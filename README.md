@@ -1,7 +1,19 @@
-# README
+# Think Tank
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Dependencies
+
+* ruby >= 3.2.2
+* node --lts (v14.16.0)
+* npm >= 9.6.6
+
+```sh
+rbenv install 3.2.2
+nvm install --lts
+node -p "process.arch" # > arm64
+nvm use --lts
+npm install yarn -g
+yarn install
+```
 
 Things you may want to cover:
 
