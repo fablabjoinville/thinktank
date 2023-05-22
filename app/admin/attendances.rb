@@ -17,10 +17,10 @@ ActiveAdmin.register Attendance do
 
   form do |f|
     f.inputs do
-      f.input :member, as: :select, collection: Member.all
-      f.input :event, as: :select, collection: Event.all
-      f.input :status
-      f.input :reason
+      f.input :member, input_html: { class: "slim-select" }, prompt: "Selecione o membro da equipe"
+      f.input :event, input_html: { class: "slim-select" }, prompt: "Selecione o evento"
+      f.input :status, as: :radio
+      f.input :reason, input_html: { rows: 5 }
     end
 
     f.actions

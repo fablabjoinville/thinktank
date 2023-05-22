@@ -57,16 +57,16 @@ ActiveAdmin.register Cluster do
     f.inputs do
       f.input :week_day, as: :select, collection: Cluster.week_days.keys.map { |k|
         [Cluster.humanized_enum_value(:week_day, k), k]
-      }
-      f.input :start_time
-      f.input :end_time
-      f.input :user
-      f.input :modality, as: :select, collection: Cluster.modalities.keys.map { |k|
+      }, input_html: { class: "slim-select" }, prompt: "Selecione o dia da semana"
+      f.input :start_time, input_html: { class: "default-select" }, prompt: "Selecione o horário"
+      f.input :end_time, input_html: { class: "default-select" }, prompt: "Selecione o horário"
+      f.input :user, input_html: { class: "slim-select" }, prompt: "Selecione o facilitador"
+      f.input :modality, as: :radio, collection: Cluster.modalities.keys.map { |k|
         [Cluster.humanized_enum_value(:modality, k), k]
-      }
+      }#, input_html: { class: "slim-select" }, prompt: "Selecione o cluster"
       f.input :address
       f.input :link, as: :url
-      f.input :teams, as: :select, input_html: { multiple: true }, collection: Team.all
+      f.input :team_ids, collection: Team.all, as: :tags# input_html: { class: "slim-select" }, prompt: "Selecione o eixo"
     end
 
     f.actions

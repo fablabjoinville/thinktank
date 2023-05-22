@@ -64,10 +64,10 @@ ActiveAdmin.register Member do
     f.inputs do
       f.input :full_name
       f.input :email
-      f.input :team, as: :select, collection: Team.all
+      f.input :team, as: :select, prompt: "Selecione a equipe"
       f.input :role, as: :select, collection: Member.roles.keys.map { |k|
         [Member.humanized_enum_value(:role, k), k]
-      }
+      }, input_html: { class: "default-select" }, prompt: "Selecione o role"
       f.input :active
       f.input :nickname
       f.input :celular_number, input_html: { placeholder: "(XX) XXXXX-XXXX" }
@@ -78,7 +78,7 @@ ActiveAdmin.register Member do
       f.input :birthday, as: :datepicker
       f.input :gender, as: :select, collection: Member.genders.keys.map { |k|
         [Member.humanized_enum_value(:gender, k), k]
-      }
+      }, input_html: { class: "default-select" }, prompt: "Selecione o gênero"
     end
 
     f.actions

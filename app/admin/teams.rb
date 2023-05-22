@@ -78,9 +78,9 @@ ActiveAdmin.register Team do
       f.input :name
       f.input :link_miro
       f.input :link_teams
-      f.input :axis
-      f.input :clusters, as: :select, input_html: { multiple: true }, collection: Cluster.all
-      f.input :members, as: :select, input_html: { multiple: true }, collection: Member.all
+      f.input :axis, input_html: { class: "slim-select" }, prompt: "Selecione o eixo"
+      f.input :clusters, collection: Cluster.all, as: :tags, display_name: :to_s, hint: "Selecione os clusters"
+      f.input :member_ids, collection: Member.all, as: :tags, display_name: :full_name, hint: "Selecione os membros da equipe"
     end
 
     f.actions
