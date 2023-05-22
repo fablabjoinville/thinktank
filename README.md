@@ -65,4 +65,6 @@ heroku ps:scale web=1
 heroku open
 ```
 
+Will open [https://thinktank.herokuapp.com/login](https://thinktank.herokuapp.com/login).
+
 ## Production
