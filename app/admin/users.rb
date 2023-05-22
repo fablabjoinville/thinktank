@@ -53,7 +53,6 @@ ActiveAdmin.register User do
 
     f.inputs "Dados pessoais" do
       f.input :full_name
-      f.input :email
       f.input :nickname
       f.input :celular_number, input_html: { placeholder: "(XX) XXXXX-XXXX" }
       f.input :phone_number, input_html: { placeholder: "(XX) XXXX-XXXX" }
@@ -63,12 +62,14 @@ ActiveAdmin.register User do
       f.input :birthday, as: :datepicker
       f.input :gender, as: :select, collection: User.genders.keys.map { |k|
         [User.humanized_enum_value(:gender, k), k]
-      }
+      }, input_html: { class: "default-select" }, prompt: "Selecione o gênero"
     end
 
     f.inputs "Credenciais" do
       f.input :email
-      f.input :authorization_level, as: :select, collection: User.authorization_levels.keys
+      f.input :authorization_level, as: :select, collection: User.authorization_levels.keys.map { |k|
+        [User.humanized_enum_value(:authorization_levels, k), k]
+      }, input_html: { class: "default-select" }, prompt: "Selecione o nível de autorização"
       f.input :password
       f.input :password_confirmation
     end

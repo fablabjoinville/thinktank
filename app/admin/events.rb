@@ -73,11 +73,11 @@ ActiveAdmin.register Event do
 
     f.inputs do
       f.input :title
-      f.input :team
-      f.input :ref, as: :select, collection: Event.refs.keys.map { |k|
-        [Event.humanized_enum_value(:ref, k), k]
+      f.input :team, input_html: { class: "slim-select" }, prompt: "Selecione a equipe"
+      f.input :ref, as: :radio
+      f.input :date, as: :date_time_picker, picker_options: {
+        min_date: Date.current
       }
-      f.input :date, as: :datepicker
     end
 
     if f.object.persisted?
@@ -90,25 +90,24 @@ ActiveAdmin.register Event do
           else
             a.input :member, as: :string, input_html: { disabled: true }
           end
-          a.input :member, as: :hidden
-          a.input :status
-          a.input :reason
+          a.input :status, as: :radio
+          a.input :reason, input_html: { rows: 5 }
         end
       end
 
       f.inputs "Avaliação" do
-        f.input :item_a_assessment, as: :select, collection: 1..5
+        f.input :item_a_assessment, as: :select, collection: 1..5, input_html: { class: "default-select" }, prompt: "Selecione a avaliação"
         f.input :item_a_comment, input_html: { rows: 5 }
-        f.input :item_b_assessment, as: :select, collection: 1..5
+        f.input :item_b_assessment, as: :select, collection: 1..5, input_html: { class: "default-select" }, prompt: "Selecione a avaliação"
         f.input :item_b_comment, input_html: { rows: 5 }
-        f.input :item_c_assessment, as: :select, collection: 1..5
+        f.input :item_c_assessment, as: :select, collection: 1..5, input_html: { class: "default-select" }, prompt: "Selecione a avaliação"
         f.input :item_c_comment, input_html: { rows: 5 }
-        f.input :item_d_assessment, as: :select, collection: 1..5
+        f.input :item_d_assessment, as: :select, collection: 1..5, input_html: { class: "default-select" }, prompt: "Selecione a avaliação"
         f.input :item_d_comment, input_html: { rows: 5 }
         f.input :general_comments, input_html: { rows: 5 }
       end
-
-      f.actions
     end
+
+    f.actions
   end
 end

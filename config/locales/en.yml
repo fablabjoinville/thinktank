@@ -115,6 +115,10 @@ en:
         user_id: ID do Usuário
         created_at: Criado Em
         updated_at: Atualizado Em
+        week_day: Dia da semana
+        modality: Modalidade
+        teams: Equipes
+        team_ids: Equipes
         week_days:
           one: Dia da Semana
           segunda: Segunda-feira
@@ -142,6 +146,7 @@ en:
         created_at: Criado Em
         updated_at: Atualizado Em
         axis_id: ID do Eixo
+        member_ids: Membros da equipe
       event:
         id: ID
         team: Equipe
@@ -173,6 +178,7 @@ en:
         event: Evento
         created_at: Criado em
         updated_at: Atualizado em
+        status: Presença
         statuses:
           one: Presença
           not_registered: Não registrado

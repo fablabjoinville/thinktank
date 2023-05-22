@@ -50,6 +50,10 @@ class Member < ApplicationRecord
      full_name
   end
 
+  def name
+    full_name
+  end
+
   def attendance_status_for(event)
     status = Attendance.humanized_enum_value(:status, attendances.where(event: event).first.status)
     "Participação: #{status}"
