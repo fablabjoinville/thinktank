@@ -1,0 +1,62 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :bigint           not null, primary key
+#  address                :string           default(""), not null
+#  authorization_level    :integer          default("facilitator"), not null
+#  birthday               :date
+#  celular_number         :string           default(""), not null
+#  cpf                    :string
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  full_name              :string           not null
+#  gender                 :integer          default("other"), not null
+#  nickname               :string           default(""), not null
+#  phone_number           :string           default(""), not null
+#  remember_created_at    :datetime
+#  reset_password_sent_at :datetime
+#  reset_password_token   :string
+#  rg                     :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_cpf                   (cpf) UNIQUE
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_rg                    (rg) UNIQUE
+#
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the "{}" from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+marvin: {
+  email: 'marvin@example.com',
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>,
+  full_name: Marvin Hitchhiker,
+  birthday: 1982-01-01,
+  nickname: marvin,
+  cpf: 12345678901,
+  rg: 12345678,
+  phone_number: 31362832,
+  celular_number: 991222339,
+  address: Rua Test, 99, Joinville/SC,
+  gender: man
+}
+
+trillian: {
+  email: 'trillian@example.com',
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>,
+  full_name: Tricia McMillan,
+  birthday: 1980-02-02,
+  nickname: trillian,
+  cpf: 12345678902,
+  rg: 12345679,
+  phone_number: 31362832,
+  celular_number: 991222339,
+  address: Rua Golden, 234, Jaraguá do Sul/SC,
+  gender: woman
+}

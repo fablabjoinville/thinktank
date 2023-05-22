@@ -30,4 +30,398 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'A validação falhou: %{errors}'
+        restrict_dependent_destroy:
+          has_one: Não é possível excluir o registro pois existe um %{record} dependente
+          has_many: Não é possível excluir o registro pois existem %{record} dependentes
+    activerecord:
+    attributes:
+      user:
+        id: ID
+        authorization_level: Permissão
+        confirmation_sent_at: Confirmação enviada em
+        confirmation_token: Token de confirmação
+        confirmed_at: Confirmado em
+        created_at: Criado em
+        current_password: Senha atual
+        current_sign_in_at: Atualmente logado em
+        current_sign_in_ip: IP do acesso atual
+        email: E-mail
+        encrypted_password: Senha criptografada
+        failed_attempts: Tentativas sem sucesso
+        last_sign_in_at: Último acesso em
+        last_sign_in_ip: Último IP de acesso
+        locked_at: Bloqueado em
+        password: Senha
+        password_confirmation: Confirme sua senha
+        remember_created_at: Lembrar criado em
+        remember_me: Lembre-se de mim
+        reset_password_sent_at: Resetar senha enviado em
+        reset_password_token: Resetar token de senha
+        sign_in_count: Contagem de acessos
+        unconfirmed_email: E-mail não confirmado
+        unlock_token: Token de desbloqueio
+        updated_at: Atualizado em
+        address: Endereço
+        birthday: Aniversário
+        celular_number: Celular
+        cpf: CPF
+        rg: RG
+        full_name: Nome
+        nickname: Apelido
+        phone_number: Telefone
+        gender:
+          one: Gênero
+          man: Masculino
+          woman: Feminino
+          other: Outro
+      member:
+        id: ID
+        address: Endereço
+        email: E-mail
+        birthday: Aniversário
+        celular_number: Celular
+        cpf: CPF
+        rg: RG
+        full_name: Nome
+        nickname: Apelido
+        phone_number: Telefone
+        active: Ativo
+        team: Equipe
+        gender:
+          one: Gênero
+          man: Masculino
+          woman: Feminino
+          other: Outro
+        role:
+          one: Role
+          mm: MM
+          mp: MP
+          sol: SOL
+      cluster:
+        id: ID
+        user: Facilitador
+        address: Endereço
+        end_time: Hora Final
+        link: Link
+        start_time: Hora de Início
+        user_id: ID do Usuário
+        created_at: Criado Em
+        updated_at: Atualizado Em
+        week_day:
+          one: Dia da Semana
+          segunda: Segunda-feira
+          terca: Terça-feira
+          quarta: Quarta-feira
+          quinta: Quinta-feira
+          sexta: Sexta-feira
+          sabado: Sábado
+          domingo: Domingo
+        modality:
+          one: Modalidade
+          presencial: Presencial
+          online: Online
+      axis:
+        id: ID
+        title: Título
+        description: Descrição
+        created_at: Criado Em
+        updated_at: Atualizado Em
+      team:
+        id: ID
+        name: Nome da equipe
+        link_miro: Link do Miro
+        link_teams: Link do MS Teams
+        created_at: Criado Em
+        updated_at: Atualizado Em
+        axis_id: ID do Eixo
+      event:
+        id: ID
+        team: Equipe
+        title: Título
+        date: Data
+        item_a_assessment: Item de controle A
+        item_a_comment: Comentário item de controle A
+        item_b_assessment: Item de controle B
+        item_b_comment: Comentário item de controle B
+        item_c_assessment: Item de controle C
+        item_c_comment: Comentário item de controle C
+        item_d_assessment: Item de controle D
+        item_d_comment: Comentário item de controle D
+        general_comments: Comentários gerais
+        created_at: Criado em
+        updated_at: Atualizado em
+        ref:
+          one: Referência
+          p: P
+          e: E
+      tool:
+        name: Nome da ferramenta
+        created_at: Criado em
+        updated_at: Atualizado em
+      attendance:
+        attendance: Presença
+        reason: Razão
+        member: Membro
+        event: Evento
+        created_at: Criado em
+        updated_at: Atualizado em
+        status:
+          one: Presença
+          not_registered: Não registrado
+          present: Presente
+          absent: Ausente
+    models:
+      user:
+        one: Facilitador
+        other: Facilitadores
+      member:
+        one: Membro de Equipe
+        other: Membros de Equipe
+      cluster:
+        one: Cluster
+        other: Clusters
+      axis:
+        one: Eixo
+        other: Eixos
+      team:
+        one: Equipe
+        other: Equipes
+      event:
+        one: Evento
+        other: Eventos
+      active_admin_comments:
+        one: Comentário
+        other: Comentários
+      tool:
+        one: Ferramenta
+        other: Ferramentas
+      attendance:
+        one: Presença
+        other: Presenças
+  date:
+    abbr_day_names:
+    - dom
+    - seg
+    - ter
+    - qua
+    - qui
+    - sex
+    - sáb
+    abbr_month_names:
+    -
+    - jan
+    - fev
+    - mar
+    - abr
+    - mai
+    - jun
+    - jul
+    - ago
+    - set
+    - out
+    - nov
+    - dez
+    day_names:
+    - domingo
+    - segunda-feira
+    - terça-feira
+    - quarta-feira
+    - quinta-feira
+    - sexta-feira
+    - sábado
+    formats:
+      default: "%d/%m/%Y"
+      long: "%d de %B de %Y"
+      short: "%d de %B"
+    month_names:
+    -
+    - janeiro
+    - fevereiro
+    - março
+    - abril
+    - maio
+    - junho
+    - julho
+    - agosto
+    - setembro
+    - outubro
+    - novembro
+    - dezembro
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: aproximadamente %{count} hora
+        other: aproximadamente %{count} horas
+      about_x_months:
+        one: aproximadamente %{count} mês
+        other: aproximadamente %{count} meses
+      about_x_years:
+        one: aproximadamente %{count} ano
+        other: aproximadamente %{count} anos
+      almost_x_years:
+        one: quase %{count} ano
+        other: quase %{count} anos
+      half_a_minute: meio minuto
+      less_than_x_seconds:
+        one: menos de %{count} segundo
+        other: menos de %{count} segundos
+      less_than_x_minutes:
+        one: menos de um minuto
+        other: menos de %{count} minutos
+      over_x_years:
+        one: mais de %{count} ano
+        other: mais de %{count} anos
+      x_seconds:
+        one: "%{count} segundo"
+        other: "%{count} segundos"
+      x_minutes:
+        one: "%{count} minuto"
+        other: "%{count} minutos"
+      x_days:
+        one: "%{count} dia"
+        other: "%{count} dias"
+      x_months:
+        one: "%{count} mês"
+        other: "%{count} meses"
+      x_years:
+        one: "%{count} ano"
+        other: "%{count} anos"
+    prompts:
+      second: Segundo
+      minute: Minuto
+      hour: Hora
+      day: Dia
+      month: Mês
+      year: Ano
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: deve ser aceito
+      blank: não pode ficar em branco
+      confirmation: não é igual a %{attribute}
+      empty: não pode ficar vazio
+      equal_to: deve ser igual a %{count}
+      even: deve ser par
+      exclusion: não está disponível
+      greater_than: deve ser maior que %{count}
+      greater_than_or_equal_to: deve ser maior ou igual a %{count}
+      in: deve estar em %{count}
+      inclusion: não está incluído na lista
+      invalid: não é válido
+      less_than: deve ser menor que %{count}
+      less_than_or_equal_to: deve ser menor ou igual a %{count}
+      model_invalid: 'A validação falhou: %{errors}'
+      not_a_number: não é um número
+      not_an_integer: não é um número inteiro
+      odd: deve ser ímpar
+      other_than: deve ser diferente de %{count}
+      present: deve ficar em branco
+      required: é obrigatório(a)
+      taken: já está em uso
+      too_long:
+        one: 'é muito longo (máximo: %{count} caracter)'
+        other: 'é muito longo (máximo: %{count} caracteres)'
+      too_short:
+        one: 'é muito curto (mínimo: %{count} caracter)'
+        other: 'é muito curto (mínimo: %{count} caracteres)'
+      wrong_length:
+        one: não possui o tamanho esperado (%{count} caracter)
+        other: não possui o tamanho esperado (%{count} caracteres)
+      already_confirmed: já foi confirmado
+      confirmation_period_expired: É necessário ser confirmado dentro do período %{period}, por favor requisite um novo usuário.
+      expired: expirou, por favor solicite uma nova
+      not_found: não encontrado
+      not_locked: não foi bloqueado
+      not_saved:
+        one: 'Não foi possível salvar %{resource}: 1 erro'
+        other: 'Não foi possível salvar %{resource}: %{count} erros.'
+    template:
+      body: 'Por favor, verifique o(s) seguinte(s) campo(s):'
+      header:
+        one: 'Não foi possível gravar %{model}: %{count} erro'
+        other: 'Não foi possível gravar %{model}: %{count} erros'
+  helpers:
+    select:
+      prompt: Por favor selecione
+    submit:
+      create: Criar %{model}
+      submit: Salvar %{model}
+      update: Atualizar %{model}
+  number:
+    currency:
+      format:
+        delimiter: "."
+        format: "%u %n"
+        precision: 2
+        separator: ","
+        significant: false
+        strip_insignificant_zeros: false
+        unit: R$
+    format:
+      delimiter: "."
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion:
+            one: bilhão
+            other: bilhões
+          million:
+            one: milhão
+            other: milhões
+          quadrillion:
+            one: quatrilhão
+            other: quatrilhões
+          thousand: mil
+          trillion:
+            one: trilhão
+            other: trilhões
+          unit: ""
+      format:
+        delimiter: ""
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          eb: EB
+          gb: GB
+          kb: KB
+          mb: MB
+          pb: PB
+          tb: TB
+    percentage:
+      format:
+        delimiter: "."
+        format: "%n%"
+    precision:
+      format:
+        delimiter: "."
+  support:
+    array:
+      last_word_connector: " e "
+      two_words_connector: " e "
+      words_connector: ", "
+  time:
+    am: ""
+    formats:
+      default: "%a, %d de %B de %Y, %H:%M:%S %z"
+      long: "%d de %B de %Y, %H:%M"
+      short: "%d de %B, %H:%M"
+    pm: ""

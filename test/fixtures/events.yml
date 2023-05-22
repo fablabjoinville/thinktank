@@ -1,0 +1,59 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id                :bigint           not null, primary key
+#  date              :date             not null
+#  general_comments  :text             default(""), not null
+#  item_a_assessment :integer          default(1), not null
+#  item_a_comment    :text             default(""), not null
+#  item_b_assessment :integer          default(1), not null
+#  item_b_comment    :text             default(""), not null
+#  item_c_assessment :integer          default(1), not null
+#  item_c_comment    :text             default(""), not null
+#  item_d_assessment :integer          default(1), not null
+#  item_d_comment    :text             default(""), not null
+#  ref               :integer          not null
+#  title             :string           not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  team_id           :bigint           not null
+#
+# Indexes
+#
+#  index_events_on_team_id  (team_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (team_id => teams.id)
+#
+
+one:
+  team: one
+  title: MyString
+  date: 2023-05-20
+  reference: 1
+  item_a_assessment: 1
+  item_a_comment: MyText
+  item_b_assessment: 1
+  item_b_comment: MyText
+  item_c_assessment: 1
+  item_c_comment: MyText
+  item_d_assessment: 1
+  item_d_comment: MyText
+  general_comments: MyText
+
+two:
+  team: two
+  title: MyString
+  date: 2023-05-20
+  reference: 1
+  item_a_assessment: 1
+  item_a_comment: MyText
+  item_b_assessment: 1
+  item_b_comment: MyText
+  item_c_assessment: 1
+  item_c_comment: MyText
+  item_d_assessment: 1
+  item_d_comment: MyText
+  general_comments: MyText
