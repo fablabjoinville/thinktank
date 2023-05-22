@@ -10,15 +10,11 @@ ActiveAdmin.register Member do
     column :full_name
     column :email
     column :team
-    column "Role" do |member|
-      member.humanized_enum(:role)
-    end
+    tag_column :role
     column :phone_number
     column :celular_number
     column :birthday
-    column "Gênero" do |member|
-      member.humanized_enum(:gender)
-    end
+    tag_column :gender
     column :active
 
     actions
@@ -29,9 +25,7 @@ ActiveAdmin.register Member do
       attributes_table_for member do
         row :full_name
         row :email
-        row "Role" do |member|
-          member.humanized_enum(:role)
-        end
+        tag_row :role
         row :team
         row :nickname
         row :phone_number
@@ -40,9 +34,7 @@ ActiveAdmin.register Member do
         row :cpf
         row :rg
         row :birthday
-        row "Gênero" do |member|
-          member.humanized_enum(:gender)
-        end
+        tag_row :gender
         row :active
       end
     end

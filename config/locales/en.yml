@@ -73,7 +73,11 @@ en:
         full_name: Nome
         nickname: Apelido
         phone_number: Telefone
-        gender:
+        authorization_levels:
+          one: Permissão
+          super_admin: Super Admin
+          facilitator: Facilitador
+        genders:
           one: Gênero
           man: Masculino
           woman: Feminino
@@ -91,12 +95,12 @@ en:
         phone_number: Telefone
         active: Ativo
         team: Equipe
-        gender:
+        genders:
           one: Gênero
           man: Masculino
           woman: Feminino
           other: Outro
-        role:
+        roles:
           one: Role
           mm: MM
           mp: MP
@@ -111,7 +115,7 @@ en:
         user_id: ID do Usuário
         created_at: Criado Em
         updated_at: Atualizado Em
-        week_day:
+        week_days:
           one: Dia da Semana
           segunda: Segunda-feira
           terca: Terça-feira
@@ -120,7 +124,7 @@ en:
           sexta: Sexta-feira
           sabado: Sábado
           domingo: Domingo
-        modality:
+        modalities:
           one: Modalidade
           presencial: Presencial
           online: Online
@@ -154,7 +158,7 @@ en:
         general_comments: Comentários gerais
         created_at: Criado em
         updated_at: Atualizado em
-        ref:
+        refs:
           one: Referência
           p: P
           e: E
@@ -169,7 +173,7 @@ en:
         event: Evento
         created_at: Criado em
         updated_at: Atualizado em
-        status:
+        statuses:
           one: Presença
           not_registered: Não registrado
           present: Presente
