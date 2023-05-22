@@ -9,9 +9,8 @@ ActiveAdmin.register Event do
 
     column :title
     column :team
-    column "Referência" do |event|
-      event.humanized_enum(:ref)
-    end
+    tag_column :ref
+
     column "Participantes" do |event|
       event.attendances_counts
     end
@@ -30,9 +29,7 @@ ActiveAdmin.register Event do
         row :id
         row :title
         row :date
-        row "Referência" do |event|
-          event.humanized_enum(:ref)
-        end
+        tag_row :ref
         row "Equipe" do |event|
           link_to event.team, team_path(event.team)
         end
@@ -83,33 +80,35 @@ ActiveAdmin.register Event do
       f.input :date, as: :datepicker
     end
 
-    f.inputs "Presença dos participantes" do
-      f.has_many :attendances, heading: "", allow_destroy: true, new_record: true do |a|
-        if a.object.new_record?
-          a.input :member, as: :select, collection: Member.all.map { |m|
-            [m.full_name, m.id]
-          }
-        else
-          a.input :member, as: :string, input_html: { disabled: true }
+    if f.object.persisted?
+      f.inputs "Presença dos participantes" do
+        f.has_many :attendances, heading: "", allow_destroy: true, new_record: true do |a|
+          if a.object.new_record?
+            a.input :member, as: :select, collection: Member.all.map { |m|
+              [m.full_name, m.id]
+            }
+          else
+            a.input :member, as: :string, input_html: { disabled: true }
+          end
+          a.input :member, as: :hidden
+          a.input :status
+          a.input :reason
         end
-        a.input :member, as: :hidden
-        a.input :status
-        a.input :reason
       end
-    end
 
-    f.inputs "Avaliação" do
-      f.input :item_a_assessment, as: :select, collection: 1..5
-      f.input :item_a_comment, input_html: { rows: 5 }
-      f.input :item_b_assessment, as: :select, collection: 1..5
-      f.input :item_b_comment, input_html: { rows: 5 }
-      f.input :item_c_assessment, as: :select, collection: 1..5
-      f.input :item_c_comment, input_html: { rows: 5 }
-      f.input :item_d_assessment, as: :select, collection: 1..5
-      f.input :item_d_comment, input_html: { rows: 5 }
-      f.input :general_comments, input_html: { rows: 5 }
-    end
+      f.inputs "Avaliação" do
+        f.input :item_a_assessment, as: :select, collection: 1..5
+        f.input :item_a_comment, input_html: { rows: 5 }
+        f.input :item_b_assessment, as: :select, collection: 1..5
+        f.input :item_b_comment, input_html: { rows: 5 }
+        f.input :item_c_assessment, as: :select, collection: 1..5
+        f.input :item_c_comment, input_html: { rows: 5 }
+        f.input :item_d_assessment, as: :select, collection: 1..5
+        f.input :item_d_comment, input_html: { rows: 5 }
+        f.input :general_comments, input_html: { rows: 5 }
+      end
 
-    f.actions
+      f.actions
+    end
   end
 end

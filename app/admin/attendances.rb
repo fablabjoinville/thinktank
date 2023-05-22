@@ -9,7 +9,7 @@ ActiveAdmin.register Attendance do
 
     column :member
     column :event
-    column :status
+    tag_column :status
     column :reason
 
     actions
@@ -30,7 +30,7 @@ ActiveAdmin.register Attendance do
     attributes_table do
       row :member
       row :event
-      row :status
+      tag_row :status
       row :reason
     end
 

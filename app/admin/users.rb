@@ -21,13 +21,11 @@ ActiveAdmin.register User do
 
     column :full_name
     column :email
-    column :authorization_level
+    tag_column :authorization_level
     column :phone_number
     column :celular_number
     column :birthday
-    column "Gênero" do |user|
-      user.humanized_enum(:gender)
-    end
+    tag_column :gender
 
     actions
   end
@@ -36,7 +34,7 @@ ActiveAdmin.register User do
     attributes_table do
       row :full_name
       row :email
-      row :authorization_level
+      tag_row :authorization_level
       row :nickname
       row :phone_number
       row :celular_number
@@ -44,9 +42,7 @@ ActiveAdmin.register User do
       row :cpf
       row :rg
       row :birthday
-      row "Gênero" do |user|
-        user.humanized_enum(:gender)
-      end
+      tag_row :gender
     end
 
     active_admin_comments

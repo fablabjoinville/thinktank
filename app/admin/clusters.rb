@@ -13,9 +13,7 @@ ActiveAdmin.register Cluster do
     column :start_time
     column :end_time
     column :user
-    column "Modalidade" do |cluster|
-      cluster.humanized_enum(:modality)
-    end
+    tag_column :modality
     column "Equipes" do |cluster|
       cluster.teams.count
     end
@@ -34,9 +32,7 @@ ActiveAdmin.register Cluster do
       row :start_time
       row :end_time
       row :user
-      row :modality do |cluster|
-        cluster.humanized_enum(:modality)
-      end
+      tag_row :modality
       row "Equipes" do |cluster|
         if cluster.teams.any?
           ul do
