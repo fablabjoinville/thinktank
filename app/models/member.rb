@@ -47,7 +47,7 @@ class Member < ApplicationRecord
   enum :role, [:mm, :mp, :sol], prefix: true, default: :sol
 
   def to_s
-     full_name
+    "#{humanized_enum(:role)} | #{full_name} | TODO EMPRESA"
   end
 
   def name
