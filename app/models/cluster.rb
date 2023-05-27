@@ -36,8 +36,10 @@ class Cluster < ApplicationRecord
   enum modality: [:presencial, :online]
 
   def to_s
-    start_time_s = start_time.strftime('%H:%M')
-    end_time_s = end_time.strftime('%H:%M')
-    "Cluster #{humanized_enum(:week_day)}: #{start_time_s} - #{end_time_s} | #{humanized_enum(:modality)}"
+    day_s = humanized_enum(:week_day)
+    modality_s = humanized_enum(:modality)
+    facilitador_s = user.full_name
+    starttime_s = start_time.strftime('%H:%M')
+    "#{day_s}, #{starttime_s} | #{facilitador_s} | #{modality_s}"
   end
 end
