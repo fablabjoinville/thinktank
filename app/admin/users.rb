@@ -1,5 +1,6 @@
 ActiveAdmin.register User do
-  menu parent: "Administração", if: proc { current_user.super_admin_authorization_level? }
+  TITLE = "Time interno"
+  menu label: TITLE, parent: "Administração", if: proc { current_user.super_admin_authorization_level? }
 
   permit_params :email, :authorization_level, :password, :password_confirmation, :id, :address, :birthday, :celular_number, :cpf, :full_name, :gender, :nickname, :phone_number, :rg, :_destroy
 
@@ -15,7 +16,7 @@ ActiveAdmin.register User do
     end
   end
 
-  index do
+  index title: TITLE do
     selectable_column
     id_column
 
@@ -30,7 +31,7 @@ ActiveAdmin.register User do
     actions
   end
 
-  show do
+  show title: proc { |user| user.to_s } do
     attributes_table do
       row :full_name
       row :email
@@ -48,7 +49,7 @@ ActiveAdmin.register User do
     active_admin_comments
   end
 
-  form do |f|
+  form title: proc { |o| o.new_record? ? "Criar novo" : "Editar #{o.full_name}" } do |f|
     f.semantic_errors
 
     f.inputs "Dados pessoais" do

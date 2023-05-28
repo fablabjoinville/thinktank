@@ -76,6 +76,7 @@ en:
         authorization_levels:
           one: Permissão
           super_admin: Super Admin
+          admin: Admin
           facilitator: Facilitador
         genders:
           one: Gênero

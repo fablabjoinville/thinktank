@@ -41,10 +41,14 @@ class User < ApplicationRecord
   validates :phone_number, phone: { allow_blank: true, types: :fixed_line }
   validates :celular_number, phone: { allow_blank: true, types: :mobile }
 
-  enum :authorization_level, [:super_admin, :facilitator], suffix: true, default: :facilitator
+  enum :authorization_level, [:super_admin, :admin, :facilitator], suffix: true, default: :facilitator
   enum :gender, [:man, :woman, :other], prefix: true, default: :other
 
   attr_accessor :skip_password_validation
+
+  def to_s
+    "#{humanized_enum(:authorization_level)}: #{full_name}"
+  end
 
   def cpf=(cpf)
     return if cpf.blank?
