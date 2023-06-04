@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
   TITLE = "Time interno"
-  menu label: TITLE, parent: "Administração", if: proc { current_user.super_admin_authorization_level? }
+  menu label: TITLE, parent: "Administração", priority: 1, if: proc { current_user.super_admin_authorization_level? }
 
   permit_params :email, :authorization_level, :password, :password_confirmation, :id, :address, :birthday, :celular_number, :cpf, :full_name, :gender, :nickname, :phone_number, :rg, :_destroy
 

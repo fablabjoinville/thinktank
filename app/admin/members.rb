@@ -1,5 +1,5 @@
 ActiveAdmin.register Member do
-  menu parent: "Equipes"
+  menu parent: "Equipes", priority: 1
 
   permit_params :email, :id, :address, :birthday, :celular_number, :cpf, :full_name, :gender, :nickname, :phone_number, :rg, :team_id, :_destroy
 

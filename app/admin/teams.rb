@@ -1,5 +1,5 @@
 ActiveAdmin.register Team do
-  menu parent: "Equipes"
+  menu parent: "Equipes", priority: 0
 
   permit_params :name, :link_miro, :link_teams, :axis_id, member_ids: [], cluster_ids: []
 
@@ -28,18 +28,22 @@ ActiveAdmin.register Team do
   end
 
   filter :name_cont, label: "Nome"
-  filter :clusters, as: :select, collection: Cluster.all, label: "Clusters"
-  filter :members, as: :select, collection: Member.all, label: "Membros"
-  filter :axis, as: :select, collection: Axis.all, label: "Eixo"
+  filter :clusters, as: :select, label: "Clusters"
+  filter :members, as: :select, label: "Membros"
+  filter :axis, as: :select, label: "Eixo"
 
   show do
     attributes_table do
       row :name
       row "Miro" do |team|
-        link_to team.link_miro, team.link_miro
+        if team.link_miro.present?
+          link_to team.link_miro, team.link_miro
+        end
       end
       row "MS Teams" do |team|
-        link_to team.link_teams, team.link_teams
+        if team.link_teams.present?
+          link_to team.link_teams, team.link_teams
+        end
       end
       row "Membros" do |team|
         if team.members.any?
@@ -48,8 +52,6 @@ ActiveAdmin.register Team do
               li link_to member.full_name, member_path(member)
             end
           end
-        else
-          "Esta equipe não está em nenhum membro"
         end
       end
       row "Clusters" do |team|
@@ -59,15 +61,15 @@ ActiveAdmin.register Team do
               li link_to cluster, cluster_path(cluster)
             end
           end
-        else
-          "Esta equipe não está em nenhum cluster"
         end
       end
       row :axis
       row "Eventos" do |team|
-        ul do
-          team.events.each do |event|
-            li link_to event.title, event_path(event)
+        if team.events.any?
+          ul do
+            team.events.each do |event|
+              li link_to event.title, event_path(event)
+            end
           end
         end
       end
