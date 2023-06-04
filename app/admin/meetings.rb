@@ -1,5 +1,5 @@
 ActiveAdmin.register Meeting do
-  menu parent: "Encontros"
+  menu parent: "Encontros", priority: 0
 
   permit_params :team_id, :title, :date, :ref, attendances_attributes: [:id, :person_id, :meeting_id, :status, :reason, :_destroy]
 

@@ -64,6 +64,21 @@ en:
   activerecord:
     <<: *activemodel
     attributes:
+      assessment:
+        assessmentable: Item
+        author: Avaliador
+        created_at: Criado em
+        general_comments: Comentários gerais
+        id: ID
+        item_a_assessment: Item de controle A
+        item_a_comment: Comentário item de controle A
+        item_b_assessment: Item de controle B
+        item_b_comment: Comentário item de controle B
+        item_c_assessment: Item de controle C
+        item_c_comment: Comentário item de controle C
+        item_d_assessment: Item de controle D
+        item_d_comment: Comentário item de controle D
+        updated_at: Atualizado Em
       attendance:
         attendance: Presença
         created_at: Criado em
@@ -117,16 +132,7 @@ en:
       event:
         created_at: Criado em
         date: Data
-        general_comments: Comentários gerais
         id: ID
-        item_a_assessment: Item de controle A
-        item_a_comment: Comentário item de controle A
-        item_b_assessment: Item de controle B
-        item_b_comment: Comentário item de controle B
-        item_c_assessment: Item de controle C
-        item_c_comment: Comentário item de controle C
-        item_d_assessment: Item de controle D
-        item_d_comment: Comentário item de controle D
         refs:
           one: Referência
           p: P
@@ -249,6 +255,9 @@ en:
       active_admin_comments:
         one: Comentário
         other: Comentários
+      assessment:
+        one: Avaliação
+        other: Avaliações
       attendance:
         one: Presença
         other: Presenças
@@ -267,6 +276,9 @@ en:
       meeting:
         one: Encontro
         other: Encontros
+      meeting_assessment:
+        one: Avaliação de Encontro
+        other: Avaliações de Encontros
       member:
         one: Membro de Equipe
         other: Membros de Equipe

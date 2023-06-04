@@ -25,4 +25,6 @@
 #  index_assessments_on_author          (author_type,author_id)
 #
 class Assessment < ApplicationRecord
+  belongs_to :assessmentable, polymorphic: true
+  belongs_to :author, polymorphic: true
 end
