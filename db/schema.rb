@@ -29,15 +29,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_184106) do
   end
 
   create_table "attendances", force: :cascade do |t|
-    t.bigint "member_id", null: false
+    t.bigint "person_id", null: false
     t.bigint "event_id", null: false
     t.integer "status", default: 0, null: false
     t.text "reason", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_attendances_on_event_id"
-    t.index ["member_id", "event_id"], name: "index_attendances_on_member_id_and_event_id", unique: true
-    t.index ["member_id"], name: "index_attendances_on_member_id"
+    t.index ["person_id", "event_id"], name: "index_attendances_on_person_id_and_event_id", unique: true
+    t.index ["person_id"], name: "index_attendances_on_person_id"
   end
 
   create_table "axes", force: :cascade do |t|
@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_184106) do
   end
 
   create_table "clusters", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "person_id", null: false
     t.time "start_time", null: false
     t.time "end_time", null: false
     t.integer "week_day", null: false
@@ -57,7 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_184106) do
     t.text "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_clusters_on_user_id"
+    t.index ["person_id"], name: "index_clusters_on_person_id"
   end
 
   create_table "clusters_teams", id: false, force: :cascade do |t|
@@ -84,25 +84,33 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_184106) do
     t.index ["team_id"], name: "index_events_on_team_id"
   end
 
-  create_table "members", force: :cascade do |t|
-    t.string "full_name", null: false
-    t.string "email", default: "", null: false
-    t.date "birthday"
-    t.string "nickname", default: "", null: false
-    t.string "cpf"
-    t.string "rg"
-    t.string "phone_number", default: "", null: false
-    t.string "celular_number", default: "", null: false
-    t.string "address", default: "", null: false
-    t.integer "gender", default: 2, null: false
+  create_table "people", force: :cascade do |t|
     t.boolean "active", default: true, null: false
+    t.date "birthday"
+    t.integer "gender", default: 2, null: false
+    t.string "address", default: "", null: false
+    t.string "celular_number", default: "", null: false
+    t.string "cpf", default: ""
+    t.string "full_name", null: false
+    t.string "nickname", default: "", null: false
+    t.string "phone_number", default: "", null: false
+    t.string "rg", default: ""
+    t.string "type", null: false
     t.integer "role", default: 0, null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "authorization_level", default: 0, null: false
     t.bigint "team_id"
-    t.index ["cpf"], name: "index_members_on_cpf", unique: true
-    t.index ["rg"], name: "index_members_on_rg", unique: true
-    t.index ["team_id"], name: "index_members_on_team_id"
+    t.index ["cpf"], name: "index_people_on_cpf", unique: true, where: "(((cpf)::text <> ''::text) AND (cpf IS NOT NULL))"
+    t.index ["email"], name: "index_people_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true
+    t.index ["rg"], name: "index_people_on_rg", unique: true, where: "(((rg)::text <> ''::text) AND (rg IS NOT NULL))"
+    t.index ["team_id"], name: "index_people_on_team_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -121,34 +129,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_184106) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "full_name", null: false
-    t.date "birthday"
-    t.string "nickname", default: "", null: false
-    t.string "cpf"
-    t.string "rg"
-    t.string "phone_number", default: "", null: false
-    t.string "celular_number", default: "", null: false
-    t.string "address", default: "", null: false
-    t.integer "gender", default: 2, null: false
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "authorization_level", default: 0, null: false
-    t.index ["cpf"], name: "index_users_on_cpf", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["rg"], name: "index_users_on_rg", unique: true
-  end
-
   add_foreign_key "attendances", "events"
-  add_foreign_key "attendances", "members"
-  add_foreign_key "clusters", "users"
+  add_foreign_key "attendances", "people"
+  add_foreign_key "clusters", "people"
   add_foreign_key "events", "teams"
-  add_foreign_key "members", "teams"
+  add_foreign_key "people", "teams"
   add_foreign_key "teams", "axes"
 end

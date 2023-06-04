@@ -19,7 +19,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  rg                     :string           default("")
-#  role                   :integer          default("sol"), not null
+#  role                   :integer          default(0), not null
 #  type                   :string           not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -37,10 +37,28 @@
 #
 #  fk_rails_...  (team_id => teams.id)
 #
-require "test_helper"
+class Person < ApplicationRecord
+  validates :full_name, presence: true
+  validates :cpf, presence: true, uniqueness: true
+  validates_cpf_format_of :cpf
+  validates :rg, presence: true, uniqueness: true
+  validates :phone_number, phone: { allow_blank: true, types: :fixed_line }
+  validates :celular_number, phone: { allow_blank: true, types: :mobile }
 
-class MemberTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  enum :gender, [:man, :woman, :other], prefix: true, default: :other
+
+  def cpf=(cpf)
+    return if cpf.blank?
+    write_attribute(:cpf, CPF.new(cpf).formatted)
+  end
+
+  def celular_number=(celular_number)
+    return if celular_number.blank?
+    write_attribute(:celular_number, Phonelib.parse(celular_number).local_number)
+  end
+
+  def phone_number=(phone_number)
+    return if phone_number.blank?
+    write_attribute(:phone_number, Phonelib.parse(phone_number).local_number)
+  end
 end

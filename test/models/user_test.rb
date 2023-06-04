@@ -1,13 +1,14 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: people
 #
 #  id                     :bigint           not null, primary key
+#  active                 :boolean          default(TRUE), not null
 #  address                :string           default(""), not null
 #  authorization_level    :integer          default("facilitator"), not null
 #  birthday               :date
 #  celular_number         :string           default(""), not null
-#  cpf                    :string
+#  cpf                    :string           default("")
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  full_name              :string           not null
@@ -17,16 +18,24 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
-#  rg                     :string
+#  rg                     :string           default("")
+#  role                   :integer          default(0), not null
+#  type                   :string           not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  team_id                :bigint
 #
 # Indexes
 #
-#  index_users_on_cpf                   (cpf) UNIQUE
-#  index_users_on_email                 (email) UNIQUE
-#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
-#  index_users_on_rg                    (rg) UNIQUE
+#  index_people_on_cpf                   (cpf) UNIQUE WHERE (((cpf)::text <> ''::text) AND (cpf IS NOT NULL))
+#  index_people_on_email                 (email) UNIQUE
+#  index_people_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_people_on_rg                    (rg) UNIQUE WHERE (((rg)::text <> ''::text) AND (rg IS NOT NULL))
+#  index_people_on_team_id               (team_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (team_id => teams.id)
 #
 primary key
 #  authorization_level    :integer          default("facilitator"), not null

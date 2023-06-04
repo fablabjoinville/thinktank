@@ -11,15 +11,15 @@
 #  week_day   :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  user_id    :bigint           not null
+#  person_id  :bigint           not null
 #
 # Indexes
 #
-#  index_clusters_on_user_id  (user_id)
+#  index_clusters_on_person_id  (person_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...  (person_id => people.id)
 #
 require "test_helper"
 

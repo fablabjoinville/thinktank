@@ -28,7 +28,7 @@ ActiveAdmin.register Axis do
 
     f.inputs do
       f.input :title, input_html: { placeholder: "Título" }
-      f.rich_text_area :description
+      f.input :description
     end
 
     f.actions
