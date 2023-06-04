@@ -95,7 +95,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_184106) do
     t.string "nickname", default: "", null: false
     t.string "phone_number", default: "", null: false
     t.string "rg", default: ""
-    t.string "type", null: false
+    t.string "type"
     t.integer "role", default: 0, null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
