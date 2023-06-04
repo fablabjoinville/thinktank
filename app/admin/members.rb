@@ -31,7 +31,7 @@ ActiveAdmin.register Member do
   filter :company, as: :select, label: "Empresa"
 
   show do
-    panel "Detalhes do(a) membro de equipe ##{member.id}" do
+    panel "Detalhes" do
       attributes_table_for member do
         row :full_name
         row :email

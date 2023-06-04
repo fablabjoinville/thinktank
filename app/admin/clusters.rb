@@ -42,8 +42,6 @@ ActiveAdmin.register Cluster do
               li link_to team, team_path(team)
             end
           end
-        else
-          "Este cluster possuí nenhuma equipe"
         end
       end
       row :address

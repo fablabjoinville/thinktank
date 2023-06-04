@@ -1,9 +1,9 @@
-ActiveAdmin.register Assessment, as: "MeetingAssessment" do
-  menu parent: "Encontros", priority: 1
+ActiveAdmin.register Assessment, as: "EventAssessment" do
+  menu parent: "Eventos", priority: 1
 
   controller do
     def scoped_collection
-      end_of_association_chain.where(assessmentable_type: "Meeting")
+      end_of_association_chain.where(assessmentable_type: "Event")
     end
   end
 
@@ -24,11 +24,11 @@ ActiveAdmin.register Assessment, as: "MeetingAssessment" do
     end
 
     filter :author_id, as: :select, label: "Avaliador"
-    filter :assessmentable_id, as: :select, label: "Encontro"
+    filter :assessmentable_id, as: :select, label: "Evento"
 
     show do
-      panel "Avaliação do encontro" do
-        attributes_table_for meeting_assessment do
+      panel "Avaliação do evento" do
+        attributes_table_for event_assessment do
           row :assessmentable
           row :author
           row :item_a_assessment
@@ -47,9 +47,9 @@ ActiveAdmin.register Assessment, as: "MeetingAssessment" do
     form do |f|
       f.semantic_errors
 
-      f.inputs "Encontro" do
-        f.input :assessmentable_id, as: :select, collection: Meeting.not_evaluated, label: "Encontro", prompt: "Selecione o encontro"
-        f.input :assessmentable_type, as: :hidden, input_html: { value: 'Meeting' }
+      f.inputs "Evento" do
+        f.input :assessmentable_id, as: :select, collection: Event.not_evaluated, label: "Evento", prompt: "Selecione o evento"
+        f.input :assessmentable_type, as: :hidden, input_html: { value: 'Event' }
         f.input :author_id, as: :hidden, input_html: { value: current_user.id }
         f.input :author_type, as: :hidden, input_html: { value: current_user.class }
       end

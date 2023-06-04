@@ -42,6 +42,7 @@
 #
 class Person < ApplicationRecord
   belongs_to :company, optional: true
+  has_and_belongs_to_many :events
 
   validates :full_name, presence: true
   validates :cpf, uniqueness: { allow_blank: true }

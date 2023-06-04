@@ -21,7 +21,7 @@ ActiveAdmin.register Company do
   filter :cnpj_eq, label: "CNPJ"
 
   show do
-    panel "Detalhes da empresa ##{company.id}" do
+    panel "Detalhes" do
       attributes_table_for company do
         row :name
         row :cnpj
@@ -36,8 +36,6 @@ ActiveAdmin.register Company do
               li link_to(person, person_path(person))
             end
           end
-        else
-          "Nenhuma pessoa associada a esta empresa"
         end
       end
     end

@@ -4,7 +4,6 @@
 #
 #  id         :bigint           not null, primary key
 #  date       :date             not null
-#  ref        :integer          not null
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -20,19 +19,19 @@
 #
 class Meeting < ApplicationRecord
   belongs_to :team
+  has_one :assessment, as: :assessmentable, dependent: :destroy
   has_many :attendances, dependent: :destroy
   has_many :members, through: :team
   has_many :attending_members, through: :attendances, source: :member
 
   accepts_nested_attributes_for :attendances, allow_destroy: true
 
-  enum ref: [:p, :e]
-
   validates :title, presence: true
   validates :date, presence: true
-  validates :ref, presence: true
 
   after_create :create_attendances_for_members
+
+  scope :not_evaluated, -> { left_joins(:assessment).where(assessments: { id: nil }) }
 
   def to_s
     "#{title} - #{formatted_date}"
@@ -49,6 +48,8 @@ class Meeting < ApplicationRecord
 
     "#{total} esperados - #{present} presentes - #{absent} faltas"
   end
+
+  private
 
   def create_attendances_for_members
     members.each do |member|

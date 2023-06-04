@@ -133,10 +133,7 @@ en:
         created_at: Criado em
         date: Data
         id: ID
-        refs:
-          one: Referência
-          p: P
-          e: E
+        people: Participantes
         team: Equipe
         title: Título
         updated_at: Atualizado em
@@ -144,10 +141,6 @@ en:
         created_at: Criado em
         date: Data
         id: ID
-        refs:
-          one: Referência
-          p: P
-          e: E
         team: Equipe
         title: Título
         updated_at: Atualizado em
@@ -273,6 +266,9 @@ en:
       event:
         one: Evento
         other: Eventos
+      event_assessment:
+        one: Avaliação de Evento
+        other: Avaliações de Eventos
       meeting:
         one: Encontro
         other: Encontros
