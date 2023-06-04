@@ -25,6 +25,10 @@ Tool.create!(name: "Ferramenta 3")
 Tool.create!(name: "Ferramenta 4")
 Tool.create!(name: "Ferramenta 5")
 
+company1 = Company.create!(name: "Empresa 1", cnpj: CNPJ.generate(true))
+company2 = Company.create!(name: "Empresa 2", cnpj: CNPJ.generate(true))
+company3 = Company.create!(name: "Empresa 3", cnpj: CNPJ.generate(true))
+
 admin = User.create_with(
   full_name: "Admin Marvin",
   password: "password",
@@ -42,6 +46,7 @@ admin = User.create_with(
 
 facilitator = User.create_with(
   full_name: "Facilitator Trillian",
+  company: company1,
   password: "password",
   password_confirmation: "password",
   authorization_level: :facilitator,
@@ -81,6 +86,7 @@ member_one_team_one = Member.create_with(
   address: "Rua Test, 100, Joinville/SC",
   active: true,
   gender: :woman,
+  company: company1,
   team: team_one
 ).find_or_create_by!(email: "member_one_team_one@example.com")
 
@@ -96,6 +102,7 @@ member_two_team_one = Member.create_with(
   address: "Rua Test, 100, Joinville/SC",
   active: true,
   gender: :woman,
+  company: company2,
   team: team_one
 ).find_or_create_by!(email: "member_two_team_one@example.com")
 
@@ -111,6 +118,7 @@ member_three_team_one = Member.create_with(
   address: "Rua Test, 100, Joinville/SC",
   active: true,
   gender: :woman,
+  company: company3,
   team: team_one
 ).find_or_create_by!(email: "member_three_team_one@example.com")
 
@@ -163,6 +171,7 @@ member_one_team_two = Member.create_with(
   address: "Rua Test, 100, Joinville/SC",
   active: true,
   gender: :woman,
+  company: company1,
   team: team_two
 ).find_or_create_by!(email: "member_one_team_two@example.com")
 
@@ -178,6 +187,7 @@ member_two_team_two = Member.create_with(
   address: "Rua Test, 100, Joinville/SC",
   active: true,
   gender: :woman,
+  company: company2,
   team: team_two
 ).find_or_create_by!(email: "member_two_team_two@example.com")
 
@@ -193,6 +203,7 @@ member_three_team_two = Member.create_with(
   address: "Rua Test, 100, Joinville/SC",
   active: true,
   gender: :woman,
+  company: company3,
   team: team_two
 ).find_or_create_by!(email: "member_three_team_two@example.com")
 
@@ -254,6 +265,7 @@ member_one_team_three = Member.create_with(
   address: "Rua Test, 100, Joinville/SC",
   active: true,
   gender: :woman,
+  company: company1,
   team: team_three
 ).find_or_create_by!(email: "member_three@example.com")
 

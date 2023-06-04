@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_21_184106) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_04_155851) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,6 +65,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_184106) do
     t.bigint "team_id", null: false
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string "cnpj", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "events", force: :cascade do |t|
     t.bigint "team_id", null: false
     t.string "title", null: false
@@ -106,6 +113,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_184106) do
     t.datetime "updated_at", null: false
     t.integer "authorization_level", default: 0, null: false
     t.bigint "team_id"
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_people_on_company_id"
     t.index ["cpf"], name: "index_people_on_cpf", unique: true, where: "(((cpf)::text <> ''::text) AND (cpf IS NOT NULL))"
     t.index ["email"], name: "index_people_on_email", unique: true
     t.index ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true
@@ -133,6 +142,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_184106) do
   add_foreign_key "attendances", "people"
   add_foreign_key "clusters", "people"
   add_foreign_key "events", "teams"
+  add_foreign_key "people", "companies"
   add_foreign_key "people", "teams"
   add_foreign_key "teams", "axes"
 end

@@ -30,114 +30,77 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  activerecord:
+  activemodel: &activemodel
     errors:
       messages:
+        disposable_domain: "não é permitido (e-mail temporário)"
+        disposable_email: "não é permitido (e-mail temporário)"
+        invalid_cnpj: "não é um CNPJ válido"
+        invalid_cpf: "não é um CPF válido"
+        invalid_date: "não é uma data válida"
+        invalid_date_after: "precisa ser depois de %{date}"
+        invalid_date_before: "precisa ser antes de %{date}"
+        invalid_email: "não parece ser um e-mail válido"
+        invalid_hostname: "não é um hostname válido"
+        invalid_ip_address: "não é um endereço IP válido"
+        invalid_ipv4_address: "não é um endereço IPv4 válido"
+        invalid_ipv6_address: "não é um endereço IPv6 válido"
+        invalid_owner: "não está associado ao seu usuário"
+        invalid_ssh_private_key: "não é uma chave privada de SSH válida"
+        invalid_ssh_private_key_bits:
+          "precisa ter pelo menos %{required} bits; a sua chave tem %{value}
+          bits"
+        invalid_ssh_private_key_type: "precisa ser uma chave %{value}"
+        invalid_ssh_public_key: "não é uma chave pública de SSH válida"
+        invalid_subdomain: "é inválido"
+        invalid_url: "não parece ser uma URL válida"
+        invalid_username: "não é válido"
+        reserved_subdomain: "%{value} é um subdomínio reservado"
+        reserved_username: "%{value} é nome de usuário reservado"
         record_invalid: 'A validação falhou: %{errors}'
         restrict_dependent_destroy:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
-    activerecord:
+  activerecord:
+    <<: *activemodel
     attributes:
-      user:
-        id: ID
-        authorization_level: Permissão
-        confirmation_sent_at: Confirmação enviada em
-        confirmation_token: Token de confirmação
-        confirmed_at: Confirmado em
+      attendance:
+        attendance: Presença
         created_at: Criado em
-        current_password: Senha atual
-        current_sign_in_at: Atualmente logado em
-        current_sign_in_ip: IP do acesso atual
-        email: E-mail
-        encrypted_password: Senha criptografada
-        failed_attempts: Tentativas sem sucesso
-        last_sign_in_at: Último acesso em
-        last_sign_in_ip: Último IP de acesso
-        locked_at: Bloqueado em
-        password: Senha
-        password_confirmation: Confirme sua senha
-        remember_created_at: Lembrar criado em
-        remember_me: Lembre-se de mim
-        reset_password_sent_at: Resetar senha enviado em
-        reset_password_token: Resetar token de senha
-        sign_in_count: Contagem de acessos
-        unconfirmed_email: E-mail não confirmado
-        unlock_token: Token de desbloqueio
+        event: Evento
+        member: Membro
+        reason: Razão
+        status: Presença
+        statuses:
+          one: Presença
+          not_registered: Não registrado
+          present: Presente
+          absent: Ausente
         updated_at: Atualizado em
-        address: Endereço
-        birthday: Aniversário
-        celular_number: Celular
-        cpf: CPF
-        rg: RG
-        full_name: Nome
-        nickname: Apelido
-        phone_number: Telefone
-        authorization_levels:
-          one: Permissão
-          super_admin: Super Admin
-          admin: Admin
-          facilitator: Facilitador
-        genders:
-          one: Gênero
-          man: Masculino
-          woman: Feminino
-          other: Outro
-      person:
-        id: ID
-        address: Endereço
-        email: E-mail
-        birthday: Aniversário
-        celular_number: Celular
-        cpf: CPF
-        rg: RG
-        full_name: Nome
-        nickname: Apelido
-        phone_number: Telefone
-        gender: Gênero
-        type: Tipo de cadastro
-        genders:
-          one: Gênero
-          man: Masculino
-          woman: Feminino
-          other: Outro
-      member:
-        id: ID
-        address: Endereço
-        email: E-mail
-        birthday: Aniversário
-        celular_number: Celular
-        cpf: CPF
-        rg: RG
-        full_name: Nome
-        nickname: Apelido
-        phone_number: Telefone
-        active: Ativo
-        team: Equipe
-        genders:
-          one: Gênero
-          man: Masculino
-          woman: Feminino
-          other: Outro
-        roles:
-          one: Role
-          mm: MM
-          mp: MP
-          sol: SOL
-      cluster:
-        id: ID
-        user: Facilitador
-        address: Endereço
-        end_time: Hora Final
-        link: Link
-        start_time: Hora de Início
-        user_id: ID do Usuário
+      axis:
         created_at: Criado Em
+        description: Descrição
+        id: ID
+        title: Título
         updated_at: Atualizado Em
-        week_day: Dia da semana
+      cluster:
+        address: Endereço
+        created_at: Criado Em
+        end_time: Hora Final
+        id: ID
+        link: Link
         modality: Modalidade
-        teams: Equipes
+        modalities:
+          one: Modalidade
+          presencial: Presencial
+          online: Online
+        start_time: Hora de Início
         team_ids: Equipes
+        teams: Equipes
+        updated_at: Atualizado Em
+        user_id: ID do Usuário
+        user: Facilitador
+        week_day: Dia da semana
         week_days:
           one: Dia da Semana
           segunda: Segunda-feira
@@ -147,30 +110,15 @@ en:
           sexta: Sexta-feira
           sabado: Sábado
           domingo: Domingo
-        modalities:
-          one: Modalidade
-          presencial: Presencial
-          online: Online
-      axis:
+      company:
         id: ID
-        title: Título
-        description: Descrição
-        created_at: Criado Em
-        updated_at: Atualizado Em
-      team:
-        id: ID
-        name: Nome da equipe
-        link_miro: Link do Miro
-        link_teams: Link do MS Teams
-        created_at: Criado Em
-        updated_at: Atualizado Em
-        axis_id: ID do Eixo
-        member_ids: Membros da equipe
+        name: Nome
+        cnpj: CNPJ
       event:
-        id: ID
-        team: Equipe
-        title: Título
+        created_at: Criado em
         date: Data
+        general_comments: Comentários gerais
+        id: ID
         item_a_assessment: Item de controle A
         item_a_comment: Comentário item de controle A
         item_b_assessment: Item de controle B
@@ -179,61 +127,147 @@ en:
         item_c_comment: Comentário item de controle C
         item_d_assessment: Item de controle D
         item_d_comment: Comentário item de controle D
-        general_comments: Comentários gerais
-        created_at: Criado em
-        updated_at: Atualizado em
         refs:
           one: Referência
           p: P
           e: E
-      tool:
-        name: Nome da ferramenta
-        created_at: Criado em
+        team: Equipe
+        title: Título
         updated_at: Atualizado em
-      attendance:
-        attendance: Presença
-        reason: Razão
-        member: Membro
-        event: Evento
-        created_at: Criado em
-        updated_at: Atualizado em
-        status: Presença
-        statuses:
-          one: Presença
-          not_registered: Não registrado
-          present: Presente
-          absent: Ausente
-    models:
-      person:
-        one: Pessoa Física
-        other: Pessoas Físicas
-      user:
-        one: Facilitador
-        other: Facilitadores
       member:
-        one: Membro de Equipe
-        other: Membros de Equipe
-      cluster:
-        one: Cluster
-        other: Clusters
-      axis:
-        one: Eixo
-        other: Eixos
+        active: Ativo
+        address: Endereço
+        birthday: Aniversário
+        celular_number: Celular
+        cpf: CPF
+        email: E-mail
+        full_name: Nome
+        genders:
+          one: Gênero
+          man: Masculino
+          woman: Feminino
+          other: Outro
+        id: ID
+        nickname: Apelido
+        phone_number: Telefone
+        rg: RG
+        roles:
+          one: Role
+          mm: MM
+          mp: MP
+          sol: SOL
+        team: Equipe
+      person:
+        address: Endereço
+        birthday: Aniversário
+        celular_number: Celular
+        company: Empresa
+        cpf: CPF
+        email: E-mail
+        full_name: Nome
+        gender: Gênero
+        genders:
+          one: Gênero
+          man: Masculino
+          woman: Feminino
+          other: Outro
+        id: ID
+        nickname: Apelido
+        phone_number: Telefone
+        rg: RG
+        type: Tipo de cadastro
       team:
-        one: Equipe
-        other: Equipes
-      event:
-        one: Evento
-        other: Eventos
+        axis_id: ID do Eixo
+        created_at: Criado Em
+        id: ID
+        link_miro: Link do Miro
+        link_teams: Link do MS Teams
+        member_ids: Membros da equipe
+        name: Nome da equipe
+        updated_at: Atualizado Em
+      tool:
+        created_at: Criado em
+        name: Nome da ferramenta
+        updated_at: Atualizado em
+      user:
+        address: Endereço
+        authorization_level: Permissão
+        authorization_levels:
+          one: Permissão
+          super_admin: Super Admin
+          admin: Admin
+          facilitator: Facilitador
+        birthday: Aniversário
+        celular_number: Celular
+        confirmation_sent_at: Confirmação enviada em
+        confirmation_token: Token de confirmação
+        confirmed_at: Confirmado em
+        cpf: CPF
+        created_at: Criado em
+        current_password: Senha atual
+        current_sign_in_at: Atualmente logado em
+        current_sign_in_ip: IP do acesso atual
+        email: E-mail
+        encrypted_password: Senha criptografada
+        failed_attempts: Tentativas sem sucesso
+        full_name: Nome
+        gender: Gênero
+        genders:
+          one: Gênero
+          man: Masculino
+          woman: Feminino
+          other: Outro
+        id: ID
+        last_sign_in_at: Último acesso em
+        last_sign_in_ip: Último IP de acesso
+        locked_at: Bloqueado em
+        nickname: Apelido
+        password_confirmation: Confirme sua senha
+        password: Senha
+        phone_number: Telefone
+        remember_created_at: Lembrar criado em
+        remember_me: Lembre-se de mim
+        reset_password_sent_at: Resetar senha enviado em
+        reset_password_token: Resetar token de senha
+        rg: RG
+        sign_in_count: Contagem de acessos
+        unconfirmed_email: E-mail não confirmado
+        unlock_token: Token de desbloqueio
+        updated_at: Atualizado em
+    models:
       active_admin_comments:
         one: Comentário
         other: Comentários
-      tool:
-        one: Ferramenta
-        other: Ferramentas
       attendance:
         one: Presença
         other: Presenças
+      axis:
+        one: Eixo
+        other: Eixos
+      cluster:
+        one: Cluster
+        other: Clusters
+      company:
+        one: Empresa
+        other: Empresas
+      event:
+        one: Evento
+        other: Eventos
+      member:
+        one: Membro de Equipe
+        other: Membros de Equipe
+      person:
+        one: Pessoa Física
+        other: Pessoas Físicas
+      team:
+        one: Equipe
+        other: Equipes
+      tool:
+        one: Ferramenta
+        other: Ferramentas
+      user:
+        one: Facilitador
+        other: Facilitadores
   date:
     abbr_day_names:
     - dom
