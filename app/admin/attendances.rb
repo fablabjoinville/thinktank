@@ -1,14 +1,14 @@
 ActiveAdmin.register Attendance do
-  menu parent: "Eventos"
+  menu parent: "Encontros"
 
-  permit_params :status, :reason, :member_id, :event_id
+  permit_params :status, :reason, :person_id, :meeting_id
 
   index do
     selectable_column
     id_column
 
     column :member
-    column :event
+    column :meeting
     tag_column :status
     column :reason
 
@@ -16,13 +16,13 @@ ActiveAdmin.register Attendance do
   end
 
   filter :member, as: :select, label: "Pessoa"
-  filter :event, as: :select, label: "Evento"
+  filter :meeting, as: :select, label: "Encontro"
   filter :status, as: :select, label: "Presença"
 
   form do |f|
     f.inputs do
       f.input :member, input_html: { class: "slim-select" }, prompt: "Selecione o membro da equipe"
-      f.input :event, input_html: { class: "slim-select" }, prompt: "Selecione o evento"
+      f.input :meeting, input_html: { class: "slim-select" }, prompt: "Selecione o encontro"
       f.input :status, as: :radio
       f.input :reason, input_html: { rows: 5 }
     end
@@ -33,7 +33,7 @@ ActiveAdmin.register Attendance do
   show do
     attributes_table do
       row :member
-      row :event
+      row :meeting
       tag_row :status
       row :reason
     end

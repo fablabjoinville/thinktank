@@ -235,7 +235,8 @@ ActiveAdmin.setup do |config|
   #
   config.namespace false do |admin|
     admin.build_menu do |menu|
-      menu.add label: 'Eventos', priority: 8
+      menu.add label: 'Eventos', priority: 7
+      menu.add label: 'Encontros', priority: 8
       menu.add label: 'Equipes', priority: 9
       menu.add label: 'Administração', priority: 10
     end

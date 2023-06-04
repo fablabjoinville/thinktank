@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_04_155851) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_04_213942) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,15 +28,35 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_155851) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
   end
 
+  create_table "assessments", force: :cascade do |t|
+    t.string "assessmentable_type", null: false
+    t.bigint "assessmentable_id", null: false
+    t.string "author_type", null: false
+    t.bigint "author_id", null: false
+    t.integer "item_a_assessment", default: 1, null: false
+    t.text "item_a_comment", default: "", null: false
+    t.integer "item_b_assessment", default: 1, null: false
+    t.text "item_b_comment", default: "", null: false
+    t.integer "item_c_assessment", default: 1, null: false
+    t.text "item_c_comment", default: "", null: false
+    t.integer "item_d_assessment", default: 1, null: false
+    t.text "item_d_comment", default: "", null: false
+    t.text "general_comments", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assessmentable_type", "assessmentable_id"], name: "index_assessments_on_assessmentable"
+    t.index ["author_type", "author_id"], name: "index_assessments_on_author"
+  end
+
   create_table "attendances", force: :cascade do |t|
     t.bigint "person_id", null: false
-    t.bigint "event_id", null: false
+    t.bigint "meeting_id", null: false
     t.integer "status", default: 0, null: false
     t.text "reason", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_attendances_on_event_id"
-    t.index ["person_id", "event_id"], name: "index_attendances_on_person_id_and_event_id", unique: true
+    t.index ["meeting_id"], name: "index_attendances_on_meeting_id"
+    t.index ["person_id", "meeting_id"], name: "index_attendances_on_person_id_and_meeting_id", unique: true
     t.index ["person_id"], name: "index_attendances_on_person_id"
   end
 
@@ -73,22 +93,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_155851) do
   end
 
   create_table "events", force: :cascade do |t|
+    t.string "title", null: false
+    t.date "date", null: false
+    t.integer "ref", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "meetings", force: :cascade do |t|
     t.bigint "team_id", null: false
     t.string "title", null: false
     t.date "date", null: false
     t.integer "ref", null: false
-    t.integer "item_a_assessment", default: 1, null: false
-    t.text "item_a_comment", default: "", null: false
-    t.integer "item_b_assessment", default: 1, null: false
-    t.text "item_b_comment", default: "", null: false
-    t.integer "item_c_assessment", default: 1, null: false
-    t.text "item_c_comment", default: "", null: false
-    t.integer "item_d_assessment", default: 1, null: false
-    t.text "item_d_comment", default: "", null: false
-    t.text "general_comments", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["team_id"], name: "index_events_on_team_id"
+    t.index ["team_id"], name: "index_meetings_on_team_id"
   end
 
   create_table "people", force: :cascade do |t|
@@ -138,10 +157,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_155851) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "attendances", "events"
+  add_foreign_key "attendances", "meetings"
   add_foreign_key "attendances", "people"
   add_foreign_key "clusters", "people"
-  add_foreign_key "events", "teams"
+  add_foreign_key "meetings", "teams"
   add_foreign_key "people", "companies"
   add_foreign_key "people", "teams"
   add_foreign_key "teams", "axes"

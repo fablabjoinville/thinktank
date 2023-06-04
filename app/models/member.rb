@@ -44,7 +44,7 @@ class Member < Person
   belongs_to :team
   belongs_to :company
   has_many :attendances, foreign_key: :person_id, dependent: :destroy
-  has_many :events, through: :attendances
+  has_many :meetins, through: :attendances
 
   accepts_nested_attributes_for :attendances, allow_destroy: true
 
@@ -58,8 +58,8 @@ class Member < Person
     full_name
   end
 
-  def attendance_status_for(event)
-    status = Attendance.humanized_enum_value(:status, attendances.where(event: event).first.status)
+  def attendance_status_for(meeting)
+    status = Attendance.humanized_enum_value(:status, attendances.where(meeting: meeting).first.status)
     "Participação: #{status}"
   end
 end

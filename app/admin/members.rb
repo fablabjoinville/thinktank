@@ -49,19 +49,16 @@ ActiveAdmin.register Member do
       end
     end
 
-    panel "Eventos (#{member.events.count})" do
+    panel "Encontros (#{member.meetings.count})" do
       attributes_table_for member do
-          if member.events.any?
-            member.events.each do |event|
-              row "#{event.title}" do |member|
-              div link_to(event, event_path(event))
-              div link_to member.attendance_status_for(event), event_path(event)
-              end
+        if member.meetings.any?
+          member.meetings.each do |meeting|
+            row "#{meeting.title}" do |member|
+            div link_to(meeting, meeting_path(meeting))
+            div link_to member.attendance_status_for(meeting), meeting_path(meeting)
             end
-          else
-            "Este membro não participou de nenhum evento"
           end
-
+        end
       end
     end
 
