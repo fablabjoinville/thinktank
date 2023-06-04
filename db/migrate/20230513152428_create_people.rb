@@ -13,7 +13,7 @@ class CreatePeople < ActiveRecord::Migration[7.0]
       t.string :nickname, default: "", null: false
       t.string :phone_number, default: "", null: false
       t.string :rg, default: "", null: true
-      t.string :type, null: false
+      t.string :type, null: true # null is for the base Person class
 
       ## Member
 

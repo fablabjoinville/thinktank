@@ -20,7 +20,7 @@
 #  reset_password_token   :string
 #  rg                     :string           default("")
 #  role                   :integer          default(0), not null
-#  type                   :string           not null
+#  type                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  team_id                :bigint
