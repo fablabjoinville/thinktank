@@ -11,18 +11,18 @@
 #  week_day   :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  user_id    :bigint           not null
+#  person_id  :bigint           not null
 #
 # Indexes
 #
-#  index_clusters_on_user_id  (user_id)
+#  index_clusters_on_person_id  (person_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...  (person_id => people.id)
 #
 class Cluster < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, foreign_key: 'person_id', class_name: 'User'
   has_and_belongs_to_many :teams
 
   validates :user, presence: true
@@ -30,7 +30,6 @@ class Cluster < ApplicationRecord
   validates :end_time, presence: true
   validates :week_day, presence: true
   validates :modality, presence: true
-  # validates :link, allow_blank: true
 
   enum week_day: [:segunda, :terca, :quarta, :quinta, :sexta, :sabado, :domingo]
   enum modality: [:presencial, :online]

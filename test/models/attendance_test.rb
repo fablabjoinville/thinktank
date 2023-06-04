@@ -8,18 +8,18 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  event_id   :bigint           not null
-#  member_id  :bigint           not null
+#  person_id  :bigint           not null
 #
 # Indexes
 #
 #  index_attendances_on_event_id                (event_id)
-#  index_attendances_on_member_id               (member_id)
-#  index_attendances_on_member_id_and_event_id  (member_id,event_id) UNIQUE
+#  index_attendances_on_person_id               (person_id)
+#  index_attendances_on_person_id_and_event_id  (person_id,event_id) UNIQUE
 #
 # Foreign Keys
 #
 #  fk_rails_...  (event_id => events.id)
-#  fk_rails_...  (member_id => members.id)
+#  fk_rails_...  (person_id => people.id)
 #
 require "test_helper"
 

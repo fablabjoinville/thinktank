@@ -83,6 +83,22 @@ en:
           man: Masculino
           woman: Feminino
           other: Outro
+      person:
+        id: ID
+        address: Endereço
+        email: E-mail
+        birthday: Aniversário
+        celular_number: Celular
+        cpf: CPF
+        rg: RG
+        full_name: Nome
+        nickname: Apelido
+        phone_number: Telefone
+        genders:
+          one: Gênero
+          man: Masculino
+          woman: Feminino
+          other: Outro
       member:
         id: ID
         address: Endereço
@@ -186,6 +202,9 @@ en:
           present: Presente
           absent: Ausente
     models:
+      person:
+        one: Pessoa Física
+        other: Pessoas Físicas
       user:
         one: Facilitador
         other: Facilitadores
