@@ -5,16 +5,18 @@ ActiveAdmin.register Tool do
 
   index do
     selectable_column
-    id_column
 
-    column :name
+    column :name do |tool|
+      link_to tool.name, tool_path(tool)
+    end
 
     actions
   end
 
+  filter :name_cont, label: "Nome"
+
   show do
     attributes_table do
-      row :id
       row :name
     end
 

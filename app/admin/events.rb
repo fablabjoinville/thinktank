@@ -5,9 +5,10 @@ ActiveAdmin.register Event do
 
   index do
     selectable_column
-    id_column
 
-    column :title
+    column :title do |event|
+      link_to event.title, event_path(event)
+    end
     column :team
     tag_column :ref
 
@@ -23,10 +24,13 @@ ActiveAdmin.register Event do
     actions
   end
 
+  filter :title_cont, label: "Título"
+  filter :team, as: :select, label: "Equipe"
+  filter :ref, as: :select, label: "Ref"
+
   show do
     panel "Detalhes do evento ##{event.id}" do
       attributes_table_for event do
-        row :id
         row :title
         row :date
         tag_row :ref

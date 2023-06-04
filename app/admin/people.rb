@@ -4,6 +4,8 @@ ActiveAdmin.register Person do
   permit_params :email, :id, :address, :birthday, :celular_number, :cpf, :full_name, :gender, :nickname, :phone_number, :rg, :company_id, :_destroy
 
   index do
+    selectable_column
+
     column :full_name do |person|
       link_to person.full_name, person_path(person)
     end
@@ -22,8 +24,8 @@ ActiveAdmin.register Person do
   filter :nickname_cont, label: "Apelido"
   filter :cpf_eq, label: "CPF"
   filter :rg_eq, label: "RG"
-  filter :company
-  filter :active, as: :select, collection: [["Ativo", true], ["Inativo", false]]
+  filter :company, as: :select, label: "Empresa"
+  filter :active, as: :select, collection: [["Ativo", true], ["Inativo", false]], label: "Ativo"
 
   show do
     panel "Detalhes da pessoa ##{person.id}" do

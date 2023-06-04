@@ -5,9 +5,10 @@ ActiveAdmin.register Team do
 
   index do
     selectable_column
-    id_column
 
-    column :name
+    column :name do |team|
+      link_to team.name, team_path(team)
+    end
     column "Miro" do |team|
       link_to team.link_miro, team.link_miro
     end
@@ -26,9 +27,13 @@ ActiveAdmin.register Team do
     actions
   end
 
+  filter :name_cont, label: "Nome"
+  filter :clusters, as: :select, collection: Cluster.all, label: "Clusters"
+  filter :members, as: :select, collection: Member.all, label: "Membros"
+  filter :axis, as: :select, collection: Axis.all, label: "Eixo"
+
   show do
     attributes_table do
-      row :id
       row :name
       row "Miro" do |team|
         link_to team.link_miro, team.link_miro

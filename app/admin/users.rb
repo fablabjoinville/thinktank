@@ -18,9 +18,10 @@ ActiveAdmin.register User do
 
   index title: TITLE do
     selectable_column
-    id_column
 
-    column :full_name
+    column :full_name do |user|
+      link_to user.full_name, user_path(user)
+    end
     column :email
     tag_column :authorization_level
     column :phone_number
@@ -30,6 +31,13 @@ ActiveAdmin.register User do
 
     actions
   end
+
+  filter :full_name_cont, label: "Nome"
+  filter :nickname_cont, label: "Apelido"
+  filter :cpf_eq, label: "CPF"
+  filter :rg_eq, label: "RG"
+  filter :company, as: :select, label: "Empresa"
+  filter :authorization_level, as: :select, label: "Nível de autorização"
 
   show title: proc { |user| user.to_s } do
     attributes_table do

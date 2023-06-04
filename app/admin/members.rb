@@ -5,9 +5,10 @@ ActiveAdmin.register Member do
 
   index do
     selectable_column
-    id_column
 
-    column :full_name
+    column :full_name do |member|
+      link_to member.full_name, member_path(member)
+    end
     column :email
     column :team
     tag_column :role
@@ -19,6 +20,15 @@ ActiveAdmin.register Member do
 
     actions
   end
+
+  filter :full_name_cont, label: "Nome"
+  filter :nickname_cont, label: "Apelido"
+  filter :cpf_eq, label: "CPF"
+  filter :rg_eq, label: "RG"
+  filter :active, as: :select, collection: [["Ativo", true], ["Inativo", false]], label: "Ativo"
+  filter :role, as: :select, label: "Role"
+  filter :team, as: :select, label: "Equipe"
+  filter :company, as: :select, label: "Empresa"
 
   show do
     panel "Detalhes do(a) membro de equipe ##{member.id}" do

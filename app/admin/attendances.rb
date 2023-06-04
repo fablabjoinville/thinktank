@@ -15,6 +15,10 @@ ActiveAdmin.register Attendance do
     actions
   end
 
+  filter :member, as: :select, label: "Pessoa"
+  filter :event, as: :select, label: "Evento"
+  filter :status, as: :select, label: "Presença"
+
   form do |f|
     f.inputs do
       f.input :member, input_html: { class: "slim-select" }, prompt: "Selecione o membro da equipe"
