@@ -25,9 +25,9 @@ class Team < ApplicationRecord
   has_many :events, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
-  validates :link_teams, presence: true, format: { with: /\A(https?:\/\/)?(?:www\.)?teams\.microsoft\.com\/.+\z/i,
+  validates :link_teams, format: { with: /\A(https?:\/\/)?(?:www\.)?teams\.microsoft\.com\/.+\z/i,
     message: "deve ser um link no formato teams.microsoft.com/XXXXXX" }, allow_blank: true
-  validates :link_miro, presence: true, format: { with: /\A(https?:\/\/)?(?:www\.)?miro\.com\/.+\z/i,
+  validates :link_miro, format: { with: /\A(https?:\/\/)?(?:www\.)?miro\.com\/.+\z/i,
     message: "deve ser um link no formato miro.com/XXXXXX" }, allow_blank: true
 
   before_save :format_links
@@ -44,6 +44,7 @@ class Team < ApplicationRecord
   end
 
   def format_link(link)
+    return "" if link.blank?
     uri = URI.parse(link)
     uri = URI.parse("http://#{link}") if uri.scheme.nil?
     uri.scheme = "https"

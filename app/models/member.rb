@@ -42,6 +42,7 @@
 #
 class Member < Person
   belongs_to :team
+  belongs_to :company
   has_many :attendances, foreign_key: :person_id, dependent: :destroy
   has_many :events, through: :attendances
 
@@ -50,7 +51,7 @@ class Member < Person
   enum :role, [:mm, :mp, :sol], prefix: true, default: :sol
 
   def to_s
-    "#{humanized_enum(:role)} | #{full_name} | TODO EMPRESA"
+    "#{humanized_enum(:role)} | #{full_name} | #{company.name}"
   end
 
   def name

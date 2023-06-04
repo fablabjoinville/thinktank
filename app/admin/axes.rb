@@ -1,5 +1,5 @@
 ActiveAdmin.register Axis do
-  menu parent: "Equipes"
+  menu parent: "Equipes", priority: 2
 
   permit_params :title, :description
 

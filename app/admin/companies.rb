@@ -1,5 +1,5 @@
 ActiveAdmin.register Company do
-  menu parent: "Administração", priority: 1
+  menu parent: "Administração", priority: 2
 
   permit_params :name, :cnpj, :_destroy
 

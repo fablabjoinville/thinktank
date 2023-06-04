@@ -1,7 +1,7 @@
 ActiveAdmin.register Cluster do
-  menu parent: "Equipes"
+  menu parent: "Equipes", priority: 3
 
-  permit_params :user_id, :start_time, :end_time, :week_day, :address, :modality, :link, team_ids: []
+  permit_params :start_time, :end_time, :week_day, :address, :modality, :link, :person_id, team_ids: []
 
   index do
     selectable_column
@@ -65,7 +65,7 @@ ActiveAdmin.register Cluster do
       f.input :user, input_html: { class: "slim-select" }, prompt: "Selecione o facilitador"
       f.input :modality, as: :radio, collection: Cluster.modalities.keys.map { |k|
         [Cluster.humanized_enum_value(:modality, k), k]
-      }#, input_html: { class: "slim-select" }, prompt: "Selecione o cluster"
+      }
       f.input :address
       f.input :link, as: :url
       f.input :team_ids, collection: Team.all, as: :tags# input_html: { class: "slim-select" }, prompt: "Selecione o eixo"
