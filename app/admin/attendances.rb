@@ -1,5 +1,5 @@
 ActiveAdmin.register Attendance do
-  menu parent: "Encontros"
+  menu parent: "Encontros", priority: 2
 
   permit_params :status, :reason, :person_id, :meeting_id
 
