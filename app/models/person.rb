@@ -23,10 +23,12 @@
 #  type                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  company_id             :bigint
 #  team_id                :bigint
 #
 # Indexes
 #
+#  index_people_on_company_id            (company_id)
 #  index_people_on_cpf                   (cpf) UNIQUE WHERE (((cpf)::text <> ''::text) AND (cpf IS NOT NULL))
 #  index_people_on_email                 (email) UNIQUE
 #  index_people_on_reset_password_token  (reset_password_token) UNIQUE
@@ -35,9 +37,12 @@
 #
 # Foreign Keys
 #
+#  fk_rails_...  (company_id => companies.id)
 #  fk_rails_...  (team_id => teams.id)
 #
 class Person < ApplicationRecord
+  belongs_to :company, optional: true
+
   validates :full_name, presence: true
   validates :cpf, uniqueness: { allow_blank: true }
   validates_cpf_format_of :cpf
