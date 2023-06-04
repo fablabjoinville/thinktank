@@ -1,7 +1,7 @@
 ActiveAdmin.register Event do
   menu parent: "Eventos", priority: 0
 
-  permit_params :title, :date, :ref, :_destroy
+  permit_params :title, :date, :_destroy, person_ids: []
 
   index do
     selectable_column
@@ -9,40 +9,51 @@ ActiveAdmin.register Event do
     column :title do |event|
       link_to event.title, event_path(event)
     end
-    tag_column :ref
+
+    column :date
 
     column "Participantes" do |event|
-      # event.attendances_counts
+      event.people.count
     end
-    column :date
 
     actions
   end
 
   filter :title_cont, label: "Título"
-  filter :ref, as: :select, label: "Ref"
+  filter :people, as: :select, label: "Participantes"
 
   show do
-    panel "Detalhes do evento ##{event.id}" do
+    panel "Detalhes" do
       attributes_table_for event do
         row :title
         row :date
-        tag_row :ref
+
+        row "Participantes" do |event|
+          if event.people.any?
+            ul do
+              event.people.map do |person|
+                li link_to person.full_name, person_path(person)
+              end.join.html_safe
+            end
+          end
+        end
       end
     end
 
-    panel "Participantes (#{event.attendances_counts})" do
-      attributes_table_for event do
-        # event.team.members.each do |member|
-        #   row member.full_name do
-        #     attendance = member.attendances.where(event: event).first
-        #     if attendance
-        #       link_to attendance.humanized_enum(:status), attendance_path(attendance)
-        #     else
-        #       'Não registrado'
-        #     end
-        #   end
-        # end
+    panel "Avaliação do evento" do
+      if event.assessment.present?
+        attributes_table_for event.assessment do
+          row :author
+          row :item_a_assessment
+          row :item_a_comment
+          row :item_b_assessment
+          row :item_b_comment
+          row :item_c_assessment
+          row :item_c_comment
+          row :item_d_assessment
+          row :item_d_comment
+          row :general_comments
+        end
       end
     end
 
@@ -54,39 +65,8 @@ ActiveAdmin.register Event do
 
     f.inputs do
       f.input :title
-      # f.input :team, input_html: { class: "slim-select" }, prompt: "Selecione a equipe"
-      f.input :ref, as: :radio
-      f.input :date, as: :date_time_picker, picker_options: {
-        min_date: Date.current
-      }
-    end
-
-    if f.object.persisted?
-      # f.inputs "Presença dos participantes" do
-      #   f.has_many :attendances, heading: "", allow_destroy: true, new_record: true do |a|
-      #     if a.object.new_record?
-      #       a.input :member, as: :select, collection: Member.all.map { |m|
-      #         [m.full_name, m.id]
-      #       }
-      #     else
-      #       a.input :member, as: :string, input_html: { disabled: true }
-      #     end
-      #     a.input :status, as: :radio
-      #     a.input :reason, input_html: { rows: 5 }
-      #   end
-      # end
-
-      # f.inputs "Avaliação" do
-      #   f.input :item_a_assessment, as: :select, collection: 1..5, input_html: { class: "default-select" }, prompt: "Selecione a avaliação"
-      #   f.input :item_a_comment, input_html: { rows: 5 }
-      #   f.input :item_b_assessment, as: :select, collection: 1..5, input_html: { class: "default-select" }, prompt: "Selecione a avaliação"
-      #   f.input :item_b_comment, input_html: { rows: 5 }
-      #   f.input :item_c_assessment, as: :select, collection: 1..5, input_html: { class: "default-select" }, prompt: "Selecione a avaliação"
-      #   f.input :item_c_comment, input_html: { rows: 5 }
-      #   f.input :item_d_assessment, as: :select, collection: 1..5, input_html: { class: "default-select" }, prompt: "Selecione a avaliação"
-      #   f.input :item_d_comment, input_html: { rows: 5 }
-      #   f.input :general_comments, input_html: { rows: 5 }
-      # end
+      f.input :date, input_html: { class: "default-select" }
+      f.input :people, as: :select, input_html: { multiple: true }, prompt: "Selecione os participantes"
     end
 
     f.actions

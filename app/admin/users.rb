@@ -39,7 +39,7 @@ ActiveAdmin.register User do
   filter :company, as: :select, label: "Empresa"
   filter :authorization_level, as: :select, label: "Nível de autorização"
 
-  show title: proc { |user| user.to_s } do
+  show do
     attributes_table do
       row :full_name
       row :email

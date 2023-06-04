@@ -28,7 +28,7 @@ ActiveAdmin.register Person do
   filter :active, as: :select, collection: [["Ativo", true], ["Inativo", false]], label: "Ativo"
 
   show do
-    panel "Detalhes da pessoa ##{person.id}" do
+    panel "Detalhes" do
       attributes_table_for person do
         row :full_name
         row :nickname

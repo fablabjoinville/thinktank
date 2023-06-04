@@ -95,16 +95,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_213942) do
   create_table "events", force: :cascade do |t|
     t.string "title", null: false
     t.date "date", null: false
-    t.integer "ref", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "events_people", id: false, force: :cascade do |t|
+    t.bigint "event_id"
+    t.bigint "person_id"
+    t.index ["event_id"], name: "index_events_people_on_event_id"
+    t.index ["person_id"], name: "index_events_people_on_person_id"
   end
 
   create_table "meetings", force: :cascade do |t|
     t.bigint "team_id", null: false
     t.string "title", null: false
     t.date "date", null: false
-    t.integer "ref", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_meetings_on_team_id"
