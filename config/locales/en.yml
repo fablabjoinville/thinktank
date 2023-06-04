@@ -67,7 +67,7 @@ en:
       attendance:
         attendance: Presença
         created_at: Criado em
-        event: Evento
+        meeting: Encontro
         member: Membro
         reason: Razão
         status: Presença
@@ -127,6 +127,17 @@ en:
         item_c_comment: Comentário item de controle C
         item_d_assessment: Item de controle D
         item_d_comment: Comentário item de controle D
+        refs:
+          one: Referência
+          p: P
+          e: E
+        team: Equipe
+        title: Título
+        updated_at: Atualizado em
+      meeting:
+        created_at: Criado em
+        date: Data
+        id: ID
         refs:
           one: Referência
           p: P
@@ -253,6 +264,9 @@ en:
       event:
         one: Evento
         other: Eventos
+      meeting:
+        one: Encontro
+        other: Encontros
       member:
         one: Membro de Equipe
         other: Membros de Equipe

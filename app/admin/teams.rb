@@ -64,11 +64,11 @@ ActiveAdmin.register Team do
         end
       end
       row :axis
-      row "Eventos" do |team|
-        if team.events.any?
+      row "Encontros" do |team|
+        if team.meetings.any?
           ul do
-            team.events.each do |event|
-              li link_to event.title, event_path(event)
+            team.meetings.each do |meeting|
+              li link_to meeting.title, meeting_path(meeting)
             end
           end
         end

@@ -22,7 +22,7 @@ class Team < ApplicationRecord
   belongs_to :axis
   has_and_belongs_to_many :clusters
   has_many :members
-  has_many :events, dependent: :destroy
+  has_many :meetings, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :link_teams, format: { with: /\A(https?:\/\/)?(?:www\.)?teams\.microsoft\.com\/.+\z/i,

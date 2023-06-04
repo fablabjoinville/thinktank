@@ -10,7 +10,7 @@ return unless Rails.env.development? || Rails.env.staging?
 
 puts "Cleaning entities..."
 Attendance.destroy_all
-Event.destroy_all
+Meeting.destroy_all
 Member.destroy_all
 Team.destroy_all
 User.destroy_all
@@ -122,25 +122,16 @@ member_three_team_one = Member.create_with(
   team: team_one
 ).find_or_create_by!(email: "member_three_team_one@example.com")
 
-event_one_team_one = Event.create!(
+meeting_one_team_one = Meeting.create!(
   team: team_one,
-  title: "Evento 1 da equipe 1",
+  title: "Encontro 1 da equipe 1",
   date: Date.today - 3.days,
-  ref: :p,
-  item_a_assessment: 3,
-  item_a_comment: "Bom esforço",
-  item_b_assessment: 4,
-  item_b_comment: "Excelente trabalho",
-  item_c_assessment: 2,
-  item_c_comment: "Precisa melhorar",
-  item_d_assessment: 5,
-  item_d_comment: "Excepcional",
-  general_comments: "No geral, bom progresso"
+  ref: :p
 )
 
-evento_dois_team_one = Event.create!(
+meeting_dois_team_one = Meeting.create!(
   team: team_one,
-  title: "Evento 2 da equipe 1",
+  title: "Encontro 2 da equipe 1",
   date: Date.today + 20.days,
   ref: :p
 )
@@ -207,36 +198,18 @@ member_three_team_two = Member.create_with(
   team: team_two
 ).find_or_create_by!(email: "member_three_team_two@example.com")
 
-event_one_team_two = Event.create!(
+meeting_one_team_two = Meeting.create!(
   team: team_two,
-  title: "Evento 1 da equipe 2",
+  title: "Encontro 1 da equipe 2",
   date: Date.today - 3.days,
-  ref: :e,
-  item_a_assessment: 4,
-  item_a_comment: "Bom trabalho",
-  item_b_assessment: 5,
-  item_b_comment: "Ótimo trabalho",
-  item_c_assessment: 3,
-  item_c_comment: "Satisfatório",
-  item_d_assessment: 4,
-  item_d_comment: "Bom trabalho",
-  general_comments: "Continue com o bom trabalho"
+  ref: :e
 )
 
-evento_dois_team_two = Event.create!(
+meeting_dois_team_two = Meeting.create!(
   team: team_two,
-  title: "Evento 2 da equipe 2",
+  title: "Encontro 2 da equipe 2",
   date: Date.today - 40.days,
-  ref: :e,
-  item_a_assessment: 4,
-  item_a_comment: "Bom trabalho",
-  item_b_assessment: 5,
-  item_b_comment: "Ótimo trabalho",
-  item_c_assessment: 3,
-  item_c_comment: "Satisfatório",
-  item_d_assessment: 4,
-  item_d_comment: "Bom trabalho",
-  general_comments: "Continue com o bom trabalho"
+  ref: :e
 )
 
 #########################################################################################################
@@ -269,20 +242,11 @@ member_one_team_three = Member.create_with(
   team: team_three
 ).find_or_create_by!(email: "member_three@example.com")
 
-event_one_team_three = Event.create!(
+meeting_one_team_three = Meeting.create!(
   team: team_three,
-  title: "Evento 1 da equipe 3",
+  title: "Encontro 1 da equipe 3",
   date: Date.today - 2,
-  ref: :p,
-  item_a_assessment: 2,
-  item_a_comment: "Pode melhorar",
-  item_b_assessment: 1,
-  item_b_comment: "Precisa de muita melhoria",
-  item_c_assessment: 3,
-  item_c_comment: "Apenas ok",
-  item_d_assessment: 2,
-  item_d_comment: "Poderia melhorar",
-  general_comments: "Precisa focar em áreas de melhoria"
+  ref: :p
 )
 
 #########################################################################################################
