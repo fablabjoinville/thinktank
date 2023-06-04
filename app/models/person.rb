@@ -39,13 +39,24 @@
 #
 class Person < ApplicationRecord
   validates :full_name, presence: true
-  validates :cpf, presence: true, uniqueness: true
+  validates :cpf, uniqueness: { allow_blank: true }
   validates_cpf_format_of :cpf
-  validates :rg, presence: true, uniqueness: true
+  validates :rg, uniqueness: { allow_blank: true }
   validates :phone_number, phone: { allow_blank: true, types: :fixed_line }
   validates :celular_number, phone: { allow_blank: true, types: :mobile }
 
   enum :gender, [:man, :woman, :other], prefix: true, default: :other
+
+  def type
+    case self[:type]
+      when "User"
+        "Time Interno"
+      when "Member"
+        "Membro de Equipe"
+      else
+        "Pessoa Física"
+    end
+  end
 
   def cpf=(cpf)
     return if cpf.blank?

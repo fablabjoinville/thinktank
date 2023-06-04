@@ -94,6 +94,8 @@ en:
         full_name: Nome
         nickname: Apelido
         phone_number: Telefone
+        gender: Gênero
+        type: Tipo de cadastro
         genders:
           one: Gênero
           man: Masculino

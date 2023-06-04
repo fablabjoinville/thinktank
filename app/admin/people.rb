@@ -1,5 +1,17 @@
+# t.date :birthday
+# t.integer :gender, default: 2, null: false # 2 corresponds to "other"
+# t.string :address, default: "", null: false
+# t.string :celular_number, default: "", null: false
+# t.string :cpf, default: "", null: true
+# t.string :full_name, null: false
+# t.string :nickname, default: "", null: false
+# t.string :phone_number, default: "", null: false
+# t.string :rg, default: "", null: true
+# t.string :type, null: true # null is for the base Person class
+# t.string :email, null: false, default: ""
+
 ActiveAdmin.register Person do
-  menu parent: "Administração"
+  menu parent: "Administração", priority: 0
 
   permit_params :email, :id, :address, :birthday, :celular_number, :cpf, :full_name, :gender, :nickname, :phone_number, :rg, :_destroy
 
@@ -8,11 +20,13 @@ ActiveAdmin.register Person do
     id_column
 
     column :full_name
+    column :nickname
     column :email
     column :phone_number
     column :celular_number
     column :birthday
     tag_column :gender
+    tag_column :type
 
     actions
   end
@@ -21,8 +35,8 @@ ActiveAdmin.register Person do
     panel "Detalhes da pessoa ##{person.id}" do
       attributes_table_for person do
         row :full_name
-        row :email
         row :nickname
+        row :email
         row :phone_number
         row :celular_number
         row :address
@@ -30,6 +44,7 @@ ActiveAdmin.register Person do
         row :rg
         row :birthday
         tag_row :gender
+        tag_row :type
       end
     end
 
