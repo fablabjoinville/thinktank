@@ -5,9 +5,10 @@ ActiveAdmin.register Company do
 
   index do
     selectable_column
-    id_column
 
-    column :name
+    column :name do |company|
+      link_to company.name, company_path(company)
+    end
     column :cnpj
     column "# Pessoas" do |company|
       company.people.count
@@ -15,6 +16,9 @@ ActiveAdmin.register Company do
 
     actions
   end
+
+  filter :name_cont, label: "Nome"
+  filter :cnpj_eq, label: "CNPJ"
 
   show do
     panel "Detalhes da empresa ##{company.id}" do

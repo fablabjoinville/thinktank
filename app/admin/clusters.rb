@@ -23,9 +23,11 @@ ActiveAdmin.register Cluster do
     actions
   end
 
+  filter :week_day, as: :select, label: "Dia da semana"
+  filter :user, as: :select, label: "Facilitador"
+
   show do
     attributes_table do
-      row :id
       row :week_day do |cluster|
         cluster.humanized_enum(:week_day)
       end

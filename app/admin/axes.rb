@@ -5,17 +5,19 @@ ActiveAdmin.register Axis do
 
   index do
     selectable_column
-    id_column
 
-    column :title
+    column :title do |axis|
+      link_to axis.title, axis_path(axis)
+    end
     column :description
 
     actions
   end
 
+  filter :title_cont, label: "Título"
+
   show do
     attributes_table do
-      row :id
       row :title
       row :description
     end
