@@ -63,8 +63,10 @@ Fazendo deploy na Heroku:
 ```bash
 heroku login
 heroku git:remote -a thinktank
+heroku addons:create heroku-postgresql:mini
 git push heroku main
 heroku run rails db:migrate
+heroku ps:scale web=1
 heroku run rails db:seed
 heroku open
 ```
