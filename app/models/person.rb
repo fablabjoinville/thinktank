@@ -46,7 +46,7 @@ class Person < ApplicationRecord
 
   validates :full_name, presence: true
   validates :cpf, uniqueness: { allow_blank: true }
-  validates_cpf_format_of :cpf
+  validates_cpf_format_of :cpf, { allow_blank: true }
   validates :rg, uniqueness: { allow_blank: true }
   validates :phone_number, phone: { allow_blank: true, types: :fixed_line }
   validates :celular_number, phone: { allow_blank: true, types: :mobile }
