@@ -7,17 +7,21 @@
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  phase_id   :bigint
 #  team_id    :bigint           not null
 #
 # Indexes
 #
-#  index_meetings_on_team_id  (team_id)
+#  index_meetings_on_phase_id  (phase_id)
+#  index_meetings_on_team_id   (team_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (phase_id => phases.id)
 #  fk_rails_...  (team_id => teams.id)
 #
 class Meeting < ApplicationRecord
+  belongs_to :phase, optional: true
   belongs_to :team
   has_one :assessment, as: :assessmentable, dependent: :destroy
   has_many :attendances, dependent: :destroy

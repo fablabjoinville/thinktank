@@ -126,9 +126,11 @@ en:
           sabado: Sábado
           domingo: Domingo
       company:
+        cnpj: CNPJ
+        created_at: Criado em
         id: ID
         name: Nome
-        cnpj: CNPJ
+        updated_at: Atualizado Em
       event:
         created_at: Criado em
         date: Data
@@ -141,6 +143,7 @@ en:
         created_at: Criado em
         date: Data
         id: ID
+        phase: Fase
         team: Equipe
         title: Título
         updated_at: Atualizado em
@@ -173,6 +176,7 @@ en:
         celular_number: Celular
         company: Empresa
         cpf: CPF
+        created_at: Criado Em
         email: E-mail
         full_name: Nome
         gender: Gênero
@@ -186,6 +190,12 @@ en:
         phone_number: Telefone
         rg: RG
         type: Tipo de cadastro
+        updated_at: Atualizado Em
+      phase:
+        created_at: Criado Em
+        id: ID
+        name: Nome
+        updated_at: Atualizado Em
       team:
         axis_id: ID do Eixo
         created_at: Criado Em
@@ -281,6 +291,9 @@ en:
       person:
         one: Pessoa Física
         other: Pessoas Físicas
+      phase:
+        one: Fase
+        other: Fases
       team:
         one: Equipe
         other: Equipes

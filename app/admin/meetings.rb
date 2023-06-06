@@ -1,7 +1,7 @@
 ActiveAdmin.register Meeting do
   menu parent: "Encontros", priority: 0
 
-  permit_params :team_id, :title, :date, attendances_attributes: [:id, :person_id, :meeting_id, :status, :reason, :_destroy]
+  permit_params :team_id, :title, :date, :phase_id, attendances_attributes: [:id, :person_id, :meeting_id, :status, :reason, :_destroy]
 
   index do
     selectable_column
@@ -10,6 +10,7 @@ ActiveAdmin.register Meeting do
       link_to meeting.title, meeting_path(meeting)
     end
     column :date
+    column :phase
     column :team
 
     column "Participantes" do |meeting|
@@ -27,6 +28,7 @@ ActiveAdmin.register Meeting do
       attributes_table_for meeting do
         row :title
         row :date
+        row :phase
 
         row "Equipe" do |meeting|
           link_to meeting.team, team_path(meeting.team)
@@ -70,6 +72,7 @@ ActiveAdmin.register Meeting do
     f.inputs do
       f.input :title
       f.input :date, input_html: { class: "default-select" }
+      f.input :phase, input_html: { class: "slim-select" }, prompt: "Selecione a fase"
       f.input :team, input_html: { class: "slim-select" }, prompt: "Selecione a equipe"
     end
 
