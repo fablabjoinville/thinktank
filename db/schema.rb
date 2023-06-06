@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_04_213942) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_06_103850) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -112,6 +112,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_213942) do
     t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "phase_id"
+    t.index ["phase_id"], name: "index_meetings_on_phase_id"
     t.index ["team_id"], name: "index_meetings_on_team_id"
   end
 
@@ -146,6 +148,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_213942) do
     t.index ["team_id"], name: "index_people_on_team_id"
   end
 
+  create_table "phases", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.bigint "axis_id", null: false
@@ -165,6 +173,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_213942) do
   add_foreign_key "attendances", "meetings"
   add_foreign_key "attendances", "people"
   add_foreign_key "clusters", "people"
+  add_foreign_key "meetings", "phases"
   add_foreign_key "meetings", "teams"
   add_foreign_key "people", "companies"
   add_foreign_key "people", "teams"

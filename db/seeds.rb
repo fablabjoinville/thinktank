@@ -29,8 +29,6 @@ company1 = Company.create!(name: "Empresa 1", cnpj: CNPJ.generate(true))
 company2 = Company.create!(name: "Empresa 2", cnpj: CNPJ.generate(true))
 company3 = Company.create!(name: "Empresa 3", cnpj: CNPJ.generate(true))
 
-Event.create!(title: "Evento 1", date: Date.current)
-
 admin = User.create_with(
   full_name: "Admin Marvin",
   password: "password",
@@ -61,6 +59,13 @@ facilitator = User.create_with(
   address: "Rua Test, 100, Joinville/SC",
   gender: :man
 ).find_or_create_by!(email: "facilitator@example.com")
+
+#########################################################################################################
+
+Event.create!(title: "Evento 1", date: Date.current)
+
+phase_one = Phase.create!(name: "Fase 1")
+phase_two = Phase.create!(name: "Fase 2")
 
 #########################################################################################################
 
@@ -127,13 +132,15 @@ member_three_team_one = Member.create_with(
 meeting_one_team_one = Meeting.create!(
   team: team_one,
   title: "Encontro 1 da equipe 1",
-  date: Date.today - 3.days
+  date: Date.today - 3.days,
+  phase: phase_one
 )
 
-meeting_dois_team_one = Meeting.create!(
+meeting_two_team_one = Meeting.create!(
   team: team_one,
   title: "Encontro 2 da equipe 1",
-  date: Date.today + 20.days
+  date: Date.today + 20.days,
+  phase: phase_one
 )
 
 #########################################################################################################
@@ -204,7 +211,7 @@ meeting_one_team_two = Meeting.create!(
   date: Date.today - 3.days
 )
 
-meeting_dois_team_two = Meeting.create!(
+meeting_two_team_two = Meeting.create!(
   team: team_two,
   title: "Encontro 2 da equipe 2",
   date: Date.today - 40.days

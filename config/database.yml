@@ -6,6 +6,7 @@ default: &default
 development:
   <<: *default
   database: thinktank_development
+  host: localhost
 
 test:
   <<: *default
