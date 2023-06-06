@@ -1,7 +1,7 @@
 ActiveAdmin.register Cluster do
   menu parent: "Equipes", priority: 3
 
-  permit_params :start_time, :end_time, :week_day, :address, :modality, :link, :person_id, team_ids: []
+  permit_params :id, :start_time, :end_time, :week_day, :address, :modality, :link, :person_id, :_destroy, team_ids: []
 
   index do
     selectable_column

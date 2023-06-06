@@ -1,7 +1,7 @@
 ActiveAdmin.register Meeting do
   menu parent: "Encontros", priority: 0
 
-  permit_params :team_id, :title, :date, :phase_id, attendances_attributes: [:id, :person_id, :meeting_id, :status, :reason, :_destroy]
+  permit_params :id, :team_id, :title, :date, :phase_id, :_destroy, attendances_attributes: [:id, :person_id, :meeting_id, :status, :reason, :_destroy]
 
   index do
     selectable_column

@@ -54,10 +54,6 @@ class Member < Person
     "#{humanized_enum(:role)} | #{full_name} | #{company.name}"
   end
 
-  def name
-    full_name
-  end
-
   def attendance_status_for(meeting)
     status = Attendance.humanized_enum_value(:status, attendances.where(meeting: meeting).first.status)
     "Participação: #{status}"

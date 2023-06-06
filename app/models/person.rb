@@ -53,6 +53,8 @@ class Person < ApplicationRecord
 
   enum :gender, [:man, :woman, :other], prefix: true, default: :other
 
+  scope :not_in_company, -> { where(company_id: nil) }
+
   def type
     case self[:type]
       when "User"
@@ -62,6 +64,14 @@ class Person < ApplicationRecord
       else
         "Pessoa Física"
     end
+  end
+
+  def to_s
+    full_name
+  end
+
+  def name
+    full_name
   end
 
   def cpf=(cpf)

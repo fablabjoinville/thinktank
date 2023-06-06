@@ -6,6 +6,7 @@ en:
       call_to_action: "Para adicionar seções ao painel, verifique 'app/admin/dashboard.rb'"
     view: "Visualizar"
     edit: "Editar"
+    update: "Atualizar"
     delete: "Remover"
     delete_confirmation: "Você tem certeza que deseja remover este item?"
     create_another: "Criar outro %{model}"

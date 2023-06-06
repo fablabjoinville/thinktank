@@ -1,7 +1,7 @@
 ActiveAdmin.register Company do
   menu parent: "Administração", priority: 2
 
-  permit_params :name, :cnpj, :_destroy
+  permit_params :id, :name, :cnpj, :_destroy, person_ids: []
 
   index do
     selectable_column
@@ -49,6 +49,7 @@ ActiveAdmin.register Company do
     f.inputs do
       f.input :name
       f.input :cnpj, input_html: { placeholder: "XX.XXX.XXX/XXXX-XX" }
+      f.input :people, as: :select, collection: Person.not_in_company, label: "Pessoas"
     end
 
     f.actions
