@@ -1,7 +1,7 @@
 ActiveAdmin.register Axis do
   menu parent: "Equipes", priority: 2
 
-  permit_params :title, :description
+  permit_params :id, :title, :description, :_destroy
 
   index do
     selectable_column

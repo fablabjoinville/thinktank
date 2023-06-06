@@ -1,7 +1,7 @@
 ActiveAdmin.register Attendance do
   menu parent: "Encontros", priority: 2
 
-  permit_params :status, :reason, :person_id, :meeting_id
+  permit_params :id, :status, :reason, :person_id, :meeting_id, :_destroy
 
   index do
     selectable_column

@@ -1,7 +1,7 @@
 ActiveAdmin.register Event do
   menu parent: "Eventos", priority: 0
 
-  permit_params :title, :date, :_destroy, person_ids: []
+  permit_params :id, :title, :date, :_destroy, person_ids: []
 
   index do
     selectable_column
