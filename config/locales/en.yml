@@ -194,7 +194,10 @@ en:
       phase:
         created_at: Criado Em
         id: ID
+        meetings: Encontros
         name: Nome
+        tools: Ferramentas
+        tool_ids: Ferramentas
         updated_at: Atualizado Em
       team:
         axis_id: ID do Eixo
@@ -208,6 +211,8 @@ en:
       tool:
         created_at: Criado em
         name: Nome da ferramenta
+        phases: Fases
+        phase_ids: Fases
         updated_at: Atualizado em
       user:
         address: Endereço

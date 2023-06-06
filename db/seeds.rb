@@ -19,11 +19,11 @@ Axis.destroy_all
 
 puts "Creating entities..."
 
-Tool.create!(name: "Ferramenta 1")
-Tool.create!(name: "Ferramenta 2")
-Tool.create!(name: "Ferramenta 3")
-Tool.create!(name: "Ferramenta 4")
-Tool.create!(name: "Ferramenta 5")
+tool_one = Tool.create!(name: "Ferramenta 1")
+tool_two = Tool.create!(name: "Ferramenta 2")
+tool_three = Tool.create!(name: "Ferramenta 3")
+tool_four = Tool.create!(name: "Ferramenta 4")
+tool_five = Tool.create!(name: "Ferramenta 5")
 
 company1 = Company.create!(name: "Empresa 1", cnpj: CNPJ.generate(true))
 company2 = Company.create!(name: "Empresa 2", cnpj: CNPJ.generate(true))
@@ -65,7 +65,15 @@ facilitator = User.create_with(
 Event.create!(title: "Evento 1", date: Date.current)
 
 phase_one = Phase.create!(name: "Fase 1")
+phase_one.tools << tool_one
+phase_one.tools << tool_two
+phase_one.tools << tool_three
+phase_one.save!
+
 phase_two = Phase.create!(name: "Fase 2")
+phase_two.tools << tool_four
+phase_two.tools << tool_five
+phase_two.save!
 
 #########################################################################################################
 
@@ -208,13 +216,15 @@ member_three_team_two = Member.create_with(
 meeting_one_team_two = Meeting.create!(
   team: team_two,
   title: "Encontro 1 da equipe 2",
-  date: Date.today - 3.days
+  date: Date.today - 3.days,
+  phase: phase_one
 )
 
 meeting_two_team_two = Meeting.create!(
   team: team_two,
   title: "Encontro 2 da equipe 2",
-  date: Date.today - 40.days
+  date: Date.today - 40.days,
+  phase: phase_one
 )
 
 #########################################################################################################
