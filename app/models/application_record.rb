@@ -8,4 +8,12 @@ class ApplicationRecord < ActiveRecord::Base
   def humanized_enum(enum)
     I18n.t("activerecord.attributes.#{self.class.name.underscore}.#{enum.to_s.pluralize}.#{send(enum)}")
   end
+
+  def self.humanized(count)
+    model_name.human(count: count)
+  end
+
+  def humanized(count)
+    self.class.model_name.human(count: count)
+  end
 end

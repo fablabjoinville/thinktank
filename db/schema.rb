@@ -154,6 +154,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_103850) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "phases_tools", force: :cascade do |t|
+    t.bigint "phase_id", null: false
+    t.bigint "tool_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["phase_id"], name: "index_phases_tools_on_phase_id"
+    t.index ["tool_id"], name: "index_phases_tools_on_tool_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.bigint "axis_id", null: false
@@ -177,5 +186,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_103850) do
   add_foreign_key "meetings", "teams"
   add_foreign_key "people", "companies"
   add_foreign_key "people", "teams"
+  add_foreign_key "phases_tools", "phases"
+  add_foreign_key "phases_tools", "tools"
   add_foreign_key "teams", "axes"
 end
