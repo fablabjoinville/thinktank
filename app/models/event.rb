@@ -16,6 +16,10 @@ class Event < ApplicationRecord
   validates :title, presence: true
   validates :date, presence: true
 
+  ransacker :title, type: :string, formatter: proc { |v| I18n.transliterate(v) } do |_|
+    Arel.sql("unaccent(\"title\")")
+  end
+
   def to_s
     "#{title} - #{formatted_date}"
   end

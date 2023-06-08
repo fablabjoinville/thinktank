@@ -14,4 +14,8 @@ class Company < ApplicationRecord
   validates :name, presence: true
   validates :cnpj, uniqueness: true
   validates_cnpj_format_of :cnpj
+
+  ransacker :name, type: :string, formatter: proc { |v| I18n.transliterate(v) } do |_|
+    Arel.sql("unaccent(\"name\")")
+  end
 end

@@ -25,8 +25,7 @@ ActiveAdmin.register Assessment, as: "MeetingAssessment" do
       actions
     end
 
-    filter :author_id, as: :select, label: "Avaliador"
-    filter :assessmentable_id, as: :select, label: "Encontro"
+    filter :author_id, as: :select, collection: Person.all, label: "Avaliador"
 
     show do
       panel "Avaliação do encontro" do

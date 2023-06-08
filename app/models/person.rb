@@ -57,7 +57,17 @@ class Person < ApplicationRecord
 
   enum :gender, [:man, :woman, :other], prefix: true, default: :other
 
-  scope :not_in_company, -> { where(company_id: nil) }
+  ransacker :address, type: :string, formatter: proc { |v| I18n.transliterate(v) } do |_|
+    Arel.sql("unaccent(\"address\")")
+  end
+
+  ransacker :full_name, type: :string, formatter: proc { |v| I18n.transliterate(v) } do |_|
+    Arel.sql("unaccent(\"full_name\")")
+  end
+
+  ransacker :nickname, type: :string, formatter: proc { |v| I18n.transliterate(v) } do |_|
+    Arel.sql("unaccent(\"nickname\")")
+  end
 
   def type
     case self[:type]

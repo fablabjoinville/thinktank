@@ -23,8 +23,7 @@ ActiveAdmin.register Assessment, as: "EventAssessment" do
       actions
     end
 
-    filter :author_id, as: :select, label: "Avaliador"
-    filter :assessmentable_id, as: :select, label: "Evento"
+    filter :author_id, as: :select, collection: Person.all, label: "Avaliador"
 
     show do
       panel "Avaliação do evento" do

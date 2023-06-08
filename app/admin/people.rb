@@ -20,7 +20,7 @@ ActiveAdmin.register Person do
     actions
   end
 
-  filter :full_name_cont, label: "Nome"
+  filter :full_name_cont, label: "Nome U"
   filter :nickname_cont, label: "Apelido"
   filter :cpf_eq, label: "CPF"
   filter :rg_eq, label: "RG"
