@@ -1,5 +1,5 @@
 ActiveAdmin.register Person do
-  menu parent: "Administração", priority: 0
+  menu label: "Pessoas", priority: 18
 
   permit_params :email, :id, :address, :birthday, :celular_number, :cpf, :full_name, :gender, :nickname, :phone_number, :rg, :company_id, :_destroy
 

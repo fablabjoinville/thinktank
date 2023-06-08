@@ -1,5 +1,5 @@
 ActiveAdmin.register Tool do
-  menu parent: "Administração"
+  menu label: "Ferramentas", priority: 19
 
   permit_params :id, :name, :_destroy, phase_ids: []
 
