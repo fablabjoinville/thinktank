@@ -37,6 +37,10 @@ class Meeting < ApplicationRecord
 
   after_create :create_attendances_for_members!
 
+  ransacker :title, type: :string, formatter: proc { |v| I18n.transliterate(v) } do |_|
+    Arel.sql("unaccent(\"title\")")
+  end
+
   def to_s
     "#{title} - #{formatted_date}"
   end

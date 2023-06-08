@@ -20,7 +20,7 @@ ActiveAdmin.register Attendance do
     actions
   end
 
-  filter :person, as: :select, label: "Pessoa"
+  filter :person_full_name_cont, label: "Pessoa"
   filter :meeting, as: :select, label: "Encontro"
   filter :meeting_team_id, as: :select, collection: Team.all, label: "Equipe"
   filter :status, as: :select, label: "Presença"

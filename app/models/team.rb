@@ -35,6 +35,10 @@ class Team < ApplicationRecord
 
   before_save :format_links
 
+  ransacker :name, type: :string, formatter: proc { |v| I18n.transliterate(v) } do |_|
+    Arel.sql("unaccent(\"name\")")
+  end
+
   def to_s
     "Equipe #{name} (#{members.count})"
   end
