@@ -117,8 +117,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_103850) do
     t.index ["team_id"], name: "index_meetings_on_team_id"
   end
 
-  create_table "people", force: :cascade do |t|
+  create_table "members", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.bigint "person_id", null: false
     t.boolean "active", default: true, null: false
+    t.integer "role", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_members_on_person_id"
+    t.index ["team_id"], name: "index_members_on_team_id"
+  end
+
+  create_table "people", force: :cascade do |t|
     t.date "birthday"
     t.integer "gender", default: 2, null: false
     t.string "address", default: "", null: false
@@ -129,7 +139,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_103850) do
     t.string "phone_number", default: "", null: false
     t.string "rg", default: ""
     t.string "type"
-    t.integer "role", default: 0, null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -184,6 +193,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_103850) do
   add_foreign_key "clusters", "people"
   add_foreign_key "meetings", "phases"
   add_foreign_key "meetings", "teams"
+  add_foreign_key "members", "people"
+  add_foreign_key "members", "teams"
   add_foreign_key "people", "companies"
   add_foreign_key "people", "teams"
   add_foreign_key "phases_tools", "phases"

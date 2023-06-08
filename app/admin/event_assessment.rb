@@ -29,7 +29,9 @@ ActiveAdmin.register Assessment, as: "EventAssessment" do
     show do
       panel "Avaliação do evento" do
         attributes_table_for event_assessment do
-          row :assessmentable
+          row "Evento" do |event_assessment|
+            link_to event_assessment.assessmentable.title, event_path(event_assessment.assessmentable)
+          end
           row :author
           row :item_a_assessment
           row :item_a_comment
@@ -48,7 +50,7 @@ ActiveAdmin.register Assessment, as: "EventAssessment" do
       f.semantic_errors
 
       f.inputs "Evento" do
-        f.input :assessmentable_id, as: :select, collection: Event.not_evaluated, label: "Evento", prompt: "Selecione o evento"
+        f.input :assessmentable_id, as: :select, collection: Event.all, label: "Evento", prompt: "Selecione o evento", input_html: { disabled: f.object.persisted? }
         f.input :assessmentable_type, as: :hidden, input_html: { value: 'Event' }
         f.input :author_id, as: :hidden, input_html: { value: current_user.id }
         f.input :author_type, as: :hidden, input_html: { value: current_user.class }

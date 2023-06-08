@@ -1,7 +1,7 @@
 ActiveAdmin.register Team do
   menu parent: "Equipes", priority: 0
 
-  permit_params :id, :name, :link_miro, :link_teams, :axis_id, :_destroy, member_ids: [], cluster_ids: []
+  permit_params :id, :name, :link_miro, :link_teams, :axis_id, :_destroy, :clusters, person_ids: [], cluster_ids: []
 
   index do
     selectable_column
@@ -29,12 +29,12 @@ ActiveAdmin.register Team do
 
   filter :name_cont, label: "Nome"
   filter :clusters, as: :select, label: "Clusters"
-  filter :members, as: :select, label: "Membros"
   filter :axis, as: :select, label: "Eixo"
 
   show do
     attributes_table do
       row :name
+      row :axis
       row "Miro" do |team|
         if team.link_miro.present?
           link_to team.link_miro, team.link_miro
@@ -49,7 +49,7 @@ ActiveAdmin.register Team do
         if team.members.any?
           ul do
             team.members.each do |member|
-              li link_to member.full_name, member_path(member)
+              li link_to member, member_path(member)
             end
           end
         end
@@ -63,7 +63,6 @@ ActiveAdmin.register Team do
           end
         end
       end
-      row :axis
       row "Encontros" do |team|
         if team.meetings.any?
           ul do
@@ -73,9 +72,9 @@ ActiveAdmin.register Team do
           end
         end
       end
-
-      active_admin_comments
     end
+
+    active_admin_comments
   end
 
   form do |f|
@@ -86,8 +85,8 @@ ActiveAdmin.register Team do
       f.input :link_miro
       f.input :link_teams
       f.input :axis, input_html: { class: "slim-select" }, prompt: "Selecione o eixo"
-      f.input :clusters, collection: Cluster.all, as: :tags, display_name: :to_s, hint: "Selecione os clusters"
-      f.input :member_ids, collection: Member.all, as: :tags, display_name: :to_s, hint: "Selecione os membros da equipe"
+      f.input :cluster_ids, collection: Cluster.all, as: :tags, display_name: :to_s, hint: "Selecione os clusters"
+      f.input :person_ids, collection: Person.all, as: :tags, display_name: :to_s, hint: "Selecione os membros da equipe. Todos serão adicionados como solucionadores."
     end
 
     f.actions

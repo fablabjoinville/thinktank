@@ -49,7 +49,7 @@ ActiveAdmin.register Company do
     f.inputs do
       f.input :name
       f.input :cnpj, input_html: { placeholder: "XX.XXX.XXX/XXXX-XX" }
-      f.input :people, as: :select, collection: Person.not_in_company, label: "Pessoas"
+      f.input :people, as: :select, collection: Person.all, label: "Pessoas"
     end
 
     f.actions
