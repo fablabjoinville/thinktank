@@ -25,7 +25,6 @@ ActiveAdmin.register Person do
   filter :cpf_eq, label: "CPF"
   filter :rg_eq, label: "RG"
   filter :company, as: :select, label: "Empresa"
-  filter :active, as: :select, collection: [["Ativo", true], ["Inativo", false]], label: "Ativo"
 
   show do
     panel "Detalhes" do
@@ -62,8 +61,8 @@ ActiveAdmin.register Person do
       f.input :rg, input_html: { placeholder: "X.XXX.XXX" }
       f.input :birthday, as: :datepicker
       f.input :company, as: :select, collection: Company.all.map { |c| [c.name, c.id] }, input_html: { class: "default-select" }, prompt: "Selecione a empresa"
-      f.input :gender, as: :select, collection: Member.genders.keys.map { |k|
-        [Member.humanized_enum_value(:gender, k), k]
+      f.input :gender, as: :select, collection: Person.genders.keys.map { |k|
+        [Person.humanized_enum_value(:gender, k), k]
       }, input_html: { class: "default-select" }, prompt: "Selecione o gênero"
     end
 

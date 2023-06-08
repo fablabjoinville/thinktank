@@ -23,7 +23,9 @@
 class Meeting < ApplicationRecord
   belongs_to :phase, optional: true
   belongs_to :team
+
   has_one :assessment, as: :assessmentable, dependent: :destroy
+
   has_many :attendances, dependent: :destroy
   has_many :members, through: :team
   has_many :attending_members, through: :attendances, source: :member
@@ -34,8 +36,6 @@ class Meeting < ApplicationRecord
   validates :date, presence: true
 
   after_create :create_attendances_for_members
-
-  scope :not_evaluated, -> { left_joins(:assessment).where(assessments: { id: nil }) }
 
   def to_s
     "#{title} - #{formatted_date}"
@@ -57,7 +57,7 @@ class Meeting < ApplicationRecord
 
   def create_attendances_for_members
     members.each do |member|
-      attendances.find_or_create_by!(member: member)
+      attendances.find_or_create_by!(person: member.person)
     end
   end
 end

@@ -3,7 +3,6 @@
 # Table name: people
 #
 #  id                     :bigint           not null, primary key
-#  active                 :boolean          default(TRUE), not null
 #  address                :string           default(""), not null
 #  authorization_level    :integer          default(0), not null
 #  birthday               :date
@@ -19,7 +18,6 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  rg                     :string           default("")
-#  role                   :integer          default(0), not null
 #  type                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -42,7 +40,13 @@
 #
 class Person < ApplicationRecord
   belongs_to :company, optional: true
+
+  has_one :attendance, dependent: :destroy
+
   has_and_belongs_to_many :events
+
+  has_many :members
+  has_many :teams, through: :members
 
   validates :full_name, presence: true
   validates :cpf, uniqueness: { allow_blank: true }

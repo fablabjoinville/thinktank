@@ -21,6 +21,7 @@ ActiveAdmin.register Meeting do
   end
 
   filter :title_cont, label: "Título"
+  filter :phase, as: :select, label: "Fase"
   filter :team, as: :select, label: "Equipe"
 
   show do
@@ -36,7 +37,7 @@ ActiveAdmin.register Meeting do
       end
     end
 
-    panel "Avaliação do encontro" do
+    panel "Avaliação do encontro (#{meeting.assessment.present? ? link_to('editar', edit_meeting_assessment_path(meeting.assessment)) : link_to('avaliar', new_meeting_assessment_path(meeting.assessment, assessment: { assessmentable_id: meeting.id }))})".html_safe do
       if meeting.assessment.present?
         attributes_table_for meeting.assessment do
           row :author
@@ -56,8 +57,8 @@ ActiveAdmin.register Meeting do
     panel "Presença dos participantes (#{meeting.attendances_counts})" do
       attributes_table_for meeting do
         meeting.attendances.each do |attendance|
-          row attendance.member.full_name do
-            link_to attendance.humanized_enum(:status), attendance_path(attendance)
+          row attendance.person.full_name do
+            "#{link_to(attendance.humanized_enum(:status), attendance_path(attendance))} (#{link_to('editar', edit_attendance_path(attendance))})".html_safe
           end
         end
       end

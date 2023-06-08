@@ -3,7 +3,6 @@
 class CreatePeople < ActiveRecord::Migration[7.0]
   def change
     create_table :people do |t|
-      t.boolean :active, default: true, null: false
       t.date :birthday
       t.integer :gender, default: 2, null: false # 2 corresponds to "other"
       t.string :address, default: "", null: false
@@ -14,10 +13,6 @@ class CreatePeople < ActiveRecord::Migration[7.0]
       t.string :phone_number, default: "", null: false
       t.string :rg, default: "", null: true
       t.string :type, null: true # null is for the base Person class
-
-      ## Member
-
-      t.integer :role, null: false, default: 0
 
       ## Devise User
 

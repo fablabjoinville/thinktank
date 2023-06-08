@@ -16,8 +16,6 @@ class Event < ApplicationRecord
   validates :title, presence: true
   validates :date, presence: true
 
-  scope :not_evaluated, -> { left_joins(:assessment).where(assessments: { id: nil }) }
-
   def to_s
     "#{title} - #{formatted_date}"
   end

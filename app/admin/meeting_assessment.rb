@@ -13,7 +13,9 @@ ActiveAdmin.register Assessment, as: "MeetingAssessment" do
       selectable_column
       id_column
 
-      column :assessmentable
+      column "Encontro" do |meeting_assessment|
+        link_to meeting_assessment.assessmentable.title, meeting_path(meeting_assessment.assessmentable)
+      end
       column :author
       column :item_a_assessment
       column :item_b_assessment
@@ -29,7 +31,9 @@ ActiveAdmin.register Assessment, as: "MeetingAssessment" do
     show do
       panel "Avaliação do encontro" do
         attributes_table_for meeting_assessment do
-          row :assessmentable
+          row "Encontro" do |meeting_assessment|
+            link_to meeting_assessment.assessmentable.title, meeting_path(meeting_assessment.assessmentable)
+          end
           row :author
           row :item_a_assessment
           row :item_a_comment
@@ -48,7 +52,7 @@ ActiveAdmin.register Assessment, as: "MeetingAssessment" do
       f.semantic_errors
 
       f.inputs "Encontro" do
-        f.input :assessmentable_id, as: :select, collection: Meeting.not_evaluated, label: "Encontro", prompt: "Selecione o encontro"
+        f.input :assessmentable_id, as: :select, collection: Meeting.all, label: "Encontro", prompt: "Selecione o encontro", input_html: { disabled: f.object.persisted? }
         f.input :assessmentable_type, as: :hidden, input_html: { value: 'Meeting' }
         f.input :author_id, as: :hidden, input_html: { value: current_user.id }
         f.input :author_type, as: :hidden, input_html: { value: current_user.class }

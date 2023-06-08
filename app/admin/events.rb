@@ -39,8 +39,7 @@ ActiveAdmin.register Event do
         end
       end
     end
-
-    panel "Avaliação do evento" do
+    panel "Avaliação do evento (#{event.assessment.present? ? link_to('editar', edit_event_assessment_path(event.assessment)) : link_to('avaliar', new_event_assessment_path(event.assessment, assessment: { assessmentable_id: event.id }))})".html_safe do
       if event.assessment.present?
         attributes_table_for event.assessment do
           row :author

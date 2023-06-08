@@ -83,7 +83,7 @@ en:
         attendance: Presença
         created_at: Criado em
         meeting: Encontro
-        member: Membro
+        person: Participante
         reason: Razão
         status: Presença
         statuses:
@@ -91,6 +91,7 @@ en:
           not_registered: Não registrado
           present: Presente
           absent: Ausente
+        team: Equipe
         updated_at: Atualizado em
       axis:
         created_at: Criado Em
@@ -200,12 +201,13 @@ en:
         tool_ids: Ferramentas
         updated_at: Atualizado Em
       team:
+        axis: Eixo
         axis_id: ID do Eixo
         created_at: Criado Em
         id: ID
         link_miro: Link do Miro
         link_teams: Link do MS Teams
-        member_ids: Membros da equipe
+        person_ids: Membros da equipe
         name: Nome da equipe
         updated_at: Atualizado Em
       tool:

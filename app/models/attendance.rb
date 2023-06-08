@@ -22,10 +22,10 @@
 #  fk_rails_...  (person_id => people.id)
 #
 class Attendance < ApplicationRecord
-  belongs_to :member, foreign_key: :person_id, class_name: 'Member'
+  belongs_to :person
   belongs_to :meeting
 
-  validates :member, presence: true
+  validates :person, presence: true
   validates :meeting, presence: true
   validates :status, presence: true
   validates :reason, presence: true, if: ->{ absent? }

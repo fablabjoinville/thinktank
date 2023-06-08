@@ -1,57 +1,43 @@
 # == Schema Information
 #
-# Table name: people
+# Table name: members
 #
-#  id                     :bigint           not null, primary key
-#  active                 :boolean          default(TRUE), not null
-#  address                :string           default(""), not null
-#  authorization_level    :integer          default(0), not null
-#  birthday               :date
-#  celular_number         :string           default(""), not null
-#  cpf                    :string           default("")
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
-#  full_name              :string           not null
-#  gender                 :integer          default("other"), not null
-#  nickname               :string           default(""), not null
-#  phone_number           :string           default(""), not null
-#  remember_created_at    :datetime
-#  reset_password_sent_at :datetime
-#  reset_password_token   :string
-#  rg                     :string           default("")
-#  role                   :integer          default("sol"), not null
-#  type                   :string
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  company_id             :bigint
-#  team_id                :bigint
+#  id         :bigint           not null, primary key
+#  active     :boolean          default(TRUE), not null
+#  role       :integer          default("sol"), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  person_id  :bigint           not null
+#  team_id    :bigint           not null
 #
 # Indexes
 #
-#  index_people_on_company_id            (company_id)
-#  index_people_on_cpf                   (cpf) UNIQUE WHERE (((cpf)::text <> ''::text) AND (cpf IS NOT NULL))
-#  index_people_on_email                 (email) UNIQUE
-#  index_people_on_reset_password_token  (reset_password_token) UNIQUE
-#  index_people_on_rg                    (rg) UNIQUE WHERE (((rg)::text <> ''::text) AND (rg IS NOT NULL))
-#  index_people_on_team_id               (team_id)
+#  index_members_on_person_id  (person_id)
+#  index_members_on_team_id    (team_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (company_id => companies.id)
+#  fk_rails_...  (person_id => people.id)
 #  fk_rails_...  (team_id => teams.id)
 #
-class Member < Person
+class Member < ApplicationRecord
   belongs_to :team
-  belongs_to :company
-  has_many :attendances, foreign_key: :person_id, dependent: :destroy
-  has_many :meetins, through: :attendances
+  belongs_to :person
+
+  has_one :company, through: :person
+
+  has_many :meetings, through: :team
+  has_many :attendances, through: :person
 
   accepts_nested_attributes_for :attendances, allow_destroy: true
 
   enum :role, [:mm, :mp, :sol], prefix: true, default: :sol
 
+  delegate :full_name, :company, to: :person
+
   def to_s
-    "#{humanized_enum(:role)} | #{full_name} | #{company.name}"
+    company_name = company.present? ? "| #{company.name}" : ""
+    "#{humanized_enum(:role)} | #{full_name}#{company_name}"
   end
 
   def attendance_status_for(meeting)
