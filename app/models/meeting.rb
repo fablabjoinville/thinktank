@@ -35,7 +35,7 @@ class Meeting < ApplicationRecord
   validates :title, presence: true
   validates :date, presence: true
 
-  after_create :create_attendances_for_members
+  after_create :create_attendances_for_members!
 
   def to_s
     "#{title} - #{formatted_date}"
@@ -55,7 +55,7 @@ class Meeting < ApplicationRecord
 
   private
 
-  def create_attendances_for_members
+  def create_attendances_for_members!
     members.each do |member|
       attendances.find_or_create_by!(person: member.person)
     end

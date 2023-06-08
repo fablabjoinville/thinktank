@@ -35,6 +35,8 @@ class Member < ApplicationRecord
 
   delegate :full_name, :company, to: :person
 
+  after_create :create_attendances_for_meetings!
+
   def to_s
     company_name = company.present? ? "| #{company.name}" : ""
     "#{humanized_enum(:role)} | #{full_name}#{company_name}"
@@ -43,5 +45,13 @@ class Member < ApplicationRecord
   def attendance_status_for(meeting)
     status = Attendance.humanized_enum_value(:status, attendances.where(meeting: meeting).first.status)
     "Participação: #{status}"
+  end
+
+  private
+
+  def create_attendances_for_meetings!
+    team.meetings.each do |meeting|
+      meeting.attendances.find_or_create_by!(person: person)
+    end
   end
 end
