@@ -57,6 +57,7 @@ gem "phonelib"
 gem "cpf_cnpj"
 gem "validators"
 gem "activeadmin_addons"
+gem "active_storage_db"
 gem "faker"
 
 group :development, :test do

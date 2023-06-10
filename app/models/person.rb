@@ -48,6 +48,8 @@ class Person < ApplicationRecord
   has_many :members
   has_many :teams, through: :members
 
+  has_one_attached :image
+
   validates :full_name, presence: true
   validates :cpf, uniqueness: { allow_blank: true }
   validates_cpf_format_of :cpf, { allow_blank: true }
