@@ -1,11 +1,14 @@
 ActiveAdmin.register Person do
   menu label: "Pessoas", priority: 18
 
-  permit_params :email, :id, :address, :birthday, :celular_number, :cpf, :full_name, :gender, :nickname, :phone_number, :rg, :company_id, :_destroy
+  permit_params :email, :id, :image, :address, :birthday, :celular_number, :cpf, :full_name, :gender, :nickname, :phone_number, :rg, :company_id, :_destroy
 
   index do
     selectable_column
 
+    column :image do |person|
+      person.image.attached? ? image_tag(url_for(person.image), { height: 50 }) : nil
+    end
     column :full_name do |person|
       link_to person.full_name, person_path(person)
     end
@@ -41,6 +44,9 @@ ActiveAdmin.register Person do
         row :company
         tag_row :gender
         tag_row :type
+        row :image do |image|
+          image_tag url_for(person.image), { height: 200 }
+        end
       end
     end
 
@@ -64,6 +70,7 @@ ActiveAdmin.register Person do
       f.input :gender, as: :select, collection: Person.genders.keys.map { |k|
         [Person.humanized_enum_value(:gender, k), k]
       }, input_html: { class: "default-select" }, prompt: "Selecione o gênero"
+      f.input :image, as: :file, hint: f.object.image.attached? ? image_tag(url_for(f.object.image), { width: 100, height: 100 }) : nil
     end
 
     f.actions

@@ -78,7 +78,7 @@ facilitator = User.create_with(
 puts "Creating Person..."
 
 (0..10).each do |n|
-  Person.create!({
+  person = Person.create!({
     full_name: Faker::Name.unique.name,
     birthday: Faker::Date.birthday,
     nickname: Faker::Artist.name,
@@ -91,6 +91,7 @@ puts "Creating Person..."
     company: Company.order("RANDOM()").first,
     email: Faker::Internet.unique.email
   })
+  person.image.attach(io: File.open(Rails.root.join("db/seeds/thinktank.jpeg")), filename: 'thinktank.jpeg')
 end
 
 #########################################################################################################

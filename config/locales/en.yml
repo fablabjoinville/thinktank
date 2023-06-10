@@ -187,6 +187,7 @@ en:
           woman: Feminino
           other: Outro
         id: ID
+        image: Foto
         nickname: Apelido
         phone_number: Telefone
         rg: RG
