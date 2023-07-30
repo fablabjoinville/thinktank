@@ -132,21 +132,11 @@ en:
         id: ID
         name: Nome
         updated_at: Atualizado Em
-      event:
-        created_at: Criado em
-        date: Data
-        id: ID
-        people: Participantes
-        team: Equipe
-        title: Título
-        updated_at: Atualizado em
       meeting:
         created_at: Criado em
-        date: Data
         id: ID
         phase: Fase
-        team: Equipe
-        title: Título
+        name: Título
         updated_at: Atualizado em
       member:
         active: Ativo
@@ -281,18 +271,9 @@ en:
       company:
         one: Empresa
         other: Empresas
-      event:
-        one: Evento
-        other: Eventos
-      event_assessment:
-        one: Avaliação de Evento
-        other: Avaliações de Eventos
       meeting:
         one: Encontro
         other: Encontros
-      meeting_assessment:
-        one: Avaliação de Encontro
-        other: Avaliações de Encontros
       member:
         one: Membro de Equipe
         other: Membros de Equipe

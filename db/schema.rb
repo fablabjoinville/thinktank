@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_09_161342) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_10_212047) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -84,18 +84,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_09_161342) do
     t.index ["author_type", "author_id"], name: "index_assessments_on_author"
   end
 
-  create_table "attendances", force: :cascade do |t|
-    t.bigint "person_id", null: false
-    t.bigint "meeting_id", null: false
-    t.integer "status", default: 0, null: false
-    t.text "reason", default: "", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["meeting_id"], name: "index_attendances_on_meeting_id"
-    t.index ["person_id", "meeting_id"], name: "index_attendances_on_person_id_and_meeting_id", unique: true
-    t.index ["person_id"], name: "index_attendances_on_person_id"
-  end
-
   create_table "axes", force: :cascade do |t|
     t.string "title", default: "", null: false
     t.text "description", default: "", null: false
@@ -128,29 +116,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_09_161342) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "events", force: :cascade do |t|
-    t.string "title", null: false
-    t.date "date", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "events_people", id: false, force: :cascade do |t|
-    t.bigint "event_id"
-    t.bigint "person_id"
-    t.index ["event_id"], name: "index_events_people_on_event_id"
-    t.index ["person_id"], name: "index_events_people_on_person_id"
-  end
-
   create_table "meetings", force: :cascade do |t|
-    t.bigint "team_id", null: false
-    t.string "title", null: false
-    t.date "date", null: false
+    t.bigint "phase_id"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "phase_id"
     t.index ["phase_id"], name: "index_meetings_on_phase_id"
-    t.index ["team_id"], name: "index_meetings_on_team_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -226,11 +197,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_09_161342) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "attendances", "meetings"
-  add_foreign_key "attendances", "people"
   add_foreign_key "clusters", "people"
   add_foreign_key "meetings", "phases"
-  add_foreign_key "meetings", "teams"
   add_foreign_key "members", "people"
   add_foreign_key "members", "teams"
   add_foreign_key "people", "companies"

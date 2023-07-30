@@ -12,7 +12,5 @@ class CreatePhases < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-
-    add_reference :meetings, :phase, null: true, foreign_key: true
   end
 end

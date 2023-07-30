@@ -50,19 +50,6 @@ ActiveAdmin.register Member do
       end
     end
 
-    panel "Encontros (#{member.meetings.count})" do
-      attributes_table_for member do
-        if member.meetings.any?
-          member.meetings.each do |meeting|
-            row "#{meeting.date}" do |member|
-              div link_to(meeting.title, meeting_path(meeting))
-              div link_to member.attendance_status_for(meeting), attendance_path(member.attendances.where(meeting: meeting).first)
-            end
-          end
-        end
-      end
-    end
-
     active_admin_comments
   end
 
