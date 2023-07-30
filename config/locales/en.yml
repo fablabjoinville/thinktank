@@ -132,6 +132,14 @@ en:
         id: ID
         name: Nome
         updated_at: Atualizado Em
+      event:
+        created_at: Criado em
+        date: Data
+        id: ID
+        meeting: Encontro
+        name: Título
+        team: Equipe
+        updated_at: Atualizado em
       meeting:
         created_at: Criado em
         id: ID
@@ -271,6 +279,9 @@ en:
       company:
         one: Empresa
         other: Empresas
+      event:
+        one: Evento
+        other: Eventos
       meeting:
         one: Encontro
         other: Encontros
