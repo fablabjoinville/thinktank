@@ -43,8 +43,6 @@ class Person < ApplicationRecord
 
   has_one :attendance, dependent: :destroy
 
-  has_and_belongs_to_many :events
-
   has_many :members
   has_many :teams, through: :members
 

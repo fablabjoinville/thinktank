@@ -25,7 +25,6 @@ class Team < ApplicationRecord
 
   has_many :members, dependent: :destroy
   has_many :people, through: :members
-  has_many :meetings
 
   validates :name, presence: true, uniqueness: true
   validates :link_teams, format: { with: /\A(https?:\/\/)?(?:www\.)?teams\.microsoft\.com\/.+\z/i,

@@ -15,7 +15,6 @@ puts "Cleaning entities..."
 Company.destroy_all
 User.destroy_all
 Person.destroy_all
-Event.destroy_all
 Phase.destroy_all
 Axis.destroy_all
 Team.destroy_all
@@ -96,12 +95,6 @@ end
 
 #########################################################################################################
 
-Event.create!(title: "Evento 1", date: Faker::Date.in_date_period(month: 2))
-Event.create!(title: "Evento 2", date: Faker::Date.in_date_period(month: 2))
-Event.create!(title: "Evento 30", date: Faker::Date.in_date_period(month: 2))
-
-#########################################################################################################
-
 phase_one = Phase.create!(name: "Fase 1")
 phase_one.tools << Tool.first
 phase_one.tools << Tool.second
@@ -112,6 +105,11 @@ phase_two = Phase.create!(name: "Fase 2")
 phase_two.tools << Tool.fourth
 phase_two.tools << Tool.fifth
 phase_two.save!
+
+Meeting.create!(name: "Encontro 1", phase: Phase.first)
+Meeting.create!(name: "Encontro 2", phase: Phase.first)
+Meeting.create!(name: "Encontro 2", phase: Phase.second)
+Meeting.create!(name: "Encontro 2", phase: Phase.second)
 
 #########################################################################################################
 
@@ -131,20 +129,6 @@ Member.create!(team: Team.first, person: Person.first, role: :mm)
 Member.create!(team: Team.first, person: Person.second, role: :sol)
 Member.create!(team: Team.first, person: Person.third, role: :sol)
 
-Meeting.create!(
-  team: Team.first,
-  title: "Encontro 1 da equipe 1",
-  date: Faker::Date.in_date_period(month: 2),
-  phase: Phase.first
-)
-
-Meeting.create!(
-  team: Team.first,
-  title: "Encontro 2 da equipe 1",
-  date: Faker::Date.in_date_period(month: 2),
-  phase: Phase.first
-)
-
 #########################################################################################################
 
 Axis.create!(
@@ -163,19 +147,19 @@ Member.create!(team: Team.second, person: Person.fourth, role: :mm)
 Member.create!(team: Team.second, person: Person.fifth, role: :sol)
 Member.create!(team: Team.second, person: Person.find(5), role: :sol)
 
-Meeting.create!(
-  team: Team.second,
-  title: "Encontro 1 da equipe 2",
-  date: Faker::Date.in_date_period(month: 2),
-  phase: Phase.first
-)
+# Meeting.create!(
+#   team: Team.second,
+#   title: "Encontro 1 da equipe 2",
+#   date: Faker::Date.in_date_period(month: 2),
+#   phase: Phase.first
+# )
 
-Meeting.create!(
-  team: Team.second,
-  title: "Encontro 2 da equipe 2",
-  date: Faker::Date.in_date_period(month: 2),
-  phase: Phase.first
-)
+# Meeting.create!(
+#   team: Team.second,
+#   title: "Encontro 2 da equipe 2",
+#   date: Faker::Date.in_date_period(month: 2),
+#   phase: Phase.first
+# )
 
 #########################################################################################################
 
@@ -195,11 +179,11 @@ Member.create!(team: Team.second, person: Person.find(6), role: :mm)
 Member.create!(team: Team.second, person: Person.find(7), role: :sol)
 Member.create!(team: Team.second, person: Person.find(8), role: :sol)
 
-Meeting.create!(
-  team: Team.third,
-  title: "Encontro 1 da equipe 3",
-  date: Faker::Date.in_date_period(month: 2)
-)
+# Meeting.create!(
+#   team: Team.third,
+#   title: "Encontro 1 da equipe 3",
+#   date: Faker::Date.in_date_period(month: 2)
+# )
 
 #########################################################################################################
 

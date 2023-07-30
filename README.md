@@ -76,7 +76,3 @@ Abrirá [https://thinktank.herokuapp.com](https://thinktank.herokuapp.com).
 ## Produção
 
 TODO
-
-## Ideias
-
-* Listar times, eventos, encontros, presenças, etc. em Pessoa Física

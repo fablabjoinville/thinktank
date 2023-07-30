@@ -63,15 +63,6 @@ ActiveAdmin.register Team do
           end
         end
       end
-      row "Encontros" do |team|
-        if team.meetings.any?
-          ul do
-            team.meetings.each do |meeting|
-              li link_to meeting.title, meeting_path(meeting)
-            end
-          end
-        end
-      end
     end
 
     active_admin_comments
