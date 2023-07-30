@@ -1,8 +1,26 @@
 ActiveAdmin.register User do
   TITLE = "Time interno"
-  menu label: TITLE, parent: "Administração", priority: 0, if: proc { current_user.super_admin_authorization_level? }
+  menu label: TITLE, parent: "Administração", priority: 3, if: proc { current_user.super_admin_authorization_level? }
 
-  permit_params :email, :authorization_level, :password, :password_confirmation, :id, :address, :birthday, :celular_number, :cpf, :full_name, :gender, :nickname, :phone_number, :rg, :_destroy
+  permit_params(
+    :_destroy,
+    :address,
+    :authorization_level,
+    :birthday,
+    :celular_number,
+    :company_id,
+    :cpf,
+    :email,
+    :full_name,
+    :gender,
+    :id,
+    :image,
+    :nickname,
+    :password_confirmation,
+    :password,
+    :phone_number,
+    :rg
+  )
 
   controller do
     def update
@@ -19,14 +37,19 @@ ActiveAdmin.register User do
   index title: TITLE do
     selectable_column
 
+    column :image do |user|
+      user.image.attached? ? image_tag(url_for(user.image), { height: 50 }) : nil
+    end
     column :full_name do |user|
       link_to user.full_name, user_path(user)
     end
-    column :email
     tag_column :authorization_level
+    column :nickname
+    column :email
     column :phone_number
     column :celular_number
     column :birthday
+    column :company
     tag_column :gender
 
     actions
@@ -42,25 +65,29 @@ ActiveAdmin.register User do
   show do
     attributes_table do
       row :full_name
-      row :email
       tag_row :authorization_level
       row :nickname
+      row :email
       row :phone_number
       row :celular_number
       row :address
       row :cpf
       row :rg
       row :birthday
+      row :company
       tag_row :gender
+      row :image do |user|
+        image_tag url_for(user.image), { height: 200 }
+      end
     end
 
     active_admin_comments
   end
 
-  form title: proc { |o| o.new_record? ? "Criar novo" : "Editar #{o.full_name}" } do |f|
+  form do |f|
     f.semantic_errors
 
-    f.inputs "Dados pessoais" do
+    f.inputs do
       f.input :full_name
       f.input :nickname
       f.input :celular_number, input_html: { placeholder: "(XX) XXXXX-XXXX" }
@@ -72,6 +99,8 @@ ActiveAdmin.register User do
       f.input :gender, as: :select, collection: User.genders.keys.map { |k|
         [User.humanized_enum_value(:gender, k), k]
       }, input_html: { class: "default-select" }, prompt: "Selecione o gênero"
+      f.input :company, as: :select, collection: Company.all.map { |c| [c.name, c.id] }, input_html: { class: "default-select" }, prompt: "Selecione a empresa"
+      f.input :image, as: :file, hint: f.object.image.attached? ? image_tag(url_for(f.object.image), { width: 100, height: 100 }) : nil
     end
 
     f.inputs "Credenciais" do

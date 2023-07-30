@@ -1,9 +1,16 @@
 require 'active_admin/views/index_as_grouped_table'
 
 ActiveAdmin.register Member do
-  menu parent: "Equipes", priority: 1
+  menu priority: 5
 
-  permit_params :id, :active, :role, :person_id, :team_id, :_destroy
+  permit_params(
+    :_destroy,
+    :active,
+    :id,
+    :person_id,
+    :role,
+    :team_id,
+  )
 
   index as: :grouped_table, group_by_attribute: :team do
     selectable_column
@@ -26,12 +33,10 @@ ActiveAdmin.register Member do
   filter :company_id_eq, as: :select, collection: Company.all, label: "Empresa"
 
   show do
-    panel "Detalhes" do
-      attributes_table_for member do
-        tag_row :role
-        row :team
-        row :active
-      end
+    attributes_table do
+      tag_row :role
+      row :team
+      row :active
     end
 
     panel "Pessoa" do

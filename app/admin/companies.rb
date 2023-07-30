@@ -1,7 +1,13 @@
 ActiveAdmin.register Company do
   menu parent: "Administração", priority: 1
 
-  permit_params :id, :name, :cnpj, :_destroy, person_ids: []
+  permit_params(
+    :_destroy,
+    :cnpj,
+    :id,
+    :name,
+    person_ids: []
+  )
 
   index do
     selectable_column
@@ -21,20 +27,16 @@ ActiveAdmin.register Company do
   filter :cnpj_eq, label: "CNPJ"
 
   show do
-    panel "Detalhes" do
-      attributes_table_for company do
-        row :name
-        row :cnpj
-      end
+    attributes_table do
+      row :name
+      row :cnpj
     end
 
-    panel "Pessoas associadas ##{company.people.count}" do
+    panel "Pessoas associadas: #{company.people.count}" do
       attributes_table_for company do
         if company.people.any?
-          ul do
-            company.people.each do |person|
-              li link_to(person, person_path(person))
-            end
+          company.people.each do |person|
+            div link_to(person, person_path(person))
           end
         end
       end

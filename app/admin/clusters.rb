@@ -1,7 +1,17 @@
 ActiveAdmin.register Cluster do
-  menu parent: "Equipes", priority: 3
+  menu priority: 2
 
-  permit_params :id, :start_time, :end_time, :week_day, :address, :modality, :link, :person_id, :_destroy, team_ids: []
+  permit_params(
+    :_destroy,
+    :address,
+    :end_time,
+    :id,
+    :link,
+    :modality,
+    :person_id,
+    :start_time,
+    :week_day,
+  )
 
   index do
     selectable_column
@@ -35,17 +45,16 @@ ActiveAdmin.register Cluster do
       row :end_time
       row :user
       tag_row :modality
-      row "Equipes" do |cluster|
-        if cluster.teams.any?
-          ul do
-            cluster.teams.each do |team|
-              li link_to team, team_path(team)
-            end
-          end
-        end
-      end
       row :address
       row :link
+    end
+
+    panel "Equipes: #{cluster.teams.count}" do
+      if cluster.teams.any?
+        cluster.teams.each do |team|
+          div link_to team, team_path(team)
+        end
+      end
     end
 
     active_admin_comments
@@ -66,7 +75,6 @@ ActiveAdmin.register Cluster do
       }
       f.input :address
       f.input :link, as: :url
-      f.input :team_ids, collection: Team.all, as: :tags# input_html: { class: "slim-select" }, prompt: "Selecione o eixo"
     end
 
     f.actions

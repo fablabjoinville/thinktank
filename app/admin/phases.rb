@@ -1,7 +1,12 @@
 ActiveAdmin.register Phase do
-  menu parent: "Encontros", priority: 4
+  menu parent: "Administração", priority: 4
 
-  permit_params :id, :name, :_destroy, tool_ids: []
+  permit_params(
+    :_destroy,
+    :id,
+    :name,
+    tool_ids: []
+  )
 
   index do
     selectable_column
@@ -22,15 +27,13 @@ ActiveAdmin.register Phase do
   filter :tools, as: :select, label: "Ferramentas"
 
   show do
-    panel "Detalhes" do
-      attributes_table_for phase do
-        row :name
-        row :tools do |phase|
-          if phase.tools.any?
-            ul do
-              phase.tools.each do |tool|
-                li link_to tool.name, tool_path(tool)
-              end
+    attributes_table do
+      row :name
+      row :tools do |phase|
+        if phase.tools.any?
+          ul do
+            phase.tools.each do |tool|
+              li link_to tool.name, tool_path(tool)
             end
           end
         end

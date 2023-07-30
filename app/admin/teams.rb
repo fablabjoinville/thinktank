@@ -1,7 +1,17 @@
 ActiveAdmin.register Team do
-  menu parent: "Equipes", priority: 0
+  menu priority: 4
 
-  permit_params :id, :name, :link_miro, :link_teams, :axis_id, :_destroy, :clusters, person_ids: [], cluster_ids: []
+  permit_params(
+    :_destroy,
+    :axis_id,
+    :clusters,
+    :id,
+    :link_miro,
+    :link_teams,
+    :name,
+    cluster_ids: [],
+    person_ids: []
+  )
 
   index do
     selectable_column

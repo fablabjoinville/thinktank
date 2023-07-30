@@ -1,7 +1,12 @@
 ActiveAdmin.register Tool do
-  menu label: "Ferramentas", priority: 19
+  menu parent: "Administração", priority: 6
 
-  permit_params :id, :name, :_destroy, phase_ids: []
+  permit_params(
+    :_destroy,
+    :id,
+    :name,
+    phase_ids: []
+  )
 
   index do
     selectable_column

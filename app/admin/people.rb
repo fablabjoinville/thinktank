@@ -1,7 +1,22 @@
 ActiveAdmin.register Person do
-  menu label: "Pessoas", priority: 18
+  menu parent: "Administração", priority: 2
 
-  permit_params :email, :id, :image, :address, :birthday, :celular_number, :cpf, :full_name, :gender, :nickname, :phone_number, :rg, :company_id, :_destroy
+  permit_params(
+    :_destroy,
+    :address,
+    :birthday,
+    :celular_number,
+    :company_id,
+    :cpf,
+    :email,
+    :full_name,
+    :gender,
+    :id,
+    :image,
+    :nickname,
+    :phone_number,
+    :rg,
+  )
 
   index do
     selectable_column
@@ -23,30 +38,28 @@ ActiveAdmin.register Person do
     actions
   end
 
-  filter :full_name_cont, label: "Nome U"
+  filter :full_name_cont, label: "Nome"
   filter :nickname_cont, label: "Apelido"
   filter :cpf_eq, label: "CPF"
   filter :rg_eq, label: "RG"
   filter :company, as: :select, label: "Empresa"
 
   show do
-    panel "Detalhes" do
-      attributes_table_for person do
-        row :full_name
-        row :nickname
-        row :email
-        row :phone_number
-        row :celular_number
-        row :address
-        row :cpf
-        row :rg
-        row :birthday
-        row :company
-        tag_row :gender
-        tag_row :type
-        row :image do |image|
-          image_tag url_for(person.image), { height: 200 }
-        end
+    attributes_table do
+      row :full_name
+      row :nickname
+      row :email
+      row :phone_number
+      row :celular_number
+      row :address
+      row :cpf
+      row :rg
+      row :birthday
+      row :company
+      tag_row :gender
+      tag_row :type
+      row :image do |person|
+        image_tag url_for(person.image), { height: 200 }
       end
     end
 
