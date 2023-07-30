@@ -1,7 +1,12 @@
 ActiveAdmin.register Meeting do
-  menu parent: "Encontros", priority: 0
+  menu parent: "Administração", priority: 5
 
-  permit_params :id, :name, :phase_id, :_destroy
+  permit_params(
+    :_destroy,
+    :id,
+    :name,
+    :phase_id,
+  )
 
   index do
     selectable_column
@@ -18,11 +23,9 @@ ActiveAdmin.register Meeting do
   filter :phase, as: :select, label: "Fase"
 
   show do
-    panel "Detalhes" do
-      attributes_table_for meeting do
-        row :name
-        row :phase
-      end
+    attributes_table do
+      row :name
+      row :phase
     end
 
     active_admin_comments
