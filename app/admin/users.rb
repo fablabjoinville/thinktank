@@ -38,7 +38,7 @@ ActiveAdmin.register User do
     selectable_column
 
     column :image do |user|
-      user.image.attached? ? image_tag(url_for(user.image), { height: 50 }) : nil
+      user.image&.attached? ? image_tag(url_for(user.image), { height: 50 }) : nil
     end
     column :full_name do |user|
       link_to user.full_name, user_path(user)
@@ -77,7 +77,7 @@ ActiveAdmin.register User do
       row :company
       tag_row :gender
       row :image do |user|
-        image_tag url_for(user.image), { height: 200 }
+        user.image&.attached? ? image_tag(url_for(user.image), { height: 200 }) : nil
       end
     end
 
@@ -100,7 +100,7 @@ ActiveAdmin.register User do
         [User.humanized_enum_value(:gender, k), k]
       }, input_html: { class: "default-select" }, prompt: "Selecione o gênero"
       f.input :company, as: :select, collection: Company.all.map { |c| [c.name, c.id] }, input_html: { class: "default-select" }, prompt: "Selecione a empresa"
-      f.input :image, as: :file, hint: f.object.image.attached? ? image_tag(url_for(f.object.image), { width: 100, height: 100 }) : nil
+      f.input :image, as: :file, hint: f.object&.image&.attached? ? image_tag(url_for(f.object.image), { width: 100, height: 100 }) : nil
     end
 
     f.inputs "Credenciais" do

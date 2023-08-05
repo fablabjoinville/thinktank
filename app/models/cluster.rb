@@ -31,8 +31,8 @@ class Cluster < ApplicationRecord
   validates :week_day, presence: true
   validates :modality, presence: true
 
-  enum week_day: [:segunda, :terca, :quarta, :quinta, :sexta, :sabado, :domingo]
   enum modality: [:presencial, :online]
+  enum week_day: [:segunda, :terca, :quarta, :quinta, :sexta, :sabado, :domingo]
 
   def to_s
     day_s = humanized_enum(:week_day)
