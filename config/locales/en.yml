@@ -100,7 +100,7 @@ en:
         title: Título
         updated_at: Atualizado Em
       cluster:
-        address: Endereço
+        address: Local base
         created_at: Criado Em
         end_time: Hora Final
         id: ID
@@ -202,6 +202,7 @@ en:
       team:
         axis: Eixo
         axis_id: ID do Eixo
+        cluster_ids: Clusters
         created_at: Criado Em
         id: ID
         link_miro: Link do Miro
