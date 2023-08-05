@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_30_154806) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_05_151902) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -92,12 +92,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_30_154806) do
   end
 
   create_table "clusters", force: :cascade do |t|
-    t.bigint "person_id", null: false
+    t.bigint "person_id"
     t.time "start_time", null: false
     t.time "end_time", null: false
     t.integer "week_day", null: false
     t.string "address"
-    t.integer "modality", null: false
+    t.integer "modality", default: 0, null: false
     t.text "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
