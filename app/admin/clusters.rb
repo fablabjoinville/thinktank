@@ -28,7 +28,9 @@ ActiveAdmin.register Cluster do
       cluster.teams.count
     end
     column :address
-    column :link
+    column :link do |cluster|
+      link_to cluster.link, cluster.link, target: "_blank"
+    end
 
     actions
   end
@@ -46,12 +48,14 @@ ActiveAdmin.register Cluster do
       row :user
       tag_row :modality
       row :address
-      row :link
+      row :link do |cluster|
+        link_to cluster.link, cluster.link, target: "_blank"
+      end
     end
 
     panel "Equipes: #{cluster.teams.count}" do
       if cluster.teams.any?
-        cluster.teams.each do |team|
+        cluster.teams.ordered_by_name.each do |team|
           div link_to team, team_path(team)
         end
       end

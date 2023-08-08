@@ -39,8 +39,8 @@ ActiveAdmin.register Event do
       f.inputs do
         f.input :name
         f.input :date, input_html: { class: "default-select" }
-        f.input :meeting, input_html: { class: "slim-select" }, prompt: "Selecione o Encontro"
-        f.input :team, input_html: { class: "slim-select" }, prompt: "Selecione a Equipe"
+        f.input :meeting, as: :select, collection: Meeting.ordered_by_name, input_html: { class: "slim-select" }, prompt: "Selecione o Encontro"
+        f.input :team, as: :select, collection: Team.ordered_by_name,  input_html: { class: "slim-select" }, prompt: "Selecione a Equipe"
       end
 
       f.actions

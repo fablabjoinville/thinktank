@@ -33,10 +33,10 @@ ActiveAdmin.register Member do
   end
 
   filter :person_full_name_cont, label: "Nome"
-  filter :team, as: :select, collection: Team.all, label: "Equipe"
+  filter :team, as: :select, collection: Team.ordered_by_name, label: "Equipe"
   filter :active, as: :select, collection: [["Ativo", true], ["Inativo", false]], label: "Ativo"
   filter :role, as: :select, label: "Role"
-  filter :company_id_eq, as: :select, collection: Company.all, label: "Empresa"
+  filter :company_id_eq, as: :select, collection: Company.ordered_by_name, label: "Empresa"
 
   show do
     attributes_table do
@@ -68,8 +68,8 @@ ActiveAdmin.register Member do
     f.semantic_errors
 
     f.inputs do
-      f.input :team, as: :select, collection: Team.all, input_html: { class: "default-select" }, prompt: "Selecione a equipe"
-      f.input :person, as: :select, collection: Person.all, input_html: { class: "default-select" }, prompt: "Selecione a pessoa"
+      f.input :team, as: :select, collection: Team.ordered_by_name, input_html: { class: "slim-select" }, prompt: "Selecione a equipe"
+      f.input :person, as: :select, collection: Person.ordered_by_full_name, input_html: { class: "slim-select" }, prompt: "Selecione a pessoa"
 
       f.input :role, as: :select, collection: Member.roles.keys.map { |k|
         [Member.humanized_enum_value(:role, k), k]

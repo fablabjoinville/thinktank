@@ -87,7 +87,7 @@ ActiveAdmin.register Team do
       f.input :link_teams
       f.input :axis, input_html: { class: "slim-select" }, prompt: "Selecione o eixo"
       f.input :cluster_ids, collection: Cluster.all, as: :tags, display_name: :to_s, hint: "Selecione os clusters"
-      f.input :person_ids, collection: Person.all, as: :tags, display_name: :to_s, hint: "Selecione os membros da equipe. Todos serão adicionados como solucionadores."
+      f.input :person_ids, collection: Person.ordered_by_full_name, as: :tags, display_name: :to_s, hint: "Selecione os membros da equipe. Todos serão adicionados como solucionadores."
     end
 
     f.actions

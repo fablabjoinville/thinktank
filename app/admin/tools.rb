@@ -34,7 +34,7 @@ ActiveAdmin.register Tool do
       row :phases do |tool|
         if tool.phases.any?
           ul do
-            tool.phases.each do |phase|
+            tool.phases.ordered_by_name.each do |phase|
               li link_to phase.name, phase_path(phase)
             end
           end
@@ -50,7 +50,7 @@ ActiveAdmin.register Tool do
 
     f.inputs do
       f.input :name
-      f.input :phases, as: :select, collection: Phase.all, label: "Fases"
+      f.input :phases, as: :select, collection: Phase.ordered_by_name, label: "Fases"
     end
 
     f.actions

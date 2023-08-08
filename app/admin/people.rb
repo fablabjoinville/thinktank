@@ -84,7 +84,7 @@ ActiveAdmin.register Person do
       f.input :cpf, input_html: { placeholder: "XXX.XXX.XXX-XX" }
       f.input :rg, input_html: { placeholder: "X.XXX.XXX" }
       f.input :birthday, as: :datepicker, datepicker_options: {dateFormat: "dd/mm/yy" }, input_html: { placeholder: "DD/MM/AAAA" }
-      f.input :company, as: :select, collection: Company.all.map { |c| [c.name, c.id] }.sort, input_html: { class: "slim-select" }, prompt: "Selecione a empresa"
+      f.input :company, as: :select, collection: Company.ordered_by_name, input_html: { class: "slim-select" }, prompt: "Selecione a empresa"
       f.input :gender, as: :select, collection: Person.genders.keys.map { |k|
         [Person.humanized_enum_value(:gender, k), k]
       }, input_html: { class: "default-select" }, prompt: "Selecione o gênero"
