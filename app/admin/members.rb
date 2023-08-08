@@ -12,14 +12,20 @@ ActiveAdmin.register Member do
     :team_id,
   )
 
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes([:person, :team])
+    end
+  end
+
   index as: :grouped_table, group_by_attribute: :team do
     selectable_column
 
-    column :full_name do |member|
+    column :full_name, sortable: "person.full_name" do |member|
       link_to member.full_name, member_path(member)
     end
 
-    column :team
+    column :team, sortable: "team.name"
     tag_column :role
     column :active
 
