@@ -99,7 +99,7 @@ ActiveAdmin.register User do
       f.input :gender, as: :select, collection: User.genders.keys.map { |k|
         [User.humanized_enum_value(:gender, k), k]
       }, input_html: { class: "default-select" }, prompt: "Selecione o gênero"
-      f.input :company, as: :select, collection: Company.all.map { |c| [c.name, c.id] }.sort, input_html: { class: "slim-select" }, prompt: "Selecione a empresa"
+      f.input :company, as: :select, collection: Company.ordered_by_name, input_html: { class: "slim-select" }, prompt: "Selecione a empresa"
       f.input :image, as: :file, hint: f.object&.image&.attached? ? image_tag(url_for(f.object.image), { width: 100, height: 100 }) : nil
     end
 

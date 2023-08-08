@@ -57,6 +57,8 @@ class Person < ApplicationRecord
 
   enum :gender, [:man, :woman, :other], prefix: true, default: :other
 
+  scope :ordered_by_full_name, -> { order('LOWER(full_name) ASC') }
+
   ransacker :address, type: :string, formatter: proc { |v| I18n.transliterate(v) } do |_|
     Arel.sql("unaccent(\"address\")")
   end
