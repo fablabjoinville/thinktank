@@ -2,6 +2,7 @@ require 'active_admin/views/index_as_grouped_table'
 
 ActiveAdmin.register Member do
   menu priority: 5
+  config.create_another = true
 
   permit_params(
     :_destroy,
@@ -37,6 +38,11 @@ ActiveAdmin.register Member do
   filter :active, as: :select, collection: [["Ativo", true], ["Inativo", false]], label: "Ativo"
   filter :role, as: :select, label: "Role"
   filter :company_id_eq, as: :select, collection: Company.ordered_by_name, label: "Empresa"
+
+  action_item :new_model, only: :show do
+    localizer = ActiveAdmin::Localizers.resource(active_admin_config)
+     link_to localizer.t(:new_model), new_resource_path
+  end
 
   show do
     attributes_table do

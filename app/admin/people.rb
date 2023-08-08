@@ -1,5 +1,6 @@
 ActiveAdmin.register Person do
   menu parent: "Administração", priority: 2
+  config.create_another = true
 
   permit_params(
     :_destroy,
