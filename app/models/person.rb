@@ -82,6 +82,10 @@ class Person < ApplicationRecord
     end
   end
 
+  def user?
+    self[:type] == "User"
+  end
+
   def to_s
     full_name
   end
