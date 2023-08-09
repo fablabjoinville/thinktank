@@ -1,5 +1,6 @@
 ActiveAdmin.register Company do
   menu parent: "Administração", priority: 1
+  config.sort_order = 'name_asc'
 
   permit_params(
     :_destroy,

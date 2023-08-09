@@ -3,6 +3,9 @@ require 'active_admin/views/index_as_grouped_table'
 ActiveAdmin.register Member do
   menu priority: 5
   config.create_another = true
+  config.sort_order = 'person.full_name_asc'
+
+  includes :person, :team
 
   permit_params(
     :_destroy,
@@ -12,12 +15,6 @@ ActiveAdmin.register Member do
     :role,
     :team_id,
   )
-
-  controller do
-    def scoped_collection
-      end_of_association_chain.includes([:person, :team])
-    end
-  end
 
   index as: :grouped_table, group_by_attribute: :team do
     selectable_column
@@ -46,12 +43,13 @@ ActiveAdmin.register Member do
 
   show do
     attributes_table do
+      row :full_name
       tag_row :role
       row :team
       row :active
     end
 
-    panel "Pessoa" do
+    panel "Pessoa #{link_to "editar", member.person }".html_safe do
       attributes_table_for member.person do
         row :full_name
         row :nickname
@@ -64,6 +62,9 @@ ActiveAdmin.register Member do
         row :birthday
         row :company
         tag_row :gender
+        row :image do |person|
+          image_tag(person.avatar_path, { width: 200, height: "auto" })
+        end
       end
     end
 

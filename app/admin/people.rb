@@ -1,6 +1,7 @@
 ActiveAdmin.register Person do
   menu parent: "Administração", priority: 2
   config.create_another = true
+  config.sort_order = 'full_name_asc'
 
   permit_params(
     :_destroy,
@@ -23,7 +24,7 @@ ActiveAdmin.register Person do
     selectable_column
 
     column :image do |person|
-      person.image&.attached? ? image_tag(url_for(person.image), { height: 50 }) : nil
+      image_tag(person.avatar_path, { width: 50, height: "auto" })
     end
     column :full_name do |person|
       link_to person.full_name, person_path(person)
@@ -65,7 +66,7 @@ ActiveAdmin.register Person do
       tag_row :gender
       tag_row :type
       row :image do |person|
-        person.image&.attached? ? image_tag(url_for(person.image), { height: 200 }) : nil
+        image_tag(person.avatar_path, { width: 200, height: "auto" })
       end
     end
 
@@ -89,7 +90,7 @@ ActiveAdmin.register Person do
       f.input :gender, as: :select, collection: Person.genders.keys.map { |k|
         [Person.humanized_enum_value(:gender, k), k]
       }, input_html: { class: "default-select" }, prompt: "Selecione o gênero"
-      f.input :image, as: :file, hint: f.object&.image&.attached? ? image_tag(url_for(f.object.image), { width: 100, height: 100 }) : nil
+      f.input :image, as: :file, hint: image_tag(f.object.avatar_path, { width: 200, height: "auto" })
     end
 
     f.actions

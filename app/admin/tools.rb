@@ -1,5 +1,6 @@
 ActiveAdmin.register Tool do
   menu parent: "Administração", priority: 6
+  config.sort_order = 'name_asc'
 
   permit_params(
     :_destroy,
