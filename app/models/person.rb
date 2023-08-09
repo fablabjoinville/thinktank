@@ -104,4 +104,8 @@ class Person < ApplicationRecord
     return if phone_number.blank?
     write_attribute(:phone_number, Phonelib.parse(phone_number).local_number)
   end
+
+  def avatar_path
+    image&.attached? ? image : "default-avatar.png"
+  end
 end

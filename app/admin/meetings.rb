@@ -1,6 +1,8 @@
 ActiveAdmin.register Meeting do
   menu parent: "Administração", priority: 5
 
+  includes :phase
+
   permit_params(
     :_destroy,
     :id,
@@ -14,7 +16,7 @@ ActiveAdmin.register Meeting do
     column :name do |meeting|
       link_to meeting.name, meeting_path(meeting)
     end
-    column :phase
+    column :phase, sortable: "phase.name"
 
     actions
   end

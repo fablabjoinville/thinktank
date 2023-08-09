@@ -1,6 +1,7 @@
 ActiveAdmin.register User do
   TITLE = "Time interno"
   menu label: TITLE, parent: "Administração", priority: 3, if: proc { current_user.super_admin_authorization_level? }
+  config.sort_order = 'full_name_asc'
 
   permit_params(
     :_destroy,
@@ -38,7 +39,7 @@ ActiveAdmin.register User do
     selectable_column
 
     column :image do |user|
-      user.image&.attached? ? image_tag(url_for(user.image), { height: 50 }) : nil
+      image_tag(user.avatar_path, { width: 50, height: "auto" })
     end
     column :full_name do |user|
       link_to user.full_name, user_path(user)
@@ -77,7 +78,7 @@ ActiveAdmin.register User do
       row :company
       tag_row :gender
       row :image do |user|
-        user.image&.attached? ? image_tag(url_for(user.image), { height: 200 }) : nil
+        image_tag(user.avatar_path, { width: 200, height: "auto" })
       end
     end
 
@@ -100,7 +101,7 @@ ActiveAdmin.register User do
         [User.humanized_enum_value(:gender, k), k]
       }, input_html: { class: "default-select" }, prompt: "Selecione o gênero"
       f.input :company, as: :select, collection: Company.ordered_by_name, input_html: { class: "slim-select" }, prompt: "Selecione a empresa"
-      f.input :image, as: :file, hint: f.object&.image&.attached? ? image_tag(url_for(f.object.image), { width: 100, height: 100 }) : nil
+      f.input :image, as: :file, hint: image_tag(f.object.avatar_path, { width: 200, height: "auto" })
     end
 
     f.inputs "Credenciais" do
