@@ -31,10 +31,10 @@ ActiveAdmin.register Member do
   end
 
   filter :person_full_name_cont, label: "Nome"
-  filter :team, as: :select, collection: Team.ordered_by_name, label: "Equipe"
+  filter :team, as: :select, collection: -> { Team.ordered_by_name }, label: "Equipe"
   filter :active, as: :select, collection: [["Ativo", true], ["Inativo", false]], label: "Ativo"
   filter :role, as: :select, label: "Role"
-  filter :company_id_eq, as: :select, collection: Company.ordered_by_name, label: "Empresa"
+  filter :company_id_eq, as: :select, collection: -> { Company.ordered_by_name }, label: "Empresa"
 
   action_item :new_model, only: :show do
     localizer = ActiveAdmin::Localizers.resource(active_admin_config)
