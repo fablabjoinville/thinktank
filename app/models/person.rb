@@ -71,19 +71,8 @@ class Person < ApplicationRecord
     Arel.sql("unaccent(\"nickname\")")
   end
 
-  def type
-    case self[:type]
-      when "User"
-        "Time Interno"
-      when "Member"
-        "Membro de Equipe"
-      else
-        "Pessoa Física"
-    end
-  end
-
   def user?
-    self[:type] == "User"
+    type == "User"
   end
 
   def to_s

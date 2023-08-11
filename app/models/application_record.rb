@@ -16,4 +16,10 @@ class ApplicationRecord < ActiveRecord::Base
   def humanized(count)
     self.class.model_name.human(count: count)
   end
+
+  def self.humanized_enum_list(enum)
+    self.public_send(enum).keys.map { |k|
+      [self.humanized_enum_value(enum, k), k]
+    }
+  end
 end

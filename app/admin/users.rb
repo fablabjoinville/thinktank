@@ -97,18 +97,14 @@ ActiveAdmin.register User do
       f.input :cpf, input_html: { placeholder: "XXX.XXX.XXX-XX" }
       f.input :rg, input_html: { placeholder: "X.XXX.XXX" }
       f.input :birthday, as: :datepicker, datepicker_options: { dateFormat: "dd/mm/yy" }, input_html: { placeholder: "DD/MM/AAAA" }
-      f.input :gender, as: :select, collection: User.genders.keys.map { |k|
-        [User.humanized_enum_value(:gender, k), k]
-      }, input_html: { class: "default-select" }, prompt: "Selecione o gênero"
+      f.input :gender, as: :select, collection: User.humanized_enum_list(:genders), input_html: { class: "default-select" }, prompt: "Selecione o gênero"
       f.input :company, as: :select, collection: Company.ordered_by_name, input_html: { class: "slim-select" }, prompt: "Selecione a empresa"
       f.input :image, as: :file, hint: image_tag(f.object.avatar_path, { width: 200, height: "auto" })
     end
 
     f.inputs "Credenciais" do
       f.input :email
-      f.input :authorization_level, as: :select, collection: User.authorization_levels.keys.map { |k|
-        [User.humanized_enum_value(:authorization_levels, k), k]
-      }, input_html: { class: "default-select" }, prompt: "Selecione o nível de autorização"
+      f.input :authorization_level, as: :select, collection: User.humanized_enum_list(:authorization_levels), input_html: { class: "default-select" }, prompt: "Selecione o nível de autorização"
       f.input :password
       f.input :password_confirmation
     end

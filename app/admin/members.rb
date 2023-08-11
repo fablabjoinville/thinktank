@@ -77,10 +77,7 @@ ActiveAdmin.register Member do
     f.inputs do
       f.input :team, as: :select, collection: Team.ordered_by_name, input_html: { class: "slim-select" }, prompt: "Selecione a equipe"
       f.input :person, as: :select, collection: Person.ordered_by_full_name, input_html: { class: "slim-select" }, prompt: "Selecione a pessoa"
-
-      f.input :role, as: :select, collection: Member.roles.keys.map { |k|
-        [Member.humanized_enum_value(:role, k), k]
-      }, input_html: { class: "default-select" }, prompt: "Selecione o role"
+      f.input :role, as: :select, collection: Member.humanized_enum_list(:roles), input_html: { class: "default-select" }, prompt: "Selecione o role"
       f.input :active
     end
 
