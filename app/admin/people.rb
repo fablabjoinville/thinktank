@@ -100,9 +100,7 @@ ActiveAdmin.register Person do
       f.input :rg, input_html: { placeholder: "X.XXX.XXX" }
       f.input :birthday, as: :datepicker, datepicker_options: {dateFormat: "dd/mm/yy" }, input_html: { placeholder: "DD/MM/AAAA" }
       f.input :company, as: :select, collection: Company.ordered_by_name, input_html: { class: "slim-select" }, prompt: "Selecione a empresa"
-      f.input :gender, as: :select, collection: Person.genders.keys.map { |k|
-        [Person.humanized_enum_value(:gender, k), k]
-      }, input_html: { class: "default-select" }, prompt: "Selecione o gênero"
+      f.input :gender, as: :select, collection: Person.humanized_enum_list(:genders), input_html: { class: "default-select" }, prompt: "Selecione o gênero"
       f.input :image, as: :file, hint: image_tag(f.object.avatar_path, { width: 200, height: "auto" })
     end
 

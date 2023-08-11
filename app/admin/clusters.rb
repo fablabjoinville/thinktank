@@ -68,15 +68,11 @@ ActiveAdmin.register Cluster do
     f.semantic_errors
 
     f.inputs do
-      f.input :week_day, as: :select, collection: Cluster.week_days.keys.map { |k|
-        [Cluster.humanized_enum_value(:week_day, k), k]
-      }, input_html: { class: "default-select" }, prompt: "Selecione o dia da semana"
+      f.input :week_day, as: :select, collection: Cluster.humanized_enum_list(:week_days), input_html: { class: "default-select" }, prompt: "Selecione o dia da semana"
       f.input :start_time, as: :date_time_picker, picker_options: { datepicker: false, format: "H:i" }
       f.input :end_time, as: :date_time_picker, picker_options: { datepicker: false, format: "H:i" }
       f.input :user, input_html: { class: "slim-select" }, prompt: "Selecione o facilitador"
-      f.input :modality, as: :radio, collection: Cluster.modalities.keys.map { |k|
-        [Cluster.humanized_enum_value(:modality, k), k]
-      }
+      f.input :modality, as: :radio, collection: Cluster.humanized_enum_list(:modalities)
       f.input :address
       f.input :link, as: :url
     end
