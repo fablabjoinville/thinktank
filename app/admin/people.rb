@@ -54,13 +54,13 @@ ActiveAdmin.register Person do
   member_action :convert_to_user, method: :get do
     resource.update!(type: "User")
 
-    flash[:error] = "ADICIONE UMA SENHA PARA O USUÁRIO!"
+    flash[:error] = "ADICIONE UM EMAIL E SENHA PARA O USUÁRIO!"
     redirect_to edit_user_path(resource)
   end
 
   action_item :convert_to_user, only: :show do
     unless resource.user?
-      link_to("Converter para time interno", convert_to_user_person_path(resource))
+      link_to("Tornar time interno", convert_to_user_person_path(resource), data: { confirm: "Você tem certeza que deseja converter esse cadastro para Time Interno?" })
     end
   end
 
