@@ -53,8 +53,11 @@ class Person < ApplicationRecord
   validates :phone_number, phone: { allow_blank: true, types: :fixed_line }
   validates :celular_number, phone: { allow_blank: true, types: :mobile }
 
+  # 0 1 2 3 4
+  enum :authorization_level, [:person, :secretary, :facilitator, :admin, :super_admin], suffix: true, default: :facilitator
   enum :gender, [:man, :woman, :other], prefix: true, default: :other
 
+  scope :internal_team, -> { where(authorization_level: [:secretary, :facilitator, :admin, :super_admin]) }
   scope :ordered_by_full_name, -> { order('LOWER(full_name) ASC') }
 
   ransacker :address, type: :string, formatter: proc { |v| I18n.transliterate(v) } do |_|
