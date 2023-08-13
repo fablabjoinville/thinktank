@@ -4,11 +4,13 @@ ActiveAdmin.register Cluster do
   permit_params(
     :_destroy,
     :address,
+    :end_date,
     :end_time,
     :id,
     :link,
     :modality,
     :person_id,
+    :start_date,
     :start_time,
     :week_day,
   )
@@ -20,6 +22,8 @@ ActiveAdmin.register Cluster do
     column "Dia da semana" do |cluster|
       cluster.humanized_enum(:week_day)
     end
+    column :start_date
+    column :end_date
     column :start_time
     column :end_time
     column :user
@@ -43,6 +47,8 @@ ActiveAdmin.register Cluster do
       row :week_day do |cluster|
         cluster.humanized_enum(:week_day)
       end
+      row :start_date
+      row :end_date
       row :start_time
       row :end_time
       row :user
@@ -69,8 +75,10 @@ ActiveAdmin.register Cluster do
 
     f.inputs do
       f.input :week_day, as: :select, collection: Cluster.humanized_enum_list(:week_days), input_html: { class: "default-select" }, prompt: "Selecione o dia da semana"
-      f.input :start_time, as: :date_time_picker, picker_options: { datepicker: false, format: "H:i" }
-      f.input :end_time, as: :date_time_picker, picker_options: { datepicker: false, format: "H:i" }
+      f.input :start_date, as: :date_time_picker, picker_options: { datepicker: true, timepicker: false, format: "Y-m-d" }
+      f.input :end_date, as: :date_time_picker, picker_options: { datepicker: true, timepicker: false, format: "Y-m-d" }
+      f.input :start_time, as: :date_time_picker, picker_options: { datepicker: false, timepicker: true, format: "H:i" }
+      f.input :end_time, as: :date_time_picker, picker_options: { datepicker: false, timepicker: true, format: "H:i" }
       f.input :user, input_html: { class: "slim-select" }, prompt: "Selecione o facilitador"
       f.input :modality, as: :radio, collection: Cluster.humanized_enum_list(:modalities)
       f.input :address

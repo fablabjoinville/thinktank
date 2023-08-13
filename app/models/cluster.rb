@@ -4,9 +4,11 @@
 #
 #  id         :bigint           not null, primary key
 #  address    :string
+#  end_date   :date
 #  end_time   :time             not null
 #  link       :text
 #  modality   :integer          default("presencial"), not null
+#  start_date :date
 #  start_time :time             not null
 #  week_day   :integer          not null
 #  created_at :datetime         not null
@@ -27,6 +29,7 @@ class Cluster < ApplicationRecord
 
   validates :start_time, presence: true
   validates :end_time, presence: true, comparison: { greater_than: :start_time }
+  validates :end_date, comparison: { greater_than: :start_date }
   validates :week_day, presence: true
   validates :modality, presence: true
 
