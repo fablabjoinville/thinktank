@@ -44,7 +44,8 @@ class User < Person
 
   has_many :clusters, foreign_key: :person_id
 
-  enum :authorization_level, [:super_admin, :admin, :facilitator], suffix: true, default: :facilitator
+  # 0 1 2 3 4
+  enum :authorization_level, [:person, :secretary, :facilitator, :admin, :super_admin], suffix: true, default: :facilitator
 
   attr_accessor :skip_password_validation
 

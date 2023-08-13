@@ -224,6 +224,7 @@ en:
           super_admin: Super Admin
           admin: Admin
           facilitator: Facilitador
+          secretary: Secretário
         birthday: Aniversário
         celular_number: Celular
         confirmation_sent_at: Confirmação enviada em
