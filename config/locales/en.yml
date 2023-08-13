@@ -248,6 +248,19 @@ en:
         sign_in_count: Contagem de acessos
         unconfirmed_email: E-mail não confirmado
         unlock_token: Token de desbloqueio
+        authorization_level: Permissão
+        authorization_levels:
+          one: Permissão
+          admin: Admin
+          facilitator: Facilitador
+          person: Pessoa
+          secretary: Secretário
+          super_admin: Super Admin
+        genders:
+          one: Gênero
+          man: Masculino
+          woman: Feminino
+          other: Outro
     models:
       active_admin_comments:
         one: Comentário
