@@ -1,6 +1,6 @@
 ActiveAdmin.register Axis do
   menu priority: 3
-  config.sort_order = 'name_asc'
+  config.sort_order = 'title_asc'
 
   permit_params(
     :_destroy,

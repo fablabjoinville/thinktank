@@ -26,10 +26,6 @@ class Member < ApplicationRecord
 
   has_one :company, through: :person
 
-  has_many :attendances, through: :person
-
-  accepts_nested_attributes_for :attendances, allow_destroy: true
-
   enum :role, [:mm, :mp, :sol], prefix: true, default: :sol
 
   delegate :full_name, :company, to: :person
