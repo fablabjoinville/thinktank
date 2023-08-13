@@ -22,3 +22,19 @@
 form select {
   padding: 6px;
 }
+
+ul.actions {
+  margin-left: 0px;
+  padding-left: 0px;
+
+  list-style-type: none;
+
+  li {
+    display: inline;
+    margin-right: 3px;
+  }
+
+  li+li:before {
+    content: ' ';
+  }
+}

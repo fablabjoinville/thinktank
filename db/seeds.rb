@@ -106,10 +106,10 @@ phase_two.tools << Tool.fourth
 phase_two.tools << Tool.fifth
 phase_two.save!
 
-Meeting.create!(name: "Encontro 1", phase: Phase.first)
-Meeting.create!(name: "Encontro 2", phase: Phase.first)
-Meeting.create!(name: "Encontro 2", phase: Phase.second)
-Meeting.create!(name: "Encontro 2", phase: Phase.second)
+Meeting.create!(name: "Encontro 1 F1", phase: Phase.first)
+Meeting.create!(name: "Encontro 2 F1", phase: Phase.first)
+Meeting.create!(name: "Encontro 1 F2", phase: Phase.second)
+Meeting.create!(name: "Encontro 2 F2", phase: Phase.second)
 
 #########################################################################################################
 
