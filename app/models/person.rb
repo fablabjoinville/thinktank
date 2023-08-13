@@ -4,7 +4,7 @@
 #
 #  id                     :bigint           not null, primary key
 #  address                :string           default(""), not null
-#  authorization_level    :integer          default(0), not null
+#  authorization_level    :integer          default("facilitator"), not null
 #  birthday               :date
 #  celular_number         :string           default(""), not null
 #  cpf                    :string           default("")
