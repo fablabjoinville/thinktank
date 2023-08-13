@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_13_145846) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_13_155955) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -82,6 +82,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_145846) do
     t.datetime "updated_at", null: false
     t.index ["assessmentable_type", "assessmentable_id"], name: "index_assessments_on_assessmentable"
     t.index ["author_type", "author_id"], name: "index_assessments_on_author"
+  end
+
+  create_table "attendances", force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.bigint "event_id", null: false
+    t.integer "status", default: 0, null: false
+    t.text "reason", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_attendances_on_event_id"
+    t.index ["member_id", "event_id"], name: "index_attendances_on_member_id_and_event_id", unique: true
+    t.index ["member_id"], name: "index_attendances_on_member_id"
   end
 
   create_table "axes", force: :cascade do |t|
@@ -210,6 +222,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_145846) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "attendances", "events"
+  add_foreign_key "attendances", "members"
   add_foreign_key "clusters", "people"
   add_foreign_key "events", "meetings"
   add_foreign_key "events", "teams"

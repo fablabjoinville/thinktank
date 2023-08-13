@@ -82,8 +82,8 @@ en:
       attendance:
         attendance: Presença
         created_at: Criado em
-        meeting: Encontro
-        person: Participante
+        event: Evento
+        member: Membro de equipe
         reason: Razão
         status: Presença
         statuses:

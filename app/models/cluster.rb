@@ -29,7 +29,7 @@ class Cluster < ApplicationRecord
 
   validates :start_time, presence: true
   validates :end_time, presence: true, comparison: { greater_than: :start_time }
-  validates :end_date, comparison: { greater_than: :start_date }
+  validates :end_date, comparison: { greater_than: :start_date }, if: -> { start_date.present? }
   validates :week_day, presence: true
   validates :modality, presence: true
 
