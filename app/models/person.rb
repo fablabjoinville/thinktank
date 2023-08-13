@@ -41,8 +41,6 @@
 class Person < ApplicationRecord
   belongs_to :company, optional: true
 
-  has_one :attendance, dependent: :destroy
-
   has_many :members
   has_many :teams, through: :members
 
