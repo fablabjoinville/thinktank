@@ -171,6 +171,14 @@ en:
         team: Equipe
       person:
         address: Endereço
+        authorization_level: Permissão
+        authorization_levels:
+          one: Permissão
+          admin: Admin
+          facilitator: Facilitador
+          person: Pessoa
+          secretary: Secretário
+          super_admin: Super Admin
         birthday: Aniversário
         celular_number: Celular
         company: Empresa
@@ -217,39 +225,17 @@ en:
         phase_ids: Fases
         updated_at: Atualizado em
       user:
-        address: Endereço
-        authorization_level: Permissão
-        authorization_levels:
-          one: Permissão
-          super_admin: Super Admin
-          admin: Admin
-          facilitator: Facilitador
-          secretary: Secretário
-        birthday: Aniversário
-        celular_number: Celular
         confirmation_sent_at: Confirmação enviada em
         confirmation_token: Token de confirmação
         confirmed_at: Confirmado em
-        cpf: CPF
-        created_at: Criado em
         current_password: Senha atual
         current_sign_in_at: Atualmente logado em
         current_sign_in_ip: IP do acesso atual
-        email: E-mail
         encrypted_password: Senha criptografada
         failed_attempts: Tentativas sem sucesso
-        full_name: Nome
-        gender: Gênero
-        genders:
-          one: Gênero
-          man: Masculino
-          woman: Feminino
-          other: Outro
-        id: ID
         last_sign_in_at: Último acesso em
         last_sign_in_ip: Último IP de acesso
         locked_at: Bloqueado em
-        nickname: Apelido
         password_confirmation: Confirme sua senha
         password: Senha
         phone_number: Telefone
@@ -257,11 +243,9 @@ en:
         remember_me: Lembre-se de mim
         reset_password_sent_at: Resetar senha enviado em
         reset_password_token: Resetar token de senha
-        rg: RG
         sign_in_count: Contagem de acessos
         unconfirmed_email: E-mail não confirmado
         unlock_token: Token de desbloqueio
-        updated_at: Atualizado em
     models:
       active_admin_comments:
         one: Comentário
@@ -303,8 +287,8 @@ en:
         one: Ferramenta
         other: Ferramentas
       user:
-        one: Facilitador
-        other: Facilitadores
+        one: Usuário interno
+        other: Usuários internos
   date:
     abbr_day_names:
     - dom

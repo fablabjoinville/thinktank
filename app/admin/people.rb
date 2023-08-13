@@ -40,6 +40,19 @@ ActiveAdmin.register Person do
     actions
   end
 
+  scope "Todos" do |people|
+    people.ordered_by_full_name
+  end
+
+  scope "Pessoas" do | people|
+    people.internal_team.invert_where
+  end
+
+  scope "Time interno", if: -> { true } do |people|
+    people.internal_team
+  end
+
+
   filter :full_name_cont, label: "Nome"
   filter :nickname_cont, label: "Apelido"
   filter :cpf_eq, label: "CPF"
