@@ -44,7 +44,7 @@ ActiveAdmin.register Event do
 
     panel "Participantes #{event.attendances_counts}" do
       table_for event.attendances do
-        column :image do |attendance|
+        column do |attendance|
           image_tag(attendance.avatar_path, { width: 50, height: "auto" })
         end
         column :member do |attendance|
@@ -53,20 +53,18 @@ ActiveAdmin.register Event do
         column :email do |attendance|
           attendance.email
         end
-        column :email do |attendance|
+        column "celular" do |attendance|
           attendance.celular_number
         end
-        column :email do |attendance|
+        column "telefone" do |attendance|
           attendance.phone_number
         end
-        tag_column :status do |attendance|
-           attendance.humanized_enum(:status)
-        end
+        tag_column :status
         column :reason
-        column :actions do |attendance|
+        column "Ações" do |attendance|
           ul class: "actions" do
             li do
-              link_to "Marcar presença", edit_event_path(event)
+              link_to "Editar presença", edit_event_path(event)
             end
             li do
               link_to "Marcar como presente", mark_as_present_attendance_path(attendance), method: :put
