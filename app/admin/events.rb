@@ -1,6 +1,4 @@
 ActiveAdmin.register Event do
-  menu parent: "Eventos", priority: 1
-
   permit_params(
     :_destroy,
     :date,
@@ -34,6 +32,12 @@ ActiveAdmin.register Event do
   filter :meeting, label: "Encontro"
   filter :team, label: "Equipe"
 
+  sidebar "Links", only: [:show] do
+    ul do
+      li link_to "Lista de presenças", event_attendances_path(event)
+    end
+  end
+
   show do
     attributes_table do
       row :name
@@ -48,7 +52,7 @@ ActiveAdmin.register Event do
           image_tag(attendance.avatar_path, { width: 50, height: "auto" })
         end
         column :member do |attendance|
-          link_to attendance.full_name, attendance_path(attendance)
+          link_to attendance.full_name, event_attendance_path(attendance.event, attendance)
         end
         column :email do |attendance|
           attendance.email
@@ -67,7 +71,7 @@ ActiveAdmin.register Event do
               link_to "Editar presença", edit_event_path(event)
             end
             li do
-              link_to "Marcar como presente", mark_as_present_attendance_path(attendance), method: :put
+              link_to "Marcar como presente", mark_as_present_event_attendance_path(event, attendance), method: :put
             end
           end
         end
