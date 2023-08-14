@@ -234,10 +234,7 @@ ActiveAdmin.setup do |config|
   # To change the default utility navigation to show a link to your website & a logout btn
   #
   config.namespace false do |admin|
-    admin.build_menu do |menu|
-      menu.add label: 'Encontros', priority: 5
-      menu.add label: 'Fases', priority: 10
-      menu.add label: 'Equipes', priority: 15
+    admin.build_menu :default do |menu|
       menu.add label: 'Administração', priority: 20
     end
   end
