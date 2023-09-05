@@ -3,6 +3,7 @@ ActiveAdmin.register Cluster do
 
   permit_params(
     :_destroy,
+    :active,
     :address,
     :end_date,
     :end_time,
@@ -36,6 +37,7 @@ ActiveAdmin.register Cluster do
     column :link do |cluster|
       link_to cluster.link, cluster.link, target: "_blank"
     end
+    column :active
 
     actions
   end
@@ -58,6 +60,7 @@ ActiveAdmin.register Cluster do
       row :link do |cluster|
         link_to cluster.link, cluster.link, target: "_blank"
       end
+      row :active
     end
 
     panel "Equipes: #{cluster.teams.count}" do
@@ -85,6 +88,7 @@ ActiveAdmin.register Cluster do
       f.input :address
       f.input :link, as: :url
       f.input :teams, as: :select, collection: Team.ordered_by_name, input_html: { class: "sim-select" }, prompt: "Selecione as equipes", multiple: true
+      f.input :active, as: :boolean
     end
 
     f.actions
