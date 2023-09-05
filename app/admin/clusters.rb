@@ -13,6 +13,7 @@ ActiveAdmin.register Cluster do
     :start_date,
     :start_time,
     :week_day,
+    team_ids: []
   )
 
   index do
@@ -83,6 +84,7 @@ ActiveAdmin.register Cluster do
       f.input :modality, as: :radio, collection: Cluster.humanized_enum_list(:modalities)
       f.input :address
       f.input :link, as: :url
+      f.input :teams, as: :select, collection: Team.ordered_by_name, input_html: { class: "sim-select" }, prompt: "Selecione as equipes", multiple: true
     end
 
     f.actions
