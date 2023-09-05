@@ -68,10 +68,13 @@ ActiveAdmin.register Event do
         column "Ações" do |attendance|
           ul class: "actions" do
             li do
-              link_to "Editar presença", edit_event_path(event)
+              link_to "Presente", update_status_event_attendance_path(event, attendance, status: :present), method: :put
             end
             li do
-              link_to "Marcar como presente", mark_as_present_event_attendance_path(event, attendance), method: :put
+              link_to "Ausente", update_status_event_attendance_path(event, attendance, status: :absent ), method: :put
+            end
+            li do
+              link_to "Justificar", edit_event_path(event)
             end
           end
         end

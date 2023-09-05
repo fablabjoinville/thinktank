@@ -10,8 +10,9 @@ ActiveAdmin.register Attendance do
     :status,
   )
 
-  member_action :mark_as_present, method: :put do
-    resource.update!(status: :present)
+  member_action :update_status, method: :put do
+    resource.status = params[:status]
+    resource.save(validate: false)
 
     redirect_to event_path(resource.event)
   end
