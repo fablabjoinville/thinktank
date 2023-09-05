@@ -3,6 +3,7 @@
 # Table name: clusters
 #
 #  id         :bigint           not null, primary key
+#  active     :boolean          default(TRUE), not null
 #  address    :string
 #  end_date   :date
 #  end_time   :time             not null

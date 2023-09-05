@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_13_155955) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_05_202014) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -115,6 +115,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_155955) do
     t.datetime "updated_at", null: false
     t.date "start_date"
     t.date "end_date"
+    t.boolean "active", default: true, null: false
     t.index ["person_id"], name: "index_clusters_on_person_id"
   end
 
