@@ -20,10 +20,10 @@ ActiveAdmin.register Team do
       link_to team.name, team_path(team)
     end
     column "Miro" do |team|
-      link_to "Miro: #{team.name}", team.link_miro
+      link_to "Miro: #{team.name}", team.link_miro if team.link_miro.present?
     end
     column "Sala Teams" do |team|
-      link_to "Sala Teams: #{team.name}", team.link_teams
+      link_to "Sala Teams: #{team.name}", team.link_teams if team.link_teams.present?
     end
     column "Clusters" do |team|
       team.clusters.count
