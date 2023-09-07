@@ -1,0 +1,5 @@
+from: $(heroku config:get DATABASE_URL)?sslmode=require
+to: postgres://localhost:5432/thinktank_development
+exclude:
+  - ar_internal_metadata
+  - schema_migrations

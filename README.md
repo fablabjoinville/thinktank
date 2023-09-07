@@ -27,13 +27,10 @@ Nós usamos PostgreSQL para desenvolvimento e testes:
 brew services start postgresql
 ```
 
-Para configurar o ambiente, execute:
+Para preparar o banco de desenvolvimento, execute:
 
 ```bash
-rails db:drop
-rails db:create
-rails db:migrate
-rails db:seed
+./bin/db-reset
 ```
 
 Para rodar o servidor de desenvolvimento, execute:
@@ -63,8 +60,6 @@ heroku ps:scale web=1
 heroku run rails db:seed
 heroku open
 ```
-
-Abrirá [https://thinktank.herokuapp.com](https://thinktank.herokuapp.com).
 
 ## Produção
 

@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+rails db:drop
+rails db:create
+rails db:migrate
+
+if [[ "$1" == "--pgsync" ]]; then
+  if ! which pgsync > /dev/null; then
+    brew install pgsync
+  fi
+  pgsync --defer-constraints
+else
+  rails db:seed
+fi
