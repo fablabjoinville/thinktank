@@ -21,6 +21,8 @@ Team.destroy_all
 Meeting.destroy_all
 Cluster.destroy_all
 
+load(File.join(Rails.root, 'db/seeds/admins.rb'))
+
 #########################################################################################################
 
 puts "Creating Tools..."
@@ -36,41 +38,6 @@ puts "Creating Companies..."
 (0..2).each do |n|
   Company.create!(name: Faker::Company.unique.name, cnpj: CNPJ.generate(true))
 end
-
-#########################################################################################################
-
-puts "Creating Admin and Facilitator..."
-
-admin = User.create_with(
-  full_name: "Admin Marvin",
-  password: "password",
-  password_confirmation: "password",
-  authorization_level: :super_admin,
-  birthday: Faker::Date.birthday,
-  nickname: Faker::Artist.name,
-  cpf: CPF.generate(true),
-  rg: Faker::IDNumber.brazilian_id(formatted: true),
-  phone_number: "(47) 3034-5432",
-  celular_number: Faker::PhoneNumber.cell_phone,
-  address: Faker::Address.full_address,
-  gender: Person.genders.values.sample,
-).find_or_create_by!(email: "admin@example.com")
-
-facilitator = User.create_with(
-  full_name: "Facilitator Trillian",
-  company: Company.first,
-  password: "password",
-  password_confirmation: "password",
-  authorization_level: :facilitator,
-  birthday: Faker::Date.birthday,
-  nickname: Faker::Artist.name,
-  cpf: CPF.generate(true),
-  rg: Faker::IDNumber.brazilian_id(formatted: true),
-  phone_number: "(47) 3034-5432",
-  celular_number: Faker::PhoneNumber.cell_phone,
-  address: Faker::Address.full_address,
-  gender: Person.genders.values.sample,
-).find_or_create_by!(email: "facilitator@example.com")
 
 #########################################################################################################
 
@@ -186,6 +153,22 @@ Member.create!(team: Team.second, person: Person.find(8), role: :sol)
 # )
 
 #########################################################################################################
+
+facilitator = User.create_with(
+  full_name: "Facilitator Trillian",
+  company: Company.first,
+  password: "password",
+  password_confirmation: "password",
+  authorization_level: :facilitator,
+  birthday: Faker::Date.birthday,
+  nickname: Faker::Artist.name,
+  cpf: CPF.generate(true),
+  rg: Faker::IDNumber.brazilian_id(formatted: true),
+  phone_number: "(47) 3034-5432",
+  celular_number: Faker::PhoneNumber.cell_phone,
+  address: Faker::Address.full_address,
+  gender: Person.genders.values.sample,
+).find_or_create_by!(email: "facilitator@example.com")
 
 cluster_one = Cluster.create!(
   user: facilitator,
