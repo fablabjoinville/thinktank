@@ -28,7 +28,6 @@
 #
 #  index_people_on_company_id            (company_id)
 #  index_people_on_cpf                   (cpf) UNIQUE WHERE (((cpf)::text <> ''::text) AND (cpf IS NOT NULL))
-#  index_people_on_email                 (email) UNIQUE
 #  index_people_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_people_on_rg                    (rg) UNIQUE WHERE (((rg)::text <> ''::text) AND (rg IS NOT NULL))
 #  index_people_on_team_id               (team_id)
@@ -46,9 +45,10 @@ class Person < ApplicationRecord
 
   has_one_attached :image
 
-  validates :full_name, presence: true
   validates :cpf, uniqueness: { allow_blank: true }
   validates_cpf_format_of :cpf, { allow_blank: true }
+  validates :email, uniqueness: { allow_blank: true }
+  validates :full_name, presence: true
   validates :rg, uniqueness: { allow_blank: true }
   validates :phone_number, phone: { allow_blank: true, types: :fixed_line }
   validates :celular_number, phone: { allow_blank: true, types: :mobile }
