@@ -89,9 +89,6 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
-    annotate (3.2.0)
-      activerecord (>= 3.2, < 8.0)
-      rake (>= 10.4, < 14.0)
     arbre (1.5.0)
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
@@ -313,7 +310,6 @@ DEPENDENCIES
   active_storage_db
   activeadmin
   activeadmin_addons
-  annotate
   bootsnap
   capybara
   cpf_cnpj
