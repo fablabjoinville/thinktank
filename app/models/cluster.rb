@@ -1,29 +1,3 @@
-# == Schema Information
-#
-# Table name: clusters
-#
-#  id         :bigint           not null, primary key
-#  active     :boolean          default(TRUE), not null
-#  address    :string
-#  end_date   :date
-#  end_time   :time             not null
-#  link       :text
-#  modality   :integer          default("presencial"), not null
-#  start_date :date
-#  start_time :time             not null
-#  week_day   :integer          not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  person_id  :bigint
-#
-# Indexes
-#
-#  index_clusters_on_person_id  (person_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (person_id => people.id)
-#
 class Cluster < ApplicationRecord
   belongs_to :user, foreign_key: 'person_id', class_name: 'User'
   has_and_belongs_to_many :teams
