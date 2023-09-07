@@ -10,8 +10,6 @@ Sistema de gestão do projeto Think Tank. Desenvolvido em Ruby on Rails 7 e [Act
 ## Dependências
 
 * ruby >= 3.2.2
-* node --lts (v14.16.0)
-* npm >= 9.6.6
 * PostgreSQL >= 14.8
 
 Instalando as dependências em um macOS:
@@ -19,11 +17,6 @@ Instalando as dependências em um macOS:
 ```bash
 brew install postgresql libpq
 rbenv install 3.2.2
-nvm install --lts
-nvm use --lts
-node -p "process.arch" # > arm64
-npm install yarn -g
-yarn install
 ```
 
 ## Desenvolvimento
