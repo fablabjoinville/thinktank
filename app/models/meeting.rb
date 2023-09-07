@@ -1,21 +1,3 @@
-# == Schema Information
-#
-# Table name: meetings
-#
-#  id         :bigint           not null, primary key
-#  name       :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  phase_id   :bigint
-#
-# Indexes
-#
-#  index_meetings_on_phase_id  (phase_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (phase_id => phases.id)
-#
 class Meeting < ApplicationRecord
   belongs_to :phase
 
