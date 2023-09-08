@@ -31,6 +31,9 @@ ActiveAdmin.register Team do
     column "Membros" do |team|
       team.members.count
     end
+    column "Eventos" do |team|
+      team.events.count
+    end
     column :axis
     column :created_at
 
@@ -55,20 +58,43 @@ ActiveAdmin.register Team do
           link_to team.link_teams, team.link_teams
         end
       end
-      row "Membros" do |team|
-        if team.members.any?
-          ul do
-            team.members.each do |member|
-              li link_to member, member_path(member)
-            end
-          end
-        end
-      end
       row "Clusters" do |team|
         if team.clusters.any?
           ul do
             team.clusters.each do |cluster|
               li link_to cluster, cluster_path(cluster)
+            end
+          end
+        end
+      end
+    end
+
+    columns do
+      column do
+        panel "Membros #{team.members.count}" do
+          table_for team.members.joins(:person).order('role ASC').order('person.full_name ASC') do
+            column :full_name, sortable: "person.full_name" do |member|
+              link_to member.full_name, member_path(member)
+            end
+
+            tag_column :role
+            column :active
+            column "Presenças" do |member|
+              member.attendances_counts
+            end
+          end
+        end
+      end
+      column do
+        panel "Eventos #{team.events.count}" do
+          table_for team.events do
+            column :name do |event|
+              link_to event.name, event_path(event)
+            end
+            column :date
+            column :meeting
+            column "Presenças" do |event|
+              event.attendances_counts
             end
           end
         end

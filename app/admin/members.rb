@@ -42,28 +42,44 @@ ActiveAdmin.register Member do
   end
 
   show do
-    attributes_table do
-      row :full_name
-      tag_row :role
-      row :team
-      row :active
-    end
+    columns do
+      column do
+        attributes_table do
+          row :full_name
+          tag_row :role
+          row :team
+          row :active
+        end
 
-    panel "Pessoa #{link_to "editar", member.person }".html_safe do
-      attributes_table_for member.person do
-        row :full_name
-        row :nickname
-        row :email
-        row :phone_number
-        row :celular_number
-        row :address
-        row :cpf
-        row :rg
-        row :birthday
-        row :company
-        tag_row :gender
-        row :image do |person|
-          image_tag(person.avatar_path, { width: 200, height: "auto" })
+        panel "Pessoa #{link_to "editar", member.person }".html_safe do
+          attributes_table_for member.person do
+            row :full_name
+            row :nickname
+            row :email
+            row :phone_number
+            row :celular_number
+            row :address
+            row :cpf
+            row :rg
+            row :birthday
+            row :company
+            tag_row :gender
+            row :image do |person|
+              image_tag(person.avatar_path, { width: 200, height: "auto" })
+            end
+          end
+        end
+      end
+      column do
+        panel "Participações em eventos" do
+          table_for member.attendances do
+            column :event
+            column :date do |attendance|
+              attendance.event.date
+            end
+            column :status
+            column :reason
+          end
         end
       end
     end
