@@ -2,6 +2,7 @@ class Member < ApplicationRecord
   belongs_to :team
   belongs_to :person
 
+  has_one :attendance, dependent: :destroy
   has_one :company, through: :person
 
   enum :role, [:mm, :mp, :sol], prefix: true, default: :sol
