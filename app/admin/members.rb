@@ -16,6 +16,17 @@ ActiveAdmin.register Member do
     :team_id,
   )
 
+  action_item :new_model, only: :show do
+    localizer = ActiveAdmin::Localizers.resource(active_admin_config)
+     link_to localizer.t(:new_model), new_resource_path
+  end
+
+  member_action :delete_and_redirect_back, method: :delete do
+    member = Member.find(params[:id])
+    member.destroy!
+    redirect_backwards_or_to_root
+  end
+
   index as: :grouped_table, group_by_attribute: :team do
     selectable_column
 
@@ -35,11 +46,6 @@ ActiveAdmin.register Member do
   filter :active, as: :select, collection: [["Ativo", true], ["Inativo", false]], label: "Ativo"
   filter :role, as: :select, label: "Role"
   filter :company_id_eq, as: :select, collection: -> { Company.ordered_by_name }, label: "Empresa"
-
-  action_item :new_model, only: :show do
-    localizer = ActiveAdmin::Localizers.resource(active_admin_config)
-     link_to localizer.t(:new_model), new_resource_path
-  end
 
   show do
     columns do
@@ -77,8 +83,21 @@ ActiveAdmin.register Member do
             column :date do |attendance|
               attendance.event.date
             end
-            column :status
+            tag_column :status
             column :reason
+            column "Ações" do |attendance|
+              ul class: "actions" do
+                li do
+                  link_to "Presente", update_status_event_attendance_path(attendance.event, attendance, status: :present), method: :put
+                end
+                li do
+                  link_to "Ausente", update_status_event_attendance_path(attendance.event, attendance, status: :absent ), method: :put
+                end
+                li do
+                  link_to "Justificar", edit_event_attendance_path(attendance.event, attendance)
+                end
+              end
+            end
           end
         end
       end

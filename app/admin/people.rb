@@ -20,6 +20,24 @@ ActiveAdmin.register Person do
     :rg,
   )
 
+  action_item :new_model, only: :show do
+    localizer = ActiveAdmin::Localizers.resource(active_admin_config)
+     link_to localizer.t(:new_model), new_resource_path
+  end
+
+  action_item :convert_to_user, only: :show do
+    unless resource.user?
+      link_to("Tornar time interno", convert_to_user_person_path(resource), data: { confirm: "Você tem certeza que deseja converter esse cadastro para Time Interno?" })
+    end
+  end
+
+  member_action :convert_to_user, method: :get do
+    resource.update!(type: "User")
+
+    flash[:error] = "ADICIONE UM EMAIL E SENHA PARA O USUÁRIO!"
+    redirect_to edit_user_path(resource)
+  end
+
   index do
     selectable_column
 
@@ -58,24 +76,6 @@ ActiveAdmin.register Person do
   filter :cpf_eq, label: "CPF"
   filter :rg_eq, label: "RG"
   filter :company, as: :select, label: "Empresa"
-
-  action_item :new_model, only: :show do
-    localizer = ActiveAdmin::Localizers.resource(active_admin_config)
-     link_to localizer.t(:new_model), new_resource_path
-  end
-
-  member_action :convert_to_user, method: :get do
-    resource.update!(type: "User")
-
-    flash[:error] = "ADICIONE UM EMAIL E SENHA PARA O USUÁRIO!"
-    redirect_to edit_user_path(resource)
-  end
-
-  action_item :convert_to_user, only: :show do
-    unless resource.user?
-      link_to("Tornar time interno", convert_to_user_person_path(resource), data: { confirm: "Você tem certeza que deseja converter esse cadastro para Time Interno?" })
-    end
-  end
 
   show do
     attributes_table do

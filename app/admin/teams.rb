@@ -82,6 +82,9 @@ ActiveAdmin.register Team do
             column "Presenças" do |member|
               member.attendances_counts
             end
+            column "Ações" do |member|
+              link_to "Remover", delete_and_redirect_back_member_path(member), method: :delete, data: { confirm: "Tem certeza que deseja remover?" }
+            end
           end
         end
       end

@@ -13,8 +13,7 @@ ActiveAdmin.register Attendance do
   member_action :update_status, method: :put do
     resource.status = params[:status]
     resource.save(validate: false)
-
-    redirect_to event_path(resource.event)
+    redirect_backwards_or_to_root
   end
 
   index do
