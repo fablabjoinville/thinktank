@@ -22,5 +22,4 @@ class ApplicationRecord < ActiveRecord::Base
   def humanized(count)
     self.class.model_name.human(count: count)
   end
-
 end
