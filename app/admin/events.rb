@@ -91,7 +91,7 @@ ActiveAdmin.register Event do
         f.input :name
         f.input :date, input_html: { class: "default-select" }
         f.input :meeting, as: :select, collection: Meeting.ordered_by_name, input_html: { class: "slim-select" }, prompt: "Selecione o Encontro"
-        f.input :team, as: :select, collection: Team.ordered_by_name,  input_html: { class: "slim-select" }, prompt: "Selecione a Equipe"
+        f.input :team, as: :select, collection: Team.accessible_by(current_ability).ordered_by_name,  input_html: { class: "slim-select" }, prompt: "Selecione a Equipe"
       end
 
       f.inputs "Participantes: #{f.object.attendances_counts}", style: "padding-top: 0" do
