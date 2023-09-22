@@ -5,10 +5,10 @@ class ApplicationRecord < ActiveRecord::Base
     I18n.t("activerecord.attributes.#{name.underscore}.#{enum.to_s.pluralize}.#{value}")
   end
 
-  def self.humanized_enum_list(enum)
-    self.public_send(enum).keys.map { |k|
-      [self.humanized_enum_value(enum, k), k]
-    }
+  def self.humanized_enum_list(enum, *keys)
+    enum_keys = self.public_send(enum).keys.map(&:to_sym)
+    enum_keys = enum_keys.select { |k| keys.include?(k) } if keys.present?
+    enum_keys.map { |k| [self.humanized_enum_value(enum, k), k] }
   end
 
   def self.humanized(count)
