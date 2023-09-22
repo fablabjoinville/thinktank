@@ -34,9 +34,8 @@ class Ability
       can :manage, Event, team: { clusters: { person_id: user.id }}
       can :create, Event
 
-
-      can :update, Person, id: user.id
-      can :read, Person, id: user.id
+      # can :update, Person, id: user.id
+      # can :read, Person, id: user.id
 
       can :read, Team, clusters: { person_id: user.id }
 
