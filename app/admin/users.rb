@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
   TITLE = "Time interno"
-  menu label: TITLE, parent: "Administração", priority: 3, if: proc { current_user.super_admin_authorization_level? }
+  menu label: TITLE, parent: "Administração", priority: 3, if: proc { can? :read, User }
   config.sort_order = 'full_name_asc'
 
   permit_params(
@@ -60,8 +60,16 @@ ActiveAdmin.register User do
 
     f.inputs "Editar credenciais: #{object.full_name}" do
       f.input :email
-      f.input :authorization_level, as: :select, collection: Person.humanized_enum_list(:authorization_levels),
+
+      case current_user.authorization_level.to_sym
+      when :super_admin
+        f.input :authorization_level, as: :select, collection: Person.humanized_enum_list(:authorization_levels),
               input_html: { class: "default-select" }, prompt: "Selecione o nível de autorização"
+      when :admin
+        f.input :authorization_level, as: :select, collection: Person.humanized_enum_list(:authorization_levels, :facilitator, :secretary),
+        input_html: { class: "default-select" }, prompt: "Selecione o nível de autorização"
+      end
+
       f.input :password
       f.input :password_confirmation
     end

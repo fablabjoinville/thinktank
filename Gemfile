@@ -44,19 +44,20 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem "sassc-rails"
-gem "devise"
-gem "activeadmin"
-gem "phonelib"
-gem "cpf_cnpj"
-gem "validators"
-gem "activeadmin_addons"
 gem "active_storage_db"
-gem "faker" # TODO: move to development, test after first release
+gem "activeadmin_addons"
+gem "activeadmin"
+gem "cancancan"
+gem "cpf_cnpj"
+gem "devise"
+gem "phonelib"
+gem "sassc-rails"
+gem "validators"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "faker"
   gem "pry-rails"
 end
 
