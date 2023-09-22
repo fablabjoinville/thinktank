@@ -40,6 +40,22 @@ ActiveAdmin.register Phase do
       end
     end
 
+    panel "Ferramentas: #{phase.tools.count}" do
+      table_for phase.tools.ordered_by_name do
+        column :name do |tool|
+          link_to tool.name, tool_path(tool)
+        end
+      end
+    end
+
+    panel "Encontros: #{phase.meetings.count}" do
+      table_for phase.meetings.ordered_by_name do
+        column :name do |meeting|
+          link_to meeting.name, meeting_path(meeting)
+        end
+      end
+    end
+
     active_admin_comments
   end
 

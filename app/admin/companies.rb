@@ -34,12 +34,19 @@ ActiveAdmin.register Company do
     end
 
     panel "Pessoas associadas: #{company.people.count}" do
-      attributes_table_for company do
-        if company.people.any?
-          company.people.ordered_by_full_name.each do |person|
-            div link_to(person, person_path(person))
-          end
+      table_for company.people.ordered_by_full_name do
+        column :image do |person|
+          image_tag(person.avatar_path, { width: 50, height: "auto" })
         end
+        column :full_name do |person|
+          link_to person.full_name, person_path(person)
+        end
+        column :nickname
+        column :email
+        column :phone_number
+        column :celular_number
+        column :birthday
+        tag_column :gender
       end
     end
 

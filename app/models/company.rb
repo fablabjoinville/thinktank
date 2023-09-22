@@ -1,5 +1,5 @@
 class Company < ApplicationRecord
-  has_many :people
+  has_many :people, dependent: :restrict_with_error
 
   validates :name, presence: true
   validates :cnpj, uniqueness: true

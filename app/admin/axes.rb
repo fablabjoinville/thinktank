@@ -28,6 +28,29 @@ ActiveAdmin.register Axis do
       row :description
     end
 
+    panel "Equipes #{axis.teams.count}" do
+      table_for axis.teams.ordered_by_name do
+        column :name do |team|
+          link_to team, team_path(team)
+        end
+        column "Miro" do |team|
+          link_to "Miro: #{team.name}", team.link_miro if team.link_miro.present?
+        end
+        column "Sala Teams" do |team|
+          link_to "Sala Teams: #{team.name}", team.link_teams if team.link_teams.present?
+        end
+        column "Membros" do |team|
+          link_to team.members.count, team_path(team)
+        end
+        column "Eventos" do |team|
+          link_to team.events.count, team_path(team)
+        end
+        column "Clusters" do |team|
+          team.clusters.count
+        end
+      end
+    end
+
     active_admin_comments
   end
 
