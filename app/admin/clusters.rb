@@ -63,11 +63,24 @@ ActiveAdmin.register Cluster do
       row :active
     end
 
-    panel "Equipes: #{cluster.teams.count}" do
-      if cluster.teams.any?
-        cluster.teams.ordered_by_name.each do |team|
-          div link_to team, team_path(team)
+    panel "Equipes #{cluster.teams.count}" do
+      table_for cluster.teams.ordered_by_name do
+        column :name do |team|
+          link_to team, team_path(team)
         end
+        column "Miro" do |team|
+          link_to "Miro: #{team.name}", team.link_miro if team.link_miro.present?
+        end
+        column "Sala Teams" do |team|
+          link_to "Sala Teams: #{team.name}", team.link_teams if team.link_teams.present?
+        end
+        column "Membros" do |team|
+          link_to team.members.count, team_path(team)
+        end
+        column "Eventos" do |team|
+          link_to team.events.count, team_path(team)
+        end
+        column :axis
       end
     end
 

@@ -32,13 +32,12 @@ ActiveAdmin.register Tool do
   show do
     attributes_table do
       row :name
-      row :phases do |tool|
-        if tool.phases.any?
-          ul do
-            tool.phases.ordered_by_name.each do |phase|
-              li link_to phase.name, phase_path(phase)
-            end
-          end
+    end
+
+    panel "Fases: #{tool.phases.count}" do
+      table_for tool.phases.ordered_by_name do
+        column :name do |phase|
+          link_to phase.name, phase_path(phase)
         end
       end
     end
