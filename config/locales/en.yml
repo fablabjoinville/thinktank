@@ -227,6 +227,19 @@ en:
         phases: Fases
         phase_ids: Fases
         updated_at: Atualizado em
+      tool_event_assessment:
+        comment: Comentário
+        created_at: Criado em
+        score:
+          one: Avaliação
+          other: Avaliações
+        scores:
+          pessimo: Péssimo
+          ruim: Ruim
+          bom: Bom
+          otimo: Ótimo
+        tool: Ferramenta
+        updated_at: Atualizado em
       user:
         confirmation_sent_at: Confirmação enviada em
         confirmation_token: Token de confirmação
@@ -302,6 +315,9 @@ en:
       tool:
         one: Ferramenta
         other: Ferramentas
+      tool_event_assessment:
+        one: Avaliação de ferramenta
+        other: Avaliações de ferramenta
       user:
         one: Usuário interno
         other: Usuários internos

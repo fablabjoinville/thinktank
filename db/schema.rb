@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_08_220651) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_26_131102) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -214,6 +214,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_220651) do
     t.index ["axis_id"], name: "index_teams_on_axis_id"
   end
 
+  create_table "tool_event_assessments", force: :cascade do |t|
+    t.bigint "tool_id", null: false
+    t.bigint "event_id", null: false
+    t.integer "score"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_tool_event_assessments_on_event_id"
+    t.index ["tool_id"], name: "index_tool_event_assessments_on_tool_id"
+  end
+
   create_table "tools", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -235,4 +246,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_220651) do
   add_foreign_key "phases_tools", "phases"
   add_foreign_key "phases_tools", "tools"
   add_foreign_key "teams", "axes"
+  add_foreign_key "tool_event_assessments", "events"
+  add_foreign_key "tool_event_assessments", "tools"
 end
