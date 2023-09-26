@@ -217,8 +217,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_26_131102) do
   create_table "tool_event_assessments", force: :cascade do |t|
     t.bigint "tool_id", null: false
     t.bigint "event_id", null: false
-    t.integer "score"
-    t.text "comment"
+    t.integer "score", default: 0, null: false
+    t.text "comment", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_tool_event_assessments_on_event_id"
