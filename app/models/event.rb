@@ -7,7 +7,11 @@ class Event < ApplicationRecord
   has_many :attendances, dependent: :destroy
   has_many :attending_members, through: :attendances, source: :member
 
+  has_many :tool_event_assessments, dependent: :destroy
+  has_many :tools, through: :tool_event_assessments
+
   accepts_nested_attributes_for :attendances, allow_destroy: true
+  accepts_nested_attributes_for :tool_event_assessments, allow_destroy: true
 
   validates :name, presence: true
   validates :date, presence: true
