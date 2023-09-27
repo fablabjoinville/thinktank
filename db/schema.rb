@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_26_131102) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_26_232620) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -138,6 +138,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_26_131102) do
     t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "item_a_score"
+    t.text "item_a_comment", default: "", null: false
+    t.integer "item_b_score"
+    t.text "item_b_comment", default: "", null: false
+    t.integer "item_c_score"
+    t.text "item_c_comment", default: "", null: false
+    t.integer "item_d_score"
+    t.text "item_d_comment", default: "", null: false
+    t.text "general_comments", default: "", null: false
     t.index ["meeting_id"], name: "index_events_on_meeting_id"
     t.index ["team_id"], name: "index_events_on_team_id"
   end
