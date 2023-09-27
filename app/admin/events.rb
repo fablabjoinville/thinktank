@@ -3,6 +3,15 @@ ActiveAdmin.register Event do
     :_destroy,
     :date,
     :id,
+    :item_a_score,
+    :item_a_comment,
+    :item_b_score,
+    :item_b_comment,
+    :item_c_score,
+    :item_c_comment,
+    :item_d_score,
+    :item_d_comment,
+    :general_comments,
     :meeting_id,
     :name,
     :team_id,
@@ -48,6 +57,27 @@ ActiveAdmin.register Event do
           row :date
           row :meeting
           row :team
+        end
+
+        panel "Avaliação do evento" do
+          table_for event.assessment do
+            column "Item" do |assessment|
+              assessment[:item]
+            end
+            column "Avaliação" do |assessment|
+              if assessment[:score]
+                Event.humanized_enum_value(:score, assessment[:score])
+              else
+                "-"
+              end
+            end
+            column "Comentário" do |assessment|
+              assessment[:comment]
+            end
+          end
+          attributes_table_for event do
+            row :general_comments
+          end
         end
 
         panel "Avaliação de ferramentas #{event.tool_event_assessments.count}" do
@@ -116,6 +146,18 @@ ActiveAdmin.register Event do
           a.input :status, as: :radio, collection: Attendance.humanized_enum_list(:statuses)
           a.input :reason, input_html: { rows: 5 }
         end
+      end
+
+      f.inputs "Avaliação do evento" do
+        f.input :item_a_score, as: :radio, collection: Event.humanized_enum_list(:item_a_scores)
+        f.input :item_a_comment, input_html: { rows: 5 }
+        f.input :item_b_score, as: :radio, collection: Event.humanized_enum_list(:item_b_scores)
+        f.input :item_b_comment, input_html: { rows: 5 }
+        f.input :item_c_score, as: :radio, collection: Event.humanized_enum_list(:item_c_scores)
+        f.input :item_c_comment, input_html: { rows: 5 }
+        f.input :item_d_score, as: :radio, collection: Event.humanized_enum_list(:item_d_scores)
+        f.input :item_d_comment, input_html: { rows: 5 }
+        f.input :general_comments, input_html: { rows: 5 }
       end
 
       f.inputs "Avaliação de ferramentas: #{f.object.tool_event_assessments.count}", style: "padding-top: 0" do

@@ -138,9 +138,43 @@ en:
       event:
         created_at: Criado em
         date: Data
+        general_comments: Comentários gerais
         id: ID
+        item_a_comment: Comentário
+        item_a_score: Relacionamento entre MPs
+        item_a_scores:
+          bom: Bom
+          otimo: Ótimo
+          pessimo: Péssimo
+          ruim: Ruim
+        item_b_comment: Comentário
+        item_b_score: Relacionamento MPs e SOLs
+        item_b_scores:
+          bom: Bom
+          otimo: Ótimo
+          pessimo: Péssimo
+          ruim: Ruim
+        item_c_comment: Comentário
+        item_c_score: Conhecimento dos MPs para o evento
+        item_c_scores:
+          bom: Bom
+          otimo: Ótimo
+          pessimo: Péssimo
+          ruim: Ruim
+        item_d_comment: Comentário
+        item_d_score: Atitude dos MPs para o evento
+        item_d_scores:
+          bom: Bom
+          otimo: Ótimo
+          pessimo: Péssimo
+          ruim: Ruim
         meeting: Encontro
         name: Título
+        scores:
+          bom: Bom
+          otimo: Ótimo
+          pessimo: Péssimo
+          ruim: Ruim
         team: Equipe
         updated_at: Atualizado em
       meeting:
