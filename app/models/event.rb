@@ -21,19 +21,19 @@ class Event < ApplicationRecord
 
   validates :name, presence: true
   validates :date, presence: true
-  validates :item_a_score, presence: true
-  validates :item_a_comment, length: { maximum: 280 }
-  validates :item_a_comment, presence: true, if: -> { [:pessimo, :ruim].include?(item_a_score&.to_sym) }
-  validates :item_b_score, presence: true
-  validates :item_b_comment, length: { maximum: 280 }
-  validates :item_b_comment, presence: true, if: -> { [:pessimo, :ruim].include?(item_b_score&.to_sym) }
-  validates :item_c_score, presence: true
-  validates :item_c_comment, length: { maximum: 280 }
-  validates :item_c_comment, presence: true, if: -> { [:pessimo, :ruim].include?(item_c_score&.to_sym) }
-  validates :item_d_score, presence: true
-  validates :item_d_comment, length: { maximum: 280 }
-  validates :item_d_comment, presence: true, if: -> { [:pessimo, :ruim].include?(item_d_score&.to_sym) }
-  validates :general_comments, length: { maximum: 280 }
+  validates :item_a_score, presence: true, on: :update
+  validates :item_a_comment, length: { maximum: 280 }, on: :update
+  validates :item_a_comment, presence: true, if: -> { [:pessimo, :ruim].include?(item_a_score&.to_sym) }, on: :update
+  validates :item_b_score, presence: true, on: :update
+  validates :item_b_comment, length: { maximum: 280 }, on: :update
+  validates :item_b_comment, presence: true, if: -> { [:pessimo, :ruim].include?(item_b_score&.to_sym) }, on: :update
+  validates :item_c_score, presence: true, on: :update
+  validates :item_c_comment, length: { maximum: 280 }, on: :update
+  validates :item_c_comment, presence: true, if: -> { [:pessimo, :ruim].include?(item_c_score&.to_sym) }, on: :update
+  validates :item_d_score, presence: true, on: :update
+  validates :item_d_comment, length: { maximum: 280 }, on: :update
+  validates :item_d_comment, presence: true, if: -> { [:pessimo, :ruim].include?(item_d_score&.to_sym) }, on: :update
+  validates :general_comments, length: { maximum: 280 }, on: :update
 
   after_create :create_attendances_for_members!
 

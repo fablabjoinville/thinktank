@@ -142,38 +142,43 @@ ActiveAdmin.register Event do
           f.input :team, as: :select, collection: Team.accessible_by(current_ability).ordered_by_name,  input_html: { class: "slim-select" }, prompt: "Selecione a Equipe"
         end
 
-        f.inputs "Avaliação do evento" do
-          f.input :item_a_score, as: :radio, collection: Event.humanized_enum_list(:item_a_scores)
-          f.input :item_a_comment, input_html: { rows: 5 }
-          f.input :item_b_score, as: :radio, collection: Event.humanized_enum_list(:item_b_scores)
-          f.input :item_b_comment, input_html: { rows: 5 }
-          f.input :item_c_score, as: :radio, collection: Event.humanized_enum_list(:item_c_scores)
-          f.input :item_c_comment, input_html: { rows: 5 }
-          f.input :item_d_score, as: :radio, collection: Event.humanized_enum_list(:item_d_scores)
-          f.input :item_d_comment, input_html: { rows: 5 }
-          f.input :general_comments, input_html: { rows: 5 }
-        end
+        unless f.object.new_record?
+          f.inputs "Avaliação do evento" do
+            f.input :item_a_score, as: :radio, collection: Event.humanized_enum_list(:item_a_scores)
+            f.input :item_a_comment, input_html: { rows: 5 }
+            f.input :item_b_score, as: :radio, collection: Event.humanized_enum_list(:item_b_scores)
+            f.input :item_b_comment, input_html: { rows: 5 }
+            f.input :item_c_score, as: :radio, collection: Event.humanized_enum_list(:item_c_scores)
+            f.input :item_c_comment, input_html: { rows: 5 }
+            f.input :item_d_score, as: :radio, collection: Event.humanized_enum_list(:item_d_scores)
+            f.input :item_d_comment, input_html: { rows: 5 }
+            f.input :general_comments, input_html: { rows: 5 }
+          end
 
-        f.inputs "Avaliação de ferramentas: #{f.object.tool_event_assessments.count}", style: "padding-top: 0" do
-          f.has_many :tool_event_assessments, heading: '', allow_destroy: true, new_record: true do |a|
-            a.input :tool, input_html: { class: "slim-select" }, prompt: "Selecione a ferramenta"
-            a.input :score, as: :radio, collection: ToolEventAssessment.humanized_enum_list(:scores)
-            a.input :comment, input_html: { rows: 5 }
+          f.inputs "Avaliação de ferramentas: #{f.object.tool_event_assessments.count}", style: "padding-top: 0" do
+            f.has_many :tool_event_assessments, heading: '', allow_destroy: true, new_record: true do |a|
+              a.input :tool, input_html: { class: "slim-select" }, prompt: "Selecione a ferramenta"
+              a.input :score, as: :radio, collection: ToolEventAssessment.humanized_enum_list(:scores)
+              a.input :comment, input_html: { rows: 5 }
+            end
           end
         end
 
         f.actions
       end
-      column do
-        f.inputs "Participantes: #{f.object.attendances_counts}", style: "padding-top: 0" do
-          f.has_many :attendances, heading: "", new_record: false do |a|
-            a.input :member, input_html: { class: "slim-select", disabled: a.object.persisted? }, prompt: "Selecione o membro da equipe"
-            a.input :status, as: :radio, collection: Attendance.humanized_enum_list(:statuses)
-            a.input :reason, input_html: { rows: 5 }
-          end
-        end
 
-        f.actions
+      unless f.object.new_record?
+        column do
+          f.inputs "Participantes: #{f.object.attendances_counts}", style: "padding-top: 0" do
+            f.has_many :attendances, heading: "", new_record: false do |a|
+              a.input :member, input_html: { class: "slim-select", disabled: a.object.persisted? }, prompt: "Selecione o membro da equipe"
+              a.input :status, as: :radio, collection: Attendance.humanized_enum_list(:statuses)
+              a.input :reason, input_html: { rows: 5 }
+            end
+          end
+
+          f.actions
+        end
       end
     end
   end
