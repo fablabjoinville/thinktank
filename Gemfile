@@ -46,7 +46,7 @@ gem "bootsnap", require: false
 
 gem "active_storage_db"
 gem "activeadmin_addons"
-gem "activeadmin", '3.0.0'
+gem "activeadmin", '3.2.0'
 gem "cancancan"
 gem "cpf_cnpj"
 gem "devise"
