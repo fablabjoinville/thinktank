@@ -9,6 +9,14 @@ class Meeting < ApplicationRecord
     Arel.sql("unaccent(\"name\")")
   end
 
+  def self.ransackable_associations(auth_object = nil)
+    ['phase']
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ['id', 'name']
+  end
+
   def to_s
     "#{phase.name} - #{name}"
   end

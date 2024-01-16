@@ -10,4 +10,8 @@ class Company < ApplicationRecord
   ransacker :name, type: :string, formatter: proc { |v| I18n.transliterate(v) } do |_|
     Arel.sql("unaccent(\"name\")")
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ['id', 'title']
+  end
 end

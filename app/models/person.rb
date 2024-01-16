@@ -33,6 +33,14 @@ class Person < ApplicationRecord
     Arel.sql("unaccent(\"nickname\")")
   end
 
+  def self.ransackable_associations(auth_object = nil)
+    ['company']
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ['address', 'cpf', 'full_name', 'id', 'nickname', 'rg']
+  end
+
   def user?
     type == "User"
   end

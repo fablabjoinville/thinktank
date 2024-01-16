@@ -7,6 +7,14 @@ class Phase < ApplicationRecord
   scope :ordered_by_name, -> { order('LOWER(name) ASC') }
 
   ransacker :name, type: :string, formatter: proc { |v| I18n.transliterate(v) } do |_|
-    Arel.sql("unaccent(\"name\")")
+    Arel.sql('unaccent("phases"."name")')
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ['tools']
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ['id', 'name']
   end
 end

@@ -11,6 +11,14 @@ class Cluster < ApplicationRecord
   enum modality: [:presencial, :online]
   enum week_day: [:segunda, :terca, :quarta, :quinta, :sexta, :sabado, :domingo]
 
+  def self.ransackable_associations(auth_object = nil)
+    ['user']
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ['id', 'name', 'week_day']
+  end
+
   def start_time
     read_attribute(:start_time)&.strftime('%H:%M')
   end

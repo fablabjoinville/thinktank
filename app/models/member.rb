@@ -10,6 +10,14 @@ class Member < ApplicationRecord
 
   delegate :avatar_path, :full_name, :email, :company, :celular_number, :phone_number, to: :person
 
+  def self.ransackable_associations(auth_object = nil)
+    ['company', 'person', 'team']
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ['active', 'id', 'role']
+  end
+
   def to_s
     company_name = company.present? ? "| #{company.name}" : ""
     "#{humanized_enum(:role)} | #{full_name}#{company_name}"
