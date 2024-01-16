@@ -47,6 +47,9 @@ gem "devise", ">= 4.9.2"
 gem "phonelib", ">= 0.8.6"
 gem "validators", ">= 3.4.2"
 
+gem "sentry-ruby", ">= 5.16.1"
+gem "sentry-rails", ">= 5.16.1"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", ">= 1.9.1", platforms: %i[ mri mingw x64_mingw ]
