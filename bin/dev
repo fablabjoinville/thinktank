@@ -5,4 +5,5 @@ if ! gem list foreman -i --silent; then
   gem install foreman
 fi
 
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 exec foreman start -f Procfile.dev "$@"
