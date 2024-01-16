@@ -21,6 +21,14 @@ class Team < ApplicationRecord
     Arel.sql("unaccent(\"name\")")
   end
 
+  def self.ransackable_associations(auth_object = nil)
+    ['axis', 'clusters']
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ['id', 'name']
+  end
+
   def to_s
     "Equipe #{name} (#{members.count})"
   end

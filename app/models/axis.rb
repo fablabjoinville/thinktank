@@ -7,4 +7,8 @@ class Axis < ApplicationRecord
   ransacker :title, type: :string, formatter: proc { |v| I18n.transliterate(v) } do |_|
     Arel.sql("unaccent(\"title\")")
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ['id', 'title']
+  end
 end
