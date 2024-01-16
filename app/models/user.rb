@@ -6,6 +6,10 @@ class User < Person
 
   attr_accessor :skip_password_validation
 
+  def self.ransackable_attributes(auth_object = nil)
+    ['authorization_level', 'id', 'full_name']
+  end
+
   def to_s
     "#{humanized_enum(:authorization_level)}: #{full_name}"
   end
