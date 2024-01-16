@@ -11,7 +11,11 @@ class Company < ApplicationRecord
     Arel.sql("unaccent(\"name\")")
   end
 
+  def self.ransackable_associations(auth_object = nil)
+    ['people']
+  end
+
   def self.ransackable_attributes(auth_object = nil)
-    ['id', 'title']
+    ['id', 'cnpj', 'name']
   end
 end
