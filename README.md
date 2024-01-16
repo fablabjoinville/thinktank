@@ -9,7 +9,8 @@ Sistema de gestão do projeto Think Tank. Desenvolvido em Ruby on Rails 7 e [Act
 
 ## Dependências
 
-* ruby = 3.3.0
+* Ruby = 3.3.0
+* Node.js =  20.11.0
 * PostgreSQL >= 14.8
 
 Instalando as dependências em um macOS:
@@ -17,6 +18,7 @@ Instalando as dependências em um macOS:
 ```bash
 brew install postgresql libpq
 rbenv install 3.3.0
+nvm use
 ```
 
 ## Desenvolvimento
@@ -55,6 +57,7 @@ heroku login
 heroku git:remote -a thinktank
 heroku addons:create heroku-postgresql:mini
 git push heroku main
+heroku buildpacks:add heroku/nodejs -i 1
 heroku run rails db:migrate
 heroku ps:scale web=1
 heroku run rails db:seed
