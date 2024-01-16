@@ -268,6 +268,11 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    sentry-rails (5.16.1)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.16.1)
+    sentry-ruby (5.16.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -321,6 +326,8 @@ DEPENDENCIES
   rails (~> 7.1.2)
   redis (>= 5.0.8)
   sassc-rails (>= 2.1.2)
+  sentry-rails (>= 5.16.1)
+  sentry-ruby (>= 5.16.1)
   sprockets-rails (~> 3.4.2)
   tzinfo-data
   validators (>= 3.4.2)
