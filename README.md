@@ -1,6 +1,6 @@
 # Think Tank
 
-Sistema de gestão do projeto Think Tank. Desenvolvido em Ruby on Rails 7 e [ActiveAdmin](https://activeadmin.info/5-forms.html).
+Sistema de gestão do projeto Think Tank. Desenvolvido em Ruby on Rails e [ActiveAdmin](https://activeadmin.info/5-forms.html).
 
 ## Recursos
 
