@@ -1,5 +1,5 @@
 ActiveAdmin.register Meeting do
-  menu parent: "Administração", priority: 5
+  menu parent: "Administração", priority: 6
 
   includes :phase
 

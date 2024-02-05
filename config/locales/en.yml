@@ -99,9 +99,18 @@ en:
         id: ID
         title: Título
         updated_at: Atualizado Em
+      chapter:
+        clusters: Clusters
+        created_at: Criado Em
+        edition_year: Edição
+        id: ID
+        shared: Compartilhado
+        title: Título
+        updated_at: Atualizado Em
       cluster:
         active: Ativo
         address: Local base
+        chapter: Capítulo
         created_at: Criado Em
         end_date: Data final
         end_time: Hora Final
@@ -322,6 +331,9 @@ en:
       axis:
         one: Eixo
         other: Eixos
+      chapter:
+        one: Capítulo
+        other: Capítulos
       cluster:
         one: Cluster
         other: Clusters

@@ -1,4 +1,5 @@
 class Cluster < ApplicationRecord
+  belongs_to :chapter
   belongs_to :user, foreign_key: 'person_id', class_name: 'User'
   has_and_belongs_to_many :teams
 
@@ -11,12 +12,14 @@ class Cluster < ApplicationRecord
   enum modality: [:presencial, :online]
   enum week_day: [:segunda, :terca, :quarta, :quinta, :sexta, :sabado, :domingo]
 
+  scope :ordered_by_week_day, -> { order('week_day ASC') }
+
   def self.ransackable_associations(auth_object = nil)
     ['user']
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ['id', 'name', 'week_day']
+    ['id', 'week_day']
   end
 
   def start_time
