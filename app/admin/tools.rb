@@ -1,5 +1,5 @@
 ActiveAdmin.register Tool do
-  menu parent: "Administração", priority: 6
+  menu parent: "Administração", priority: 7
   config.sort_order = 'name_asc'
 
   permit_params(

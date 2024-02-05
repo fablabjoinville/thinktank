@@ -154,6 +154,9 @@ Member.create!(team: Team.second, person: Person.find(8), role: :sol)
 
 #########################################################################################################
 
+chapter_one = Chapter.create!(title: "Causa Engajadora shared", shared: true)
+chapter_two = Chapter.create!(title: "Causa Engajadora private", shared: false)
+
 facilitator = User.create_with(
   full_name: "Facilitator Trillian",
   company: Company.first,
@@ -171,6 +174,7 @@ facilitator = User.create_with(
 ).find_or_create_by!(email: "facilitator@example.com")
 
 cluster_one = Cluster.create!(
+  chapter: chapter_one,
   user: facilitator,
   address: Faker::Address.full_address,
   start_time: Time.new(2000, 1, 1, 9, 0, 0),
@@ -184,6 +188,7 @@ cluster_one.teams << Team.second
 cluster_one.save!
 
 cluster_two = Cluster.create!(
+  chapter: chapter_two,
   user: facilitator,
   address: Faker::Address.full_address,
   start_time: Time.new(2000, 1, 1, 9, 0, 0),

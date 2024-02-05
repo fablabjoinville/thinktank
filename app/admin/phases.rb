@@ -1,5 +1,5 @@
 ActiveAdmin.register Phase do
-  menu parent: "Administração", priority: 4
+  menu parent: "Administração", priority: 5
 
   permit_params(
     :_destroy,

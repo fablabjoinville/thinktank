@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_16_020512) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_05_145721) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -103,6 +103,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_16_020512) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "chapters", force: :cascade do |t|
+    t.string "title"
+    t.boolean "shared"
+    t.integer "edition_year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "clusters", force: :cascade do |t|
     t.bigint "person_id"
     t.time "start_time", null: false
@@ -116,6 +124,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_16_020512) do
     t.date "start_date"
     t.date "end_date"
     t.boolean "active", default: true, null: false
+    t.bigint "chapter_id"
+    t.index ["chapter_id"], name: "index_clusters_on_chapter_id"
     t.index ["person_id"], name: "index_clusters_on_person_id"
   end
 
@@ -244,6 +254,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_16_020512) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attendances", "events"
   add_foreign_key "attendances", "members", on_delete: :cascade
+  add_foreign_key "clusters", "chapters"
   add_foreign_key "clusters", "people"
   add_foreign_key "events", "meetings"
   add_foreign_key "events", "teams"
