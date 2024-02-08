@@ -30,17 +30,20 @@ class Ability
       can :read, Person, authorization_level: [:facilitator, :secretary, :admin, :super_admin]
     when :facilitator
       can :read, Cluster, person_id: user.id
+      can :read, Team, clusters: { person_id: user.id }
+      can :read, Member, team: { clusters: { person_id: user.id }}
+
+      can :manage, Assessment, team: { clusters: { person_id: user.id }}
+      can :manage, Attendance, team: { clusters: { person_id: user.id }}
 
       can :manage, Event, team: { clusters: { person_id: user.id }}
       can :create, Event
 
-      # can :update, Person, id: user.id
-      # can :read, Person, id: user.id
-
-      can :read, Team, clusters: { person_id: user.id }
-
       can :read, User, id: user.id
       can :update, User, id: user.id
+      cannot :index, User
+
+      cannot :index, Person
     end
   end
 end

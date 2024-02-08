@@ -5,7 +5,7 @@ ActiveAdmin.register_page "Dashboard" do
   content title: "Dashboard" do
     div class: "blank_slate_container", id: "dashboard_default_message" do
       span class: "blank_slate" do
-        span "Seja bem vindo ao sistema de gerenciamento do Think Tank!"
+        span "Seja bem vindo ao sistema do Think Tank!"
       end
     end
 

@@ -21,16 +21,16 @@ class Event < ApplicationRecord
 
   validates :name, presence: true
   validates :date, presence: true
-  validates :item_a_score, presence: true, on: :update
+  validates :item_a_score, presence: true, on: :update, if: -> { item_a_score_changed? || item_a_comment_changed? }
   validates :item_a_comment, length: { maximum: 280 }, on: :update
   validates :item_a_comment, presence: true, if: -> { [:pessimo, :ruim].include?(item_a_score&.to_sym) }, on: :update
-  validates :item_b_score, presence: true, on: :update
+  validates :item_b_score, presence: true, on: :update, if: -> { item_b_score_changed? || item_b_comment_changed? }
   validates :item_b_comment, length: { maximum: 280 }, on: :update
   validates :item_b_comment, presence: true, if: -> { [:pessimo, :ruim].include?(item_b_score&.to_sym) }, on: :update
-  validates :item_c_score, presence: true, on: :update
+  validates :item_c_score, presence: true, on: :update, if: -> { item_c_score_changed? || item_c_comment_changed? }
   validates :item_c_comment, length: { maximum: 280 }, on: :update
   validates :item_c_comment, presence: true, if: -> { [:pessimo, :ruim].include?(item_c_score&.to_sym) }, on: :update
-  validates :item_d_score, presence: true, on: :update
+  validates :item_d_score, presence: true, on: :update, if: -> { item_d_score_changed? || item_d_comment_changed? }
   validates :item_d_comment, length: { maximum: 280 }, on: :update
   validates :item_d_comment, presence: true, if: -> { [:pessimo, :ruim].include?(item_d_score&.to_sym) }, on: :update
   validates :general_comments, length: { maximum: 280 }, on: :update

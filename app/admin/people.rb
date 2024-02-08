@@ -1,5 +1,5 @@
 ActiveAdmin.register Person do
-  menu parent: "Administração", priority: 2
+  menu parent: "Administração", priority: 2, if: -> { can? :index, Person }
   config.create_another = true
   config.sort_order = 'full_name_asc'
 

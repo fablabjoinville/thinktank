@@ -82,14 +82,17 @@ ActiveAdmin.register Team do
             column "Presenças" do |member|
               member.attendances_counts
             end
-            column "Ações" do |member|
-              link_to "Remover", delete_and_redirect_back_member_path(member), method: :delete, data: { confirm: "Tem certeza que deseja remover?" }
+            if current_user.authorization_level.to_sym.in?([:admin, :superadmin])
+              column "Ações" do |member|
+                link_to("Remover", delete_and_redirect_back_member_path(member),
+                  { method: :delete, data: { confirm: "Tem certeza que deseja remover?" } })
+              end
             end
           end
         end
       end
       column do
-        panel "Eventos #{team.events.count}" do
+        panel "Eventos #{team.events.count} #{link_to("adicionar", new_event_path)}".html_safe do
           table_for team.events do
             column :name do |event|
               link_to event.name, event_path(event)
