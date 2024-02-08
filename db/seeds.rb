@@ -154,8 +154,8 @@ Member.create!(team: Team.second, person: Person.find(8), role: :sol)
 
 #########################################################################################################
 
-chapter_one = Chapter.create!(title: "Causa Engajadora shared", shared: true)
-chapter_two = Chapter.create!(title: "Causa Engajadora private", shared: false)
+chapter_one = Chapter.create!(title: "Causa Engajadora Capítulo 1")
+chapter_two = Chapter.create!(title: "Causa Engajadora Capítulo 2")
 
 facilitator = User.create_with(
   full_name: "Facilitator Trillian",

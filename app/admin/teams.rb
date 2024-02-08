@@ -26,13 +26,13 @@ ActiveAdmin.register Team do
       link_to "Sala Teams: #{team.name}", team.link_teams if team.link_teams.present?
     end
     column "Clusters" do |team|
-      team.clusters.count
+      link_to team.clusters.count, clusters_path(q: { id_in: team.cluster_ids })
     end
     column "Membros" do |team|
-      team.members.count
+      link_to team.members.count, members_path(q: { team_id_eq: team.id })
     end
     column "Eventos" do |team|
-      team.events.count
+      link_to team.events.count, events_path(q: { team_id_eq: team.id })
     end
     column :axis
     column :created_at
