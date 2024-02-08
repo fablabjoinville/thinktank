@@ -21,7 +21,7 @@ Team.destroy_all
 Meeting.destroy_all
 Cluster.destroy_all
 
-load(File.join(Rails.root, 'db/seeds/admins.rb'))
+load(File.join(Rails.root, 'db/seeds/accounts.rb'))
 
 #########################################################################################################
 
@@ -154,8 +154,8 @@ Member.create!(team: Team.second, person: Person.find(8), role: :sol)
 
 #########################################################################################################
 
-chapter_one = Chapter.create!(title: "Causa Engajadora Capítulo 1")
-chapter_two = Chapter.create!(title: "Causa Engajadora Capítulo 2")
+chapter_one = Chapter.create!(title: "Causa Engajadora Capítulo 1", edition_year: Time.now.year)
+chapter_two = Chapter.create!(title: "Causa Engajadora Capítulo 2", edition_year: Time.now.year)
 
 facilitator = User.create_with(
   full_name: "Facilitator Trillian",
