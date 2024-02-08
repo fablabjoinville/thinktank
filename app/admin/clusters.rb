@@ -32,8 +32,8 @@ ActiveAdmin.register Cluster do
     column :end_time
     column :user
     tag_column :modality
-    column "Equipes" do |cluster|
-      cluster.teams.count
+    column :teams do |cluster|
+      link_to cluster.teams.count, teams_path(q: { id_in: cluster.team_ids })
     end
     column :address
     column :link do |cluster|

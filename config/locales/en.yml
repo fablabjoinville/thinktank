@@ -88,7 +88,7 @@ en:
         status: Presença
         statuses:
           one: Presença
-          not_registered: Não registrado
+          not_registered: Em branco
           present: Presente
           absent: Ausente
         team: Equipe
@@ -104,7 +104,6 @@ en:
         created_at: Criado Em
         edition_year: Edição
         id: ID
-        shared: Compartilhado
         title: Título
         updated_at: Atualizado Em
       cluster:
@@ -222,7 +221,7 @@ en:
           one: Permissão
           admin: Admin
           facilitator: Facilitador
-          person: Pessoa
+          person: Externo
           secretary: Secretário
           super_admin: Super Admin
         birthday: Aniversário
@@ -310,7 +309,7 @@ en:
           one: Permissão
           admin: Admin
           facilitator: Facilitador
-          person: Pessoa
+          person: Externo
           secretary: Secretário
           super_admin: Super Admin
         genders:

@@ -5,7 +5,6 @@ ActiveAdmin.register Chapter do
     :_destroy,
     :edition_year,
     :id,
-    :shared,
     :title,
     cluster_ids: []
   )
@@ -16,7 +15,6 @@ ActiveAdmin.register Chapter do
 
     column :title
     column :edition_year
-    column :shared
     column :clusters do |chapter|
       if chapter.clusters.any?
         label = chapter.clusters.count == 1 ? "Cluster" : "Clusters"
@@ -35,7 +33,6 @@ ActiveAdmin.register Chapter do
     attributes_table do
       row :title
       row :edition_year
-      row :shared
       row :clusters do |chapter|
         if chapter.clusters.any?
           ul do
@@ -56,7 +53,6 @@ ActiveAdmin.register Chapter do
     f.inputs do
       f.input :title
       f.input :edition_year
-      f.input :shared
       f.input :clusters, as: :select, collection: Cluster.ordered_by_week_day, label: "Selecione os Clusters"
     end
 

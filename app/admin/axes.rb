@@ -16,6 +16,9 @@ ActiveAdmin.register Axis do
       link_to axis.title, axis_path(axis)
     end
     column :description
+    column :teams do |axis|
+      link_to axis.teams.count, teams_path(q: { axis_id_eq: axis.id })
+    end
 
     actions
   end
@@ -45,8 +48,8 @@ ActiveAdmin.register Axis do
         column "Eventos" do |team|
           link_to team.events.count, team_path(team)
         end
-        column "Clusters" do |team|
-          team.clusters.count
+        column :clusters do |team|
+          link_to team.clusters.count, clusters_path(q: { id_in: team.cluster_ids })
         end
       end
     end

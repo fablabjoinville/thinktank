@@ -9,6 +9,11 @@
 
 // Active Admin's got SASS!
 @import "active_admin/mixins";
+
+@mixin sans-family {
+  font-family: Arial, sans-serif;
+}
+
 @import "active_admin/base";
 @import 'activeadmin_addons/all';
 

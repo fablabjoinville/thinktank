@@ -18,7 +18,7 @@ ActiveAdmin.register Company do
     end
     column :cnpj
     column "# Pessoas" do |company|
-      company.people.count
+      link_to company.people.count, people_path(q: { company_id_eq: company.id })
     end
 
     actions
