@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
   TITLE = "Time interno"
-  menu label: TITLE, parent: "Administração", priority: 3, if: proc { can? :read, User }
+  menu label: TITLE, parent: "Administração", priority: 3, if: -> { can? :index, User }
   config.sort_order = 'full_name_asc'
 
   permit_params(
