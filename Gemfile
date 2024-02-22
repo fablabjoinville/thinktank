@@ -9,7 +9,7 @@ gem "rails", "~> 7.1.3.2"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails", "~> 3.4.2"
 
-gem "pg", "~> 1.5.4"
+gem "pg", "~> 1.5.5"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 6.4.1"
