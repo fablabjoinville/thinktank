@@ -24,13 +24,13 @@ gem "cssbundling-rails", ">= 1.3.3"
 gem "jbuilder", ">= 2.11.5"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", ">= 5.0.8"
+# gem "redis", ">= 5.0.8"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", ">= 1.17.1", require: false
+gem "bootsnap", ">= 1.18.3", require: false
 
 # Use Sass to process CSS
 gem "sassc-rails", ">= 2.1.2"
