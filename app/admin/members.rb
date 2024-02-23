@@ -57,7 +57,7 @@ ActiveAdmin.register Member do
           row :active
         end
 
-        panel "Pessoa #{link_to "editar", member.person }".html_safe do
+        panel "Dados cadastrais (#{link_to "editar", member.person })".html_safe do
           attributes_table_for member.person do
             row :full_name
             row :nickname
@@ -77,7 +77,7 @@ ActiveAdmin.register Member do
         end
       end
       column do
-        panel "Participações em eventos" do
+        panel "Participações em eventos: #{member.attendances.count}" do
           table_for member.attendances do
             column :event
             column :date do |attendance|

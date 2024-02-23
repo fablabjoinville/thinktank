@@ -85,7 +85,7 @@ ActiveAdmin.register Event do
           end
         end
 
-        panel "Avaliação de ferramentas (#{event.tool_event_assessments.count})" do
+        panel "Avaliação de ferramentas: #{event.tool_event_assessments.count}" do
           table_for event.tool_event_assessments.joins(:tool).order('tool.name ASC') do
             column :tool
             tag_column :score
@@ -95,7 +95,7 @@ ActiveAdmin.register Event do
       end
 
       column do
-        panel "Participantes (#{event.attendances_counts})" do
+        panel "Participantes: #{event.attendances_counts}" do
           table_for event.attendances.joins(member: :person).order('person.full_name ASC') do
             column do |attendance|
               image_tag(attendance.avatar_path, { width: 50, height: "auto" })

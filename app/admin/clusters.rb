@@ -66,7 +66,7 @@ ActiveAdmin.register Cluster do
       row :active
     end
 
-    panel "Equipes #{cluster.teams.count}" do
+    panel "Equipes: #{cluster.teams.count}" do
       table_for cluster.teams.ordered_by_name do
         column :name do |team|
           link_to team, team_path(team)
