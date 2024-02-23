@@ -23,7 +23,7 @@ ActiveAdmin.register Cluster do
     id_column
 
     column "Dia da semana" do |cluster|
-      cluster.humanized_enum(:week_day)
+      link_to cluster.humanized_enum(:week_day), cluster_path(cluster)
     end
     column :chapter
     column :start_date

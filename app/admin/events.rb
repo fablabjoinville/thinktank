@@ -103,6 +103,9 @@ ActiveAdmin.register Event do
             column :member do |attendance|
               link_to attendance.full_name, event_attendance_path(attendance.event, attendance)
             end
+            tag_column :role do |attendance|
+              attendance.member.role
+            end
             column "telefone" do |attendance|
               attendance.celular_number || attendance.phone_number
             end
