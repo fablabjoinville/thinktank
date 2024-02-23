@@ -84,7 +84,7 @@ en:
         created_at: Criado em
         event: Evento
         member: Membro de equipe
-        reason: Razão
+        reason: Comentário
         status: Presença
         statuses:
           one: Presença

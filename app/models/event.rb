@@ -35,6 +35,8 @@ class Event < ApplicationRecord
   validates :item_d_comment, presence: true, if: -> { [:pessimo, :ruim].include?(item_d_score&.to_sym) }, on: :update
   validates :general_comments, length: { maximum: 280 }, on: :update
 
+  after_initialize -> { self.date = Date.current }, if: -> { new_record? && date.nil? }
+  before_validation -> { self.name = meeting.name }, on: :create
   after_create :create_attendances_for_members!
 
   ransacker :name, type: :string, formatter: proc { |v| I18n.transliterate(v) } do |_|
@@ -50,7 +52,7 @@ class Event < ApplicationRecord
   end
 
   def to_s
-    team.name
+    name
   end
 
   def assessment
@@ -78,17 +80,19 @@ class Event < ApplicationRecord
     ]
   end
 
-  def create_attendances_for_members!
-    members.each do |member|
-      attendances.find_or_create_by!(member: member)
-    end
-  end
-
   def attendances_counts
-    total = members.count
+    total = attendances.count
     present = attendances.present.count
     absent = attendances.absent.count
 
     "#{total} esperados - #{present} presentes - #{absent} faltas"
+  end
+
+  private
+
+  def create_attendances_for_members!
+    members.each do |member|
+      attendances.find_or_create_by!(member: member)
+    end
   end
 end
