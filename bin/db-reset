@@ -9,7 +9,7 @@ if [[ "$1" == "--pgsync" ]]; then
     brew install pgsync
   fi
   pgsync --defer-constraints
-  rails db:seed:admins
+  rails db:seed:accounts
 else
   rails db:seed
 fi
