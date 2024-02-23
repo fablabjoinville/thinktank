@@ -31,7 +31,7 @@ ActiveAdmin.register Axis do
       row :description
     end
 
-    panel "Equipes #{axis.teams.count}" do
+    panel "Equipes: #{axis.teams.count}" do
       table_for axis.teams.ordered_by_name do
         column :name do |team|
           link_to team, team_path(team)

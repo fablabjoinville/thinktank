@@ -71,7 +71,7 @@ ActiveAdmin.register Team do
 
     columns do
       column do
-        panel "Membros #{team.members.count}" do
+        panel "Membros: #{team.members.count}" do
           table_for team.members.joins(:person).order('role ASC').order('person.full_name ASC') do
             column :full_name, sortable: "person.full_name" do |member|
               link_to member.full_name, member_path(member)
@@ -92,7 +92,7 @@ ActiveAdmin.register Team do
         end
       end
       column do
-        panel "Eventos #{team.events.count} #{link_to("adicionar", new_event_path(team_id: team.id))}".html_safe do
+        panel "Eventos: #{team.events.count} (#{link_to("adicionar", new_event_path(team_id: team.id))})".html_safe do
           table_for team.events do
             column :name do |event|
               link_to event.name, event_path(event)
