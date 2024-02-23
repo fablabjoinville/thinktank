@@ -92,7 +92,7 @@ ActiveAdmin.register Team do
         end
       end
       column do
-        panel "Eventos #{team.events.count} #{link_to("adicionar", new_event_path)}".html_safe do
+        panel "Eventos #{team.events.count} #{link_to("adicionar", new_event_path(team_id: team.id))}".html_safe do
           table_for team.events do
             column :name do |event|
               link_to event.name, event_path(event)

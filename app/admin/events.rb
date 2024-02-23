@@ -31,6 +31,14 @@ ActiveAdmin.register Event do
     ]
   )
 
+  controller do
+    def build_new_resource
+        resource = super
+        resource.assign_attributes(team_id: params[:team_id]) if params[:team_id].present?
+        resource
+    end
+  end
+
   index do
     selectable_column
 
@@ -38,15 +46,13 @@ ActiveAdmin.register Event do
       link_to event.name, event_path(event)
     end
     column :date
-    column :meeting
     column :team
 
     actions
   end
 
-  filter :name_cont, label: "Título"
-  filter :date
   filter :meeting, label: "Encontro"
+  filter :date
   filter :team, label: "Equipe"
 
   show do
@@ -55,7 +61,6 @@ ActiveAdmin.register Event do
         attributes_table do
           row :name
           row :date
-          row :meeting
           row :team
         end
 
@@ -80,7 +85,7 @@ ActiveAdmin.register Event do
           end
         end
 
-        panel "Avaliação de ferramentas #{event.tool_event_assessments.count}" do
+        panel "Avaliação de ferramentas (#{event.tool_event_assessments.count})" do
           table_for event.tool_event_assessments.joins(:tool).order('tool.name ASC') do
             column :tool
             tag_column :score
@@ -90,7 +95,7 @@ ActiveAdmin.register Event do
       end
 
       column do
-        panel "Participantes #{event.attendances_counts}" do
+        panel "Participantes (#{event.attendances_counts})" do
           table_for event.attendances.joins(member: :person).order('person.full_name ASC') do
             column do |attendance|
               image_tag(attendance.avatar_path, { width: 50, height: "auto" })
@@ -98,14 +103,8 @@ ActiveAdmin.register Event do
             column :member do |attendance|
               link_to attendance.full_name, event_attendance_path(attendance.event, attendance)
             end
-            column :email do |attendance|
-              attendance.email
-            end
-            column "celular" do |attendance|
-              attendance.celular_number
-            end
             column "telefone" do |attendance|
-              attendance.phone_number
+              attendance.celular_number || attendance.phone_number
             end
             tag_column :status
             column :reason
@@ -136,9 +135,8 @@ ActiveAdmin.register Event do
     columns do
       column do
         f.inputs do
-          f.input :name
-          f.input :date, input_html: { class: "default-select" }
           f.input :meeting, as: :select, collection: Meeting.ordered_by_name, input_html: { class: "slim-select" }, prompt: "Selecione o Encontro"
+          f.input :date, input_html: { class: "default-select" }
           f.input :team, as: :select, collection: Team.accessible_by(current_ability).ordered_by_name,  input_html: { class: "slim-select" }, prompt: "Selecione a Equipe"
         end
 
