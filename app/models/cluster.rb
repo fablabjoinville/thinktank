@@ -30,11 +30,12 @@ class Cluster < ApplicationRecord
     read_attribute(:end_time)&.strftime('%H:%M')
   end
 
-  def to_s
+  def name
     day_s = humanized_enum(:week_day)
     modality_s = humanized_enum(:modality)
     facilitador_s = user.full_name
     starttime_s = start_time
     "#{day_s}, #{starttime_s} | #{facilitador_s} | #{modality_s}"
   end
+  alias :to_s :name
 end
