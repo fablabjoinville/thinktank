@@ -57,7 +57,7 @@ ActiveAdmin.register Event do
 
   show do
     columns do
-      column do
+      column min_width: "35%", max_width: "35%" do
         attributes_table do
           row :name
           row :date
@@ -94,7 +94,7 @@ ActiveAdmin.register Event do
         end
       end
 
-      column do
+      column min_width: "63%", max_width: "63%" do
         panel "Participantes: #{event.attendances_counts}" do
           table_for event.attendances.joins(member: :person).order('person.full_name ASC') do
             column do |attendance|
