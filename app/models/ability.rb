@@ -44,6 +44,11 @@ class Ability
       cannot :index, User
 
       cannot :index, Person
+
+      can :manage, ActiveAdmin::Comment
+      cannot :destroy, ActiveAdmin::Comment do |comment|
+        comment.author_id != user.id
+      end
     end
   end
 end
