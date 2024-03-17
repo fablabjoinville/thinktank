@@ -53,7 +53,6 @@ ActiveAdmin.register Chapter do
     f.inputs do
       f.input :title
       f.input :edition_year
-      f.input :clusters, as: :select, collection: Cluster.ordered_by_week_day, label: "Selecione os Clusters"
     end
 
     f.actions

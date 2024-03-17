@@ -94,7 +94,7 @@ ActiveAdmin.register Cluster do
     f.semantic_errors
 
     f.inputs do
-      f.input :chapter, input_html: { class: "slim-select" }, prompt: "Selecione o capítulo"
+      f.input :chapter, as: :select, collection: Chapter.year_and_title_options, input_html: { class: "slim-select" }, prompt: "Selecione o capítulo"
       f.input :week_day, as: :select, collection: Cluster.humanized_enum_list(:week_days), input_html: { class: "default-select" }, prompt: "Selecione o dia da semana"
       f.input :start_date, as: :date_time_picker, picker_options: { datepicker: true, timepicker: false, format: "Y-m-d" }
       f.input :end_date, as: :date_time_picker, picker_options: { datepicker: true, timepicker: false, format: "Y-m-d" }
