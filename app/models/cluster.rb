@@ -7,9 +7,7 @@ class Cluster < ApplicationRecord
   validates :end_time, presence: true, comparison: { greater_than: :start_time }
   validates :end_date, comparison: { greater_than: :start_date }, if: -> { start_date.present? }
   validates :week_day, presence: true
-  validates :modality, presence: true
 
-  enum modality: [:presencial, :online, :hibrido]
   enum week_day: [:segunda, :terca, :quarta, :quinta, :sexta, :sabado, :domingo]
 
   scope :ordered_by_week_day, -> { order('week_day ASC') }
@@ -32,10 +30,9 @@ class Cluster < ApplicationRecord
 
   def name
     day_s = humanized_enum(:week_day)
-    modality_s = humanized_enum(:modality)
     facilitador_s = user.full_name
     starttime_s = start_time
-    "#{day_s}, #{starttime_s} | #{facilitador_s} | #{modality_s}"
+    "#{day_s}, #{starttime_s} | #{facilitador_s}"
   end
   alias :to_s :name
 end

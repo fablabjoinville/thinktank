@@ -180,7 +180,6 @@ cluster_one = Cluster.create!(
   start_time: Time.new(2000, 1, 1, 9, 0, 0),
   end_time: Time.new(2000, 1, 1, 17, 0, 0),
   week_day: 2,
-  modality: 1,
   link: "https://link_meet_cluster_one.com"
 )
 cluster_one.teams << Team.first
@@ -194,7 +193,6 @@ cluster_two = Cluster.create!(
   start_time: Time.new(2000, 1, 1, 9, 0, 0),
   end_time: Time.new(2000, 1, 1, 17, 0, 0),
   week_day: 2,
-  modality: 0,
   link: "https://link_meet_cluster_two.com"
 )
 cluster_two.teams << Team.third

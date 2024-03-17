@@ -48,6 +48,9 @@ ActiveAdmin.register Team do
     attributes_table do
       row :name
       row :axis
+      tag_row "Modalidade" do |team|
+        team.modality
+      end
       row "Miro" do |team|
         if team.link_miro.present?
           link_to team.link_miro, team.link_miro
@@ -76,9 +79,9 @@ ActiveAdmin.register Team do
             column :full_name, sortable: "person.full_name" do |member|
               link_to member.full_name, member_path(member)
             end
-
             tag_column :role
             column :active
+            tag_column :modality
             column "Presenças" do |member|
               member.attendances_counts
             end

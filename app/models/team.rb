@@ -33,6 +33,12 @@ class Team < ApplicationRecord
     "Equipe #{name} (#{members.count})"
   end
 
+  def modality
+    modalities = members.map(&:modality).uniq
+    modality = modalities.size > 1 ? 'hibrido' : modalities.first
+    Member.humanized_enum_value(:modality, modality)
+  end
+
   private
 
   def format_links

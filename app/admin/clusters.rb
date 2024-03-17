@@ -10,7 +10,6 @@ ActiveAdmin.register Cluster do
     :end_time,
     :id,
     :link,
-    :modality,
     :person_id,
     :start_date,
     :start_time,
@@ -31,7 +30,6 @@ ActiveAdmin.register Cluster do
     column :start_time
     column :end_time
     column :user
-    tag_column :modality
     column :teams do |cluster|
       link_to cluster.teams.count, teams_path(q: { id_in: cluster.team_ids })
     end
@@ -58,7 +56,6 @@ ActiveAdmin.register Cluster do
       row :start_time
       row :end_time
       row :user
-      tag_row :modality
       row :address
       row :link do |cluster|
         link_to cluster.link, cluster.link, target: "_blank"
@@ -70,6 +67,9 @@ ActiveAdmin.register Cluster do
       table_for cluster.teams.ordered_by_name do
         column :name do |team|
           link_to team, team_path(team)
+        end
+        tag_column "Modalidade" do |team|
+          team.modality
         end
         column "Miro" do |team|
           link_to "Miro: #{team.name}", team.link_miro if team.link_miro.present?
@@ -101,7 +101,6 @@ ActiveAdmin.register Cluster do
       f.input :start_time, as: :date_time_picker, picker_options: { datepicker: false, timepicker: true, format: "H:i" }
       f.input :end_time, as: :date_time_picker, picker_options: { datepicker: false, timepicker: true, format: "H:i" }
       f.input :user, input_html: { class: "slim-select" }, prompt: "Selecione o facilitador"
-      f.input :modality, as: :radio, collection: Cluster.humanized_enum_list(:modalities)
       f.input :address
       f.input :link, as: :url
       f.input :teams, as: :select, collection: Team.ordered_by_name, input_html: { class: "sim-select" }, prompt: "Selecione as equipes", multiple: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_05_145721) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_17_225844) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -176,6 +176,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_05_145721) do
     t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "modality", default: 0
     t.index ["person_id"], name: "index_members_on_person_id"
     t.index ["team_id"], name: "index_members_on_team_id"
   end

@@ -6,6 +6,7 @@ class Member < ApplicationRecord
   has_many :events, through: :attendances
   has_one :company, through: :person
 
+  enum modality: [:presencial, :online, :hibrido]
   enum :role, [:mm, :mp, :sol], prefix: true, default: :sol
 
   delegate :avatar_path, :full_name, :email, :company, :celular_number, :phone_number, to: :person
