@@ -9,7 +9,7 @@ class Cluster < ApplicationRecord
   validates :week_day, presence: true
   validates :modality, presence: true
 
-  enum modality: [:presencial, :online]
+  enum modality: [:presencial, :online, :hibrido]
   enum week_day: [:segunda, :terca, :quarta, :quinta, :sexta, :sabado, :domingo]
 
   scope :ordered_by_week_day, -> { order('week_day ASC') }

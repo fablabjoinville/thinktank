@@ -118,8 +118,9 @@ en:
         modality: Modalidade
         modalities:
           one: Modalidade
-          presencial: Presencial
+          hibrido: Híbrido
           online: Online
+          presencial: Presencial
         start_date: Data início
         start_time: Hora de Início
         team_ids: Equipes
