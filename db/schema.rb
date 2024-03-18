@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_18_121609) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_18_180634) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -127,11 +127,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_121609) do
     t.bigint "chapter_id"
     t.index ["chapter_id"], name: "index_clusters_on_chapter_id"
     t.index ["person_id"], name: "index_clusters_on_person_id"
-  end
-
-  create_table "clusters_teams", id: false, force: :cascade do |t|
-    t.bigint "cluster_id", null: false
-    t.bigint "team_id", null: false
   end
 
   create_table "companies", force: :cascade do |t|
