@@ -1,5 +1,7 @@
 ActiveAdmin.register Team do
   menu priority: 4
+  config.create_another = true
+  config.sort_order = 'name_asc'
 
   permit_params(
     :_destroy,

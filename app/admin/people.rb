@@ -22,7 +22,7 @@ ActiveAdmin.register Person do
 
   action_item :new_model, only: :show do
     localizer = ActiveAdmin::Localizers.resource(active_admin_config)
-     link_to localizer.t(:new_model), new_resource_path
+    link_to localizer.t(:new_model), new_resource_path
   end
 
   action_item :convert_to_user, only: :show do
