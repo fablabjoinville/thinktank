@@ -1,7 +1,7 @@
 class Cluster < ApplicationRecord
   belongs_to :chapter
   belongs_to :user, foreign_key: 'person_id', class_name: 'User'
-  has_and_belongs_to_many :teams
+  has_many :teams
 
   validates :start_time, presence: true
   validates :end_time, presence: true, comparison: { greater_than: :start_time }

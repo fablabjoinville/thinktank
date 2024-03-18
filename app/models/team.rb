@@ -1,5 +1,6 @@
 class Team < ApplicationRecord
   belongs_to :axis
+  belongs_to :cluster
 
   has_and_belongs_to_many :clusters
 
@@ -13,7 +14,7 @@ class Team < ApplicationRecord
   validates :link_miro, format: { with: /\A(https?:\/\/)?(?:www\.)?miro\.com\/.+\z/i,
     message: "deve ser um link no formato miro.com/XXXXXX" }, allow_blank: true
 
-  before_save :format_links
+  before_save :before_save_format_links_callback
 
   scope :ordered_by_name, -> { order('LOWER(name) ASC') }
 
@@ -22,11 +23,11 @@ class Team < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ['axis', 'clusters']
+    ['axis']
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ['id', 'name']
+    ['id', 'cluster_id', 'name']
   end
 
   def to_s
@@ -34,6 +35,7 @@ class Team < ApplicationRecord
   end
 
   def modality
+    return "Não definida" if members.empty?
     modalities = members.map(&:modality).uniq
     modality = modalities.size > 1 ? 'hibrido' : modalities.first
     Member.humanized_enum_value(:modality, modality)
@@ -41,7 +43,7 @@ class Team < ApplicationRecord
 
   private
 
-  def format_links
+  def before_save_format_links_callback
     self.link_miro = format_link(self.link_miro)
     self.link_teams = format_link(self.link_teams)
   end

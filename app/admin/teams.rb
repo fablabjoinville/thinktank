@@ -4,12 +4,11 @@ ActiveAdmin.register Team do
   permit_params(
     :_destroy,
     :axis_id,
-    :clusters,
+    :cluster_id,
     :id,
     :link_miro,
     :link_teams,
     :name,
-    cluster_ids: [],
     person_ids: []
   )
 
@@ -19,14 +18,19 @@ ActiveAdmin.register Team do
     column :name do |team|
       link_to team.name, team_path(team)
     end
+    tag_column "Modalidade" do |team|
+      team.modality
+    end
     column "Miro" do |team|
       link_to "Miro: #{team.name}", team.link_miro if team.link_miro.present?
     end
     column "Sala Teams" do |team|
       link_to "Sala Teams: #{team.name}", team.link_teams if team.link_teams.present?
     end
-    column "Clusters" do |team|
-      link_to team.clusters.count, clusters_path(q: { id_in: team.cluster_ids })
+    column "Cluster" do |team|
+      if team.cluster
+        link_to team.cluster.name, cluster_path(team.cluster)
+      end
     end
     column "Membros" do |team|
       link_to team.members.count, members_path(q: { team_id_eq: team.id })
@@ -41,7 +45,7 @@ ActiveAdmin.register Team do
   end
 
   filter :name_cont, label: "Nome"
-  filter :clusters, as: :select, label: "Clusters"
+  filter :cluster, as: :select, label: "Cluster"
   filter :axis, as: :select, label: "Eixo"
 
   show do
@@ -49,7 +53,7 @@ ActiveAdmin.register Team do
       row :name
       row :axis
       tag_row "Modalidade" do |team|
-        team.modality
+        team.modality || "Não definida"
       end
       row "Miro" do |team|
         if team.link_miro.present?
@@ -61,13 +65,9 @@ ActiveAdmin.register Team do
           link_to team.link_teams, team.link_teams
         end
       end
-      row "Clusters" do |team|
-        if team.clusters.any?
-          ul do
-            team.clusters.each do |cluster|
-              li link_to cluster, cluster_path(cluster)
-            end
-          end
+      row "Cluster" do |team|
+        if team.cluster
+          link_to team.cluster.name, cluster_path(team.cluster)
         end
       end
     end
@@ -121,7 +121,7 @@ ActiveAdmin.register Team do
       f.input :link_miro
       f.input :link_teams
       f.input :axis, input_html: { class: "slim-select" }, prompt: "Selecione o eixo"
-      f.input :cluster_ids, collection: Cluster.all, as: :tags, display_name: :to_s, hint: "Selecione os clusters"
+      f.input :cluster_id, as: :select, collection: Cluster.all, display_name: :to_s, input_html: { class: "slim-select" }, hint: "Selecione o cluster"
       f.input :person_ids, collection: Person.ordered_by_full_name, as: :tags, display_name: :to_s, hint: "Selecione os membros da equipe. Todos serão adicionados como solucionadores."
     end
 

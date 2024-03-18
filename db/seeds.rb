@@ -12,14 +12,14 @@ Faker::Config.locale = 'pt-BR'
 
 puts "Cleaning entities..."
 
-Company.destroy_all
-User.destroy_all
 Person.destroy_all
 Phase.destroy_all
 Axis.destroy_all
 Team.destroy_all
 Meeting.destroy_all
 Cluster.destroy_all
+User.destroy_all
+Company.destroy_all
 
 load(File.join(Rails.root, 'db/seeds/accounts.rb'))
 
@@ -80,12 +80,54 @@ Meeting.create!(name: "Encontro 2 F2", phase: Phase.second)
 
 #########################################################################################################
 
+chapter_one = Chapter.create!(title: "Causa Engajadora Capítulo 1", edition_year: Time.now.year)
+chapter_two = Chapter.create!(title: "Causa Engajadora Capítulo 2", edition_year: Time.now.year)
+
+facilitator = User.create_with(
+  full_name: "Facilitator Trillian",
+  company: Company.first,
+  password: "password",
+  password_confirmation: "password",
+  authorization_level: :facilitator,
+  birthday: Faker::Date.birthday,
+  nickname: Faker::Artist.name,
+  cpf: CPF.generate(true),
+  rg: Faker::IDNumber.brazilian_id(formatted: true),
+  phone_number: "(47) 3034-5432",
+  celular_number: Faker::PhoneNumber.cell_phone,
+  address: Faker::Address.full_address,
+  gender: Person.genders.values.sample,
+).find_or_create_by!(email: "facilitator@example.com")
+
+cluster_one = Cluster.create!(
+  chapter: chapter_one,
+  user: facilitator,
+  address: Faker::Address.full_address,
+  start_time: Time.new(2000, 1, 1, 9, 0, 0),
+  end_time: Time.new(2000, 1, 1, 17, 0, 0),
+  week_day: 2,
+  link: "https://link_meet_cluster_one.com"
+)
+cluster_one.save!
+
+cluster_two = Cluster.create!(
+  chapter: chapter_two,
+  user: facilitator,
+  address: Faker::Address.full_address,
+  start_time: Time.new(2000, 1, 1, 9, 0, 0),
+  end_time: Time.new(2000, 1, 1, 17, 0, 0),
+  week_day: 2,
+  link: "https://link_meet_cluster_two.com"
+)
+cluster_two.save!
+
 Axis.create!(
   title: "Eixo orientador equipe 1",
   description: "Descrição do eixo orientador de trabalho para as equipes."
 )
 
 Team.create!(
+  cluster: cluster_one,
   name: "Equipe 1",
   link_miro: "https://miro.com/#{SecureRandom.hex}",
   link_teams: "https://teams.microsoft.com/#{SecureRandom.hex}",
@@ -104,6 +146,7 @@ Axis.create!(
 )
 
 Team.create!(
+  cluster: cluster_two,
   name: "Equipe 2",
   link_miro: "https://miro.com/#{SecureRandom.hex}",
   link_teams: "https://teams.microsoft.com/#{SecureRandom.hex}",
@@ -136,6 +179,7 @@ Axis.create!(
 )
 
 Team.create!(
+  cluster: cluster_two,
   name: "Equipe 3",
   link_miro: "https://miro.com/#{SecureRandom.hex}",
   link_teams: "https://teams.microsoft.com/#{SecureRandom.hex}",
@@ -153,47 +197,3 @@ Member.create!(team: Team.second, person: Person.find(8), role: :sol)
 # )
 
 #########################################################################################################
-
-chapter_one = Chapter.create!(title: "Causa Engajadora Capítulo 1", edition_year: Time.now.year)
-chapter_two = Chapter.create!(title: "Causa Engajadora Capítulo 2", edition_year: Time.now.year)
-
-facilitator = User.create_with(
-  full_name: "Facilitator Trillian",
-  company: Company.first,
-  password: "password",
-  password_confirmation: "password",
-  authorization_level: :facilitator,
-  birthday: Faker::Date.birthday,
-  nickname: Faker::Artist.name,
-  cpf: CPF.generate(true),
-  rg: Faker::IDNumber.brazilian_id(formatted: true),
-  phone_number: "(47) 3034-5432",
-  celular_number: Faker::PhoneNumber.cell_phone,
-  address: Faker::Address.full_address,
-  gender: Person.genders.values.sample,
-).find_or_create_by!(email: "facilitator@example.com")
-
-cluster_one = Cluster.create!(
-  chapter: chapter_one,
-  user: facilitator,
-  address: Faker::Address.full_address,
-  start_time: Time.new(2000, 1, 1, 9, 0, 0),
-  end_time: Time.new(2000, 1, 1, 17, 0, 0),
-  week_day: 2,
-  link: "https://link_meet_cluster_one.com"
-)
-cluster_one.teams << Team.first
-cluster_one.teams << Team.second
-cluster_one.save!
-
-cluster_two = Cluster.create!(
-  chapter: chapter_two,
-  user: facilitator,
-  address: Faker::Address.full_address,
-  start_time: Time.new(2000, 1, 1, 9, 0, 0),
-  end_time: Time.new(2000, 1, 1, 17, 0, 0),
-  week_day: 2,
-  link: "https://link_meet_cluster_two.com"
-)
-cluster_two.teams << Team.third
-cluster_two.save!

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_17_225844) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_18_121609) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -200,13 +200,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_17_225844) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "authorization_level", default: 0, null: false
-    t.bigint "team_id"
     t.bigint "company_id"
     t.index ["company_id"], name: "index_people_on_company_id"
     t.index ["cpf"], name: "index_people_on_cpf", unique: true, where: "(((cpf)::text <> ''::text) AND (cpf IS NOT NULL))"
     t.index ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true
     t.index ["rg"], name: "index_people_on_rg", unique: true, where: "(((rg)::text <> ''::text) AND (rg IS NOT NULL))"
-    t.index ["team_id"], name: "index_people_on_team_id"
   end
 
   create_table "phases", force: :cascade do |t|
@@ -231,7 +229,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_17_225844) do
     t.string "link_miro", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "cluster_id"
     t.index ["axis_id"], name: "index_teams_on_axis_id"
+    t.index ["cluster_id"], name: "index_teams_on_cluster_id"
   end
 
   create_table "tool_event_assessments", force: :cascade do |t|
@@ -263,10 +263,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_17_225844) do
   add_foreign_key "members", "people"
   add_foreign_key "members", "teams"
   add_foreign_key "people", "companies"
-  add_foreign_key "people", "teams"
   add_foreign_key "phases_tools", "phases"
   add_foreign_key "phases_tools", "tools"
   add_foreign_key "teams", "axes"
+  add_foreign_key "teams", "clusters"
   add_foreign_key "tool_event_assessments", "events"
   add_foreign_key "tool_event_assessments", "tools"
 end
