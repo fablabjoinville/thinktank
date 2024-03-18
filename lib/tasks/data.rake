@@ -1,30 +1,62 @@
 require 'csv'
 
 namespace :data do
+  task companies: :environment do
+    filepath = File.read(Rails.root.join('lib/tasks/data/companies.csv'))
+    failed = []
+    exists = []
+
+    csv = CSV.parse(filepath, headers: true)
+    csv.each do |row|
+      row_hash = row.to_hash
+      puts "IMPORTING ROW: #{row_hash}"
+
+      company = Company.where(cnpj: row_hash['company.cnpj']).first_or_initialize
+      if company.new_record?
+        begin
+          company.cnpj = row_hash['company.cnpj']
+          company.name = row_hash['company.name']
+          company.save!
+
+          puts "### COMPANY: CREATED"
+        rescue StandardError => e
+          puts "### COMPANY: ERROR #{e}"
+          failed << [row_hash['company.name'], row_hash['company.cnpj']]
+        end
+      else
+        puts "### COMPANY: ALREADY EXISTS"
+        exists << [row_hash['company.name'], row_hash['company.cnpj']]
+      end
+    end
+
+    puts("failed", failed)
+    puts("exists", exists)
+  end
+
   task members: :environment do
     filepath = File.read(Rails.root.join('lib/tasks/data/members.csv'))
 
     csv = CSV.parse(filepath, headers: true)
     csv.each do |row|
       row_hash = row.to_hash
-      puts "IMPORTING: #{row_hash}"
+      puts "IMPORTING ROW: #{row_hash}"
 
       team = Team.find(row_hash['team_id'])
       unless team.present?
-        puts "ERROR [team doesn't exist]: #{row_hash}"
+        puts "### TEAM: ERROR does't exist"
         next
       end
 
       person = Person.find(row_hash['person_id'])
       unless person.present?
-        puts "ERROR [person doesn't exist]: #{row_hash}"
+        puts "### PERSON: ERROR doesn't exist"
         next
       end
 
       active = row_hash['active'].casecmp?('TRUE')
       role = row_hash['role'].downcase
 
-      member = Member.create(
+      member = Member.new(
         active: active,
         team: team,
         person: person,
@@ -32,9 +64,9 @@ namespace :data do
       )
 
       if member.save
-        puts "SUCCESS [id: #{member.id}]: #{row_hash}"
+        puts "### MEMBER: CREATED"
       else
-        puts "ERROR [#{member.errors.full_messages}]: #{row_hash}"
+        puts "### MEMBER: ERROR #{member.errors.full_messages}"
       end
     end
   end
