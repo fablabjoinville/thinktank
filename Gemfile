@@ -54,6 +54,7 @@ gem "sentry-rails", ">= 5.16.1"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", ">= 1.9.1", platforms: %i[ mri mingw x64_mingw ]
+  gem "factory_bot_rails"
   gem "faker", ">= 3.2.3"
 end
 
@@ -63,7 +64,7 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  # gem "capybara"
-  # gem "selenium-webdriver"
-  # gem "webdrivers"
+  gem "capybara"
+  gem "selenium-webdriver"
+  gem "webdrivers"
 end
