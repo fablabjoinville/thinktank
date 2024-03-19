@@ -17,6 +17,14 @@ ActiveAdmin.register Cluster do
     team_ids: []
   )
 
+  scope -> { Chapter.latest_year.to_s }, :latest_year, default: true do |cluster|
+    cluster.filtered_by_latest_year
+  end
+  scope "Todos", :all
+
+  filter :week_day, as: :select, label: "Dia da semana"
+  filter :user, as: :select, label: "Facilitador"
+
   index download_links: false do
     selectable_column
     id_column
@@ -41,9 +49,6 @@ ActiveAdmin.register Cluster do
 
     actions
   end
-
-  filter :week_day, as: :select, label: "Dia da semana"
-  filter :user, as: :select, label: "Facilitador"
 
   show do
     attributes_table do

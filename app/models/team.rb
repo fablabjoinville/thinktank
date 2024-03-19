@@ -1,6 +1,7 @@
 class Team < ApplicationRecord
   belongs_to :axis
   belongs_to :cluster
+  has_one :chapter, through: :cluster
 
   has_many :events, dependent: :destroy
   has_many :members, dependent: :destroy
@@ -14,6 +15,7 @@ class Team < ApplicationRecord
 
   before_save :before_save_format_links_callback
 
+  scope :filtered_by_latest_year, -> { joins(:chapter).where(chapters: { edition_year: Chapter.latest_year }) }
   scope :ordered_by_name, -> { order('LOWER(name) ASC') }
 
   ransacker :name, type: :string, formatter: proc { |v| I18n.transliterate(v) } do |_|

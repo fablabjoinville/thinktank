@@ -10,6 +10,7 @@ class Cluster < ApplicationRecord
 
   enum week_day: [:segunda, :terca, :quarta, :quinta, :sexta, :sabado, :domingo]
 
+  scope :filtered_by_latest_year, -> { joins(:chapter).where(chapters: { edition_year: Chapter.latest_year }) }
   scope :ordered_by_week_day, -> { order('week_day ASC') }
 
   def self.ransackable_associations(auth_object = nil)

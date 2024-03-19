@@ -14,6 +14,15 @@ ActiveAdmin.register Team do
     person_ids: []
   )
 
+  scope -> { Chapter.latest_year.to_s }, :latest_year, default: true do |team|
+    team.filtered_by_latest_year
+  end
+  scope "Todos", :all
+
+  filter :name_cont, label: "Nome"
+  filter :cluster, as: :select, label: "Cluster"
+  filter :axis, as: :select, label: "Eixo"
+
   index download_links: false do
     selectable_column
 
@@ -45,10 +54,6 @@ ActiveAdmin.register Team do
 
     actions
   end
-
-  filter :name_cont, label: "Nome"
-  filter :cluster, as: :select, label: "Cluster"
-  filter :axis, as: :select, label: "Eixo"
 
   show do
     attributes_table do

@@ -9,6 +9,15 @@ ActiveAdmin.register Chapter do
     cluster_ids: []
   )
 
+  scope -> { Chapter.latest_year.to_s }, :latest_year, default: true do |chapter|
+    chapter.filtered_by_latest_year
+  end
+  scope "Todos", :all
+
+  filter :title_cont, label: "Capítulo"
+  filter :edition_year, as: :select, label: "Ano da edição"
+  filter :clusters, as: :select, label: "Clusters"
+
   index download_links: false do
     selectable_column
     id_column
@@ -24,10 +33,6 @@ ActiveAdmin.register Chapter do
 
     actions
   end
-
-  filter :title_cont, label: "Capítulo"
-  filter :edition_year, as: :select, label: "Ano da edição"
-  filter :clusters, as: :select, label: "Clusters"
 
   show do
     attributes_table do

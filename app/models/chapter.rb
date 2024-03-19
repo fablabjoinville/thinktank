@@ -4,6 +4,7 @@ class Chapter < ApplicationRecord
   validates :title, presence: true
   validates :edition_year, presence: true, inclusion: { in: 2023..2030 }
 
+  scope :filtered_by_latest_year, -> { where(edition_year: Chapter.latest_year) }
   scope :ordered_by_year, -> { order(edition_year: :desc) }
   scope :year_and_title_options, -> { ordered_by_year.map { |c| [c.to_s, c.id] } }
 
