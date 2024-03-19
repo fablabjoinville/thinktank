@@ -17,7 +17,9 @@ ActiveAdmin.register Member do
     :team_id,
   )
 
-  scope("#{Chapter.latest_year}", default: true) { |member| member.filtered_by_latest_year }
+  scope -> { Chapter.latest_year.to_s }, :latest_year, default: true do |member|
+    member.filtered_by_latest_year
+  end
   scope "Todos", :all
 
   filter :person_full_name_cont, label: "Nome"
