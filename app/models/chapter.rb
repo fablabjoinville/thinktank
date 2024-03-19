@@ -15,6 +15,10 @@ class Chapter < ApplicationRecord
     ['edition_year', 'id', 'title']
   end
 
+  def self.latest_year
+    ordered_by_year.first.edition_year
+  end
+
   def to_s
     "#{edition_year} - #{title}"
   end

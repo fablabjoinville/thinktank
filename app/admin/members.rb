@@ -17,6 +17,15 @@ ActiveAdmin.register Member do
     :team_id,
   )
 
+  scope("#{Chapter.latest_year}", default: true) { |member| member.filtered_by_latest_year }
+  scope "Todos", :all
+
+  filter :person_full_name_cont, label: "Nome"
+  filter :team, as: :select, collection: -> { Team.ordered_by_name }, label: "Equipe"
+  filter :active, as: :select, collection: [["Ativo", true], ["Inativo", false]], label: "Ativo"
+  filter :role, as: :select, label: "Role"
+  filter :company_id_eq, as: :select, collection: -> { Company.ordered_by_name }, label: "Empresa"
+
   action_item :new_model, only: :show do
     localizer = ActiveAdmin::Localizers.resource(active_admin_config)
      link_to localizer.t(:new_model), new_resource_path
@@ -40,12 +49,6 @@ ActiveAdmin.register Member do
 
     actions
   end
-
-  filter :person_full_name_cont, label: "Nome"
-  filter :team, as: :select, collection: -> { Team.ordered_by_name }, label: "Equipe"
-  filter :active, as: :select, collection: [["Ativo", true], ["Inativo", false]], label: "Ativo"
-  filter :role, as: :select, label: "Role"
-  filter :company_id_eq, as: :select, collection: -> { Company.ordered_by_name }, label: "Empresa"
 
   show do
     columns do
@@ -124,7 +127,10 @@ ActiveAdmin.register Member do
   csv do
     column :team
     column "Cluster" do |member|
-      member.team&.cluster&.name
+      member.cluster&.name
+    end
+    column "Capítulo" do |member|
+      member.chapter&.to_s
     end
     column :full_name
     column "Apelido" do |member|
