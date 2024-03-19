@@ -38,7 +38,7 @@ ActiveAdmin.register Person do
     redirect_to edit_user_path(resource)
   end
 
-  index do
+  index download_links: [:csv] do
     selectable_column
 
     column :image do |person|

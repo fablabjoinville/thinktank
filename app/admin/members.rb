@@ -28,7 +28,7 @@ ActiveAdmin.register Member do
     redirect_backwards_or_to_root
   end
 
-  index as: :grouped_table, group_by_attribute: :team do
+  index as: :grouped_table, group_by_attribute: :team, download_links: [:csv] do
     selectable_column
     column :full_name, sortable: "person.full_name" do |member|
       link_to member.full_name, member_path(member)
@@ -119,5 +119,46 @@ ActiveAdmin.register Member do
     end
 
     f.actions
+  end
+
+  csv do
+    column :team
+    column "Cluster" do |member|
+      member.team&.cluster&.name
+    end
+    column :full_name
+    column "Apelido" do |member|
+      member.person.nickname
+    end
+    column :role do |member|
+      member.humanized_enum(:role)
+    end
+    column :modality do |member|
+      member.humanized_enum(:modality)
+    end
+    column :active do |member|
+      member.active? ? "Ativo" : "Inativo"
+    end
+    column :email
+    column :phone_number
+    column :celular_number
+    column "Gênero" do |member|
+      member.person.humanized_enum(:gender)
+    end
+    column "Aniversário" do |member|
+      member.person.birthday
+    end
+    column "Endereço" do |member|
+      member.person.address
+    end
+    column "CPF" do |member|
+      member.person.cpf
+    end
+    column "RG" do |member|
+      member.person.rg
+    end
+    column "Empresa" do |member|
+      member.company&.name
+    end
   end
 end

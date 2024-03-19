@@ -17,7 +17,7 @@ ActiveAdmin.register Cluster do
     team_ids: []
   )
 
-  index do
+  index download_links: false do
     selectable_column
     id_column
 

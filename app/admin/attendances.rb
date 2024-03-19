@@ -16,7 +16,7 @@ ActiveAdmin.register Attendance do
     redirect_backwards_or_to_root
   end
 
-  index do
+  index download_links: false do
     selectable_column
 
     column :member

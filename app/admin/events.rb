@@ -39,7 +39,7 @@ ActiveAdmin.register Event do
     end
   end
 
-  index do
+  index download_links: false do
     selectable_column
 
     column :name do |event|

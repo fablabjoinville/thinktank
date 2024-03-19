@@ -8,7 +8,7 @@ ActiveAdmin.register Phase do
     tool_ids: []
   )
 
-  index do
+  index download_links: false do
     selectable_column
     id_column
 

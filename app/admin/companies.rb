@@ -10,7 +10,7 @@ ActiveAdmin.register Company do
     person_ids: []
   )
 
-  index do
+  index download_links: [:csv] do
     selectable_column
 
     column :name do |company|

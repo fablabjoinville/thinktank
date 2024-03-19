@@ -1,6 +1,5 @@
 ActiveAdmin.register User do
-  TITLE = "Time interno"
-  menu label: TITLE, parent: "Administração", priority: 3, if: -> { can? :index, User }
+  menu label: "Time interno", parent: "Administração", priority: 3, if: -> { can? :index, User }
   config.sort_order = 'full_name_asc'
 
   permit_params(
@@ -24,7 +23,7 @@ ActiveAdmin.register User do
     end
   end
 
-  index title: TITLE do
+  index title: "Time interno" do
     selectable_column
 
     column :image do |user|

@@ -9,7 +9,7 @@ ActiveAdmin.register Axis do
     :title,
   )
 
-  index do
+  index download_links: false do
     selectable_column
 
     column :title do |axis|

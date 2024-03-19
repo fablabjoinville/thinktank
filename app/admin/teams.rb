@@ -14,7 +14,7 @@ ActiveAdmin.register Team do
     person_ids: []
   )
 
-  index do
+  index download_links: false do
     selectable_column
 
     column :name do |team|

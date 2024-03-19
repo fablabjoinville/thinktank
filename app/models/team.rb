@@ -31,7 +31,7 @@ class Team < ApplicationRecord
   end
 
   def to_s
-    "Equipe #{name} (#{members.count})"
+    "Equipe #{name}"
   end
 
   def modality
