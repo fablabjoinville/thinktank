@@ -2,8 +2,6 @@ class Team < ApplicationRecord
   belongs_to :axis
   belongs_to :cluster
 
-  has_and_belongs_to_many :clusters
-
   has_many :events, dependent: :destroy
   has_many :members, dependent: :destroy
   has_many :people, through: :members
