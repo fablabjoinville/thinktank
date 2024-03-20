@@ -56,6 +56,7 @@ group :development, :test do
   gem "debug", ">= 1.9.1", platforms: %i[ mri mingw x64_mingw ]
   gem "factory_bot_rails"
   gem "faker", ">= 3.2.3"
+  gem "pry-rails"
 end
 
 group :development do
