@@ -60,7 +60,6 @@ git push heroku main
 heroku buildpacks:add heroku/nodejs -i 1
 heroku run rails db:migrate
 heroku ps:scale web=1
-heroku run rails db:seed
 heroku open
 ```
 
