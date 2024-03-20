@@ -5,7 +5,7 @@ class Team < ApplicationRecord
 
   has_many :events, dependent: :destroy
   has_many :members, dependent: :destroy
-  has_many :people, through: :members
+  has_many :users, through: :members
 
   validates :name, presence: true, uniqueness: true
   validates :link_teams, format: { with: /\A(https?:\/\/)?(?:www\.)?teams\.microsoft\.com\/.+\z/i,

@@ -19,31 +19,30 @@ class Ability
       can :manage, :all
 
       cannot [:create, :update, :destroy], User, authorization_level: [:super_admin, :admin]
+      can :update, User, id: user.id
     when :secretary
       can :read, :all
 
       can :manage, Company
-
       can :manage, Member
 
-      can :manage, Person, authorization_level: [:person]
-      can :read, Person, authorization_level: [:facilitator, :secretary, :admin, :super_admin]
+      can :manage, User, authorization_level: [:person]
+      can :read, User, authorization_level: [:facilitator, :secretary, :admin, :super_admin]
+      can :update, User, id: user.id
     when :facilitator
-      can :read, Cluster, person_id: user.id
-      can :read, Team, cluster: { person_id: user.id }
-      can :read, Member, team: { cluster: { person_id: user.id }}
+      can :read, Cluster, user_id: user.id
+      can :read, Team, cluster: { user_id: user.id }
+      can :read, Member, team: { cluster: { user_id: user.id }}
 
-      can :manage, Assessment, team: { cluster: { person_id: user.id }}
-      can :manage, Attendance, team: { cluster: { person_id: user.id }}
+      can :manage, Assessment, team: { cluster: { user_id: user.id }}
+      can :manage, Attendance, team: { cluster: { user_id: user.id }}
 
-      can :manage, Event, team: { cluster: { person_id: user.id }}
+      can :manage, Event, team: { cluster: { user_id: user.id }}
       can :create, Event
 
       can :read, User, id: user.id
       can :update, User, id: user.id
       cannot :index, User
-
-      cannot :index, Person
 
       can :manage, ActiveAdmin::Comment
       cannot :destroy, ActiveAdmin::Comment do |comment|

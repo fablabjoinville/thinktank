@@ -11,7 +11,7 @@ ActiveAdmin.register Team do
     :link_miro,
     :link_teams,
     :name,
-    person_ids: []
+    user_ids: []
   )
 
   scope -> { Chapter.latest_year.to_s }, :latest_year, default: true do |team|
@@ -82,8 +82,8 @@ ActiveAdmin.register Team do
     columns do
       column do
         panel "Membros: #{team.members.count}" do
-          table_for team.members.joins(:person).order('role ASC').order('person.full_name ASC') do
-            column :full_name, sortable: "person.full_name" do |member|
+          table_for team.members.joins(:user).order('role ASC').order('users.full_name ASC') do
+            column :full_name, sortable: "users.full_name" do |member|
               link_to member.full_name, member_path(member)
             end
             tag_column :role
@@ -129,7 +129,7 @@ ActiveAdmin.register Team do
       f.input :link_teams
       f.input :axis, input_html: { class: "slim-select" }, prompt: "Selecione o eixo"
       f.input :cluster_id, as: :select, collection: Cluster.all, display_name: :to_s, input_html: { class: "slim-select" }, hint: "Selecione o cluster"
-      f.input :person_ids, collection: Person.ordered_by_full_name, as: :tags, display_name: :to_s, hint: "Selecione os membros da equipe. Todos serão adicionados como solucionadores."
+      f.input :user_ids, collection: User.ordered_by_full_name, as: :tags, display_name: :to_s, hint: "Selecione os membros da equipe. Todos serão adicionados como solucionadores."
     end
 
     f.actions

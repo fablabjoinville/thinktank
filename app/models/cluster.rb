@@ -1,6 +1,6 @@
 class Cluster < ApplicationRecord
   belongs_to :chapter
-  belongs_to :user, foreign_key: 'person_id', class_name: 'User'
+  belongs_to :user
   has_many :teams
 
   validates :start_time, presence: true

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :member do
-    person
+    user
     modality { Member.modality.sample }
     role { Member.roles.sample }
     team

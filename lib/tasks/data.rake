@@ -47,9 +47,9 @@ namespace :data do
         next
       end
 
-      person = Person.find(row_hash['person_id'])
-      unless person.present?
-        puts "### PERSON: ERROR doesn't exist"
+      user = User.find(row_hash['user_id'])
+      unless user.present?
+        puts "### USER: ERROR doesn't exist"
         next
       end
 
@@ -59,7 +59,7 @@ namespace :data do
       member = Member.new(
         active: active,
         team: team,
-        person: person,
+        user: user,
         role: role
       )
 
@@ -71,15 +71,15 @@ namespace :data do
     end
   end
 
-  task people: :environment do
-    filepath = File.read(Rails.root.join('lib/tasks/data/people.csv'))
+  task users: :environment do
+    filepath = File.read(Rails.root.join('lib/tasks/data/users.csv'))
 
     csv = CSV.parse(filepath, headers: true)
     csv.each do |row|
       row_hash = row.to_hash
       puts "IMPORTING ROW: #{row_hash}"
 
-      person = create_or_initialize_person!(row_hash)
+      user = create_or_initialize_user!(row_hash)
       # company = create_or_initialize_company!(row_hash)
 
       team = Team.where(
@@ -91,39 +91,39 @@ namespace :data do
 
       next unless team.present?
 
-      create_or_initialize_member!(row_hash, person, team)
+      create_or_initialize_member!(row_hash, user, team)
     end
   end
 end
 
-def create_or_initialize_person!(row_hash)
-  return if row_hash['person.full_name'].blank?
+def create_or_initialize_user!(row_hash)
+  return if row_hash['user.full_name'].blank?
 
-  person = Person.where(full_name: row_hash['person.full_name']).first_or_initialize
+  user = User.where(full_name: row_hash['user.full_name']).first_or_initialize
 
-  if person.new_record?
+  if user.new_record?
     begin
-      person.full_name = row_hash['person.full_name']
-      person.celular_number = row_hash['person.celular_number'] if row_hash['person.celular_number'].present?
-      person.email = row_hash['person.email'] || "#{row_hash['person.nickname']}@projetoresgate.org.br"
-      person.nickname = row_hash['person.nickname'] if row_hash['person.nickname'].present?
-      person.cpf = row_hash['person.cpf'] if row_hash['person.cpf'].present?
-      person.rg = row_hash['person.rg'] if row_hash['person.rg'].present?
-      person.birthday = row_hash['person.birthday'] if row_hash['person.birthday'].present?
-      person.gender = row_hash['person.gender'] if row_hash['person.gender'].present?
-      person.address = row_hash['person.address'] if row_hash['person.address'].present?
+      user.full_name = row_hash['user.full_name']
+      user.celular_number = row_hash['user.celular_number'] if row_hash['user.celular_number'].present?
+      user.email = row_hash['user.email'] || "#{row_hash['user.nickname']}@projetoresgate.org.br"
+      user.nickname = row_hash['user.nickname'] if row_hash['user.nickname'].present?
+      user.cpf = row_hash['user.cpf'] if row_hash['user.cpf'].present?
+      user.rg = row_hash['user.rg'] if row_hash['user.rg'].present?
+      user.birthday = row_hash['user.birthday'] if row_hash['user.birthday'].present?
+      user.gender = row_hash['user.gender'] if row_hash['user.gender'].present?
+      user.address = row_hash['user.address'] if row_hash['user.address'].present?
 
-      person.save!
+      user.save!
 
-      puts "### PERSON: CREATED"
+      puts "### USER: CREATED"
     rescue StandardError => e
-      puts "### PERSON: ERROR #{e}"
+      puts "### USER: ERROR #{e}"
     end
   else
-    puts "### PERSON: ALREADY EXISTS"
+    puts "### USER: ALREADY EXISTS"
   end
 
-  person
+  user
 end
 
 def create_or_initialize_company!(row_hash)
@@ -148,8 +148,8 @@ def create_or_initialize_company!(row_hash)
   company
 end
 
-def create_or_initialize_member!(row_hash, person, team)
-  member = Member.where(person: person, team: team).first_or_initialize
+def create_or_initialize_member!(row_hash, user, team)
+  member = Member.where(user: user, team: team).first_or_initialize
 
   if member.new_record?
     begin

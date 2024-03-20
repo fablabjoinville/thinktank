@@ -10,7 +10,7 @@ ActiveAdmin.register Cluster do
     :end_time,
     :id,
     :link,
-    :person_id,
+    :user_id,
     :start_date,
     :start_time,
     :week_day,
