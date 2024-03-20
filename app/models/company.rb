@@ -1,5 +1,5 @@
 class Company < ApplicationRecord
-  has_many :people, dependent: :restrict_with_error
+  has_many :users, dependent: :restrict_with_error
 
   validates :name, presence: true
   validates :cnpj, uniqueness: true
@@ -12,7 +12,7 @@ class Company < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ['people']
+    ['users']
   end
 
   def self.ransackable_attributes(auth_object = nil)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_18_180634) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_20_175212) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -112,7 +112,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_180634) do
   end
 
   create_table "clusters", force: :cascade do |t|
-    t.bigint "person_id"
+    t.bigint "user_id"
     t.time "start_time", null: false
     t.time "end_time", null: false
     t.integer "week_day", null: false
@@ -126,7 +126,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_180634) do
     t.boolean "active", default: true, null: false
     t.bigint "chapter_id"
     t.index ["chapter_id"], name: "index_clusters_on_chapter_id"
-    t.index ["person_id"], name: "index_clusters_on_person_id"
+    t.index ["user_id"], name: "index_clusters_on_user_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -166,40 +166,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_180634) do
 
   create_table "members", force: :cascade do |t|
     t.bigint "team_id", null: false
-    t.bigint "person_id", null: false
+    t.bigint "user_id", null: false
     t.boolean "active", default: true, null: false
     t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "modality", default: 0
-    t.index ["person_id"], name: "index_members_on_person_id"
     t.index ["team_id"], name: "index_members_on_team_id"
-  end
-
-  create_table "people", force: :cascade do |t|
-    t.date "birthday"
-    t.integer "gender", default: 2, null: false
-    t.string "address", default: "", null: false
-    t.string "celular_number", default: "", null: false
-    t.string "cpf", default: ""
-    t.string "full_name", null: false
-    t.string "nickname", default: "", null: false
-    t.string "phone_number", default: "", null: false
-    t.string "rg", default: ""
-    t.string "type"
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "authorization_level", default: 0, null: false
-    t.bigint "company_id"
-    t.index ["company_id"], name: "index_people_on_company_id"
-    t.index ["cpf"], name: "index_people_on_cpf", unique: true, where: "(((cpf)::text <> ''::text) AND (cpf IS NOT NULL))"
-    t.index ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true
-    t.index ["rg"], name: "index_people_on_rg", unique: true, where: "(((rg)::text <> ''::text) AND (rg IS NOT NULL))"
+    t.index ["user_id"], name: "index_members_on_user_id"
   end
 
   create_table "phases", force: :cascade do |t|
@@ -246,22 +220,47 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_180634) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.date "birthday"
+    t.integer "gender", default: 2, null: false
+    t.string "address", default: "", null: false
+    t.string "celular_number", default: "", null: false
+    t.string "cpf", default: ""
+    t.string "full_name", null: false
+    t.string "nickname", default: "", null: false
+    t.string "phone_number", default: "", null: false
+    t.string "rg", default: ""
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "authorization_level", default: 0, null: false
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_users_on_company_id"
+    t.index ["cpf"], name: "index_users_on_cpf", unique: true, where: "(((cpf)::text <> ''::text) AND (cpf IS NOT NULL))"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["rg"], name: "index_users_on_rg", unique: true, where: "(((rg)::text <> ''::text) AND (rg IS NOT NULL))"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attendances", "events"
   add_foreign_key "attendances", "members", on_delete: :cascade
   add_foreign_key "clusters", "chapters"
-  add_foreign_key "clusters", "people"
+  add_foreign_key "clusters", "users"
   add_foreign_key "events", "meetings"
   add_foreign_key "events", "teams"
   add_foreign_key "meetings", "phases"
-  add_foreign_key "members", "people"
   add_foreign_key "members", "teams"
-  add_foreign_key "people", "companies"
+  add_foreign_key "members", "users"
   add_foreign_key "phases_tools", "phases"
   add_foreign_key "phases_tools", "tools"
   add_foreign_key "teams", "axes"
   add_foreign_key "teams", "clusters"
   add_foreign_key "tool_event_assessments", "events"
   add_foreign_key "tool_event_assessments", "tools"
+  add_foreign_key "users", "companies"
 end

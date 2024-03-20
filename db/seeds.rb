@@ -12,7 +12,7 @@ Faker::Config.locale = 'pt-BR'
 
 puts "Cleaning entities..."
 
-Person.destroy_all
+User.destroy_all
 Phase.destroy_all
 Axis.destroy_all
 Team.destroy_all
@@ -41,10 +41,10 @@ end
 
 #########################################################################################################
 
-puts "Creating Person..."
+puts "Creating User..."
 
 (0..10).each do |n|
-  person = Person.create!({
+  user = User.create!({
     full_name: Faker::Name.unique.name,
     birthday: Faker::Date.birthday,
     nickname: Faker::Artist.name,
@@ -53,11 +53,11 @@ puts "Creating Person..."
     phone_number: "(47) 3034-5432",
     celular_number: Faker::PhoneNumber.cell_phone,
     address: Faker::Address.full_address,
-    gender: Person.genders.values.sample,
+    gender: User.genders.values.sample,
     company: Company.order("RANDOM()").first,
     email: Faker::Internet.unique.email
   })
-  person.image.attach(io: File.open(Rails.root.join("db/seeds/thinktank.jpeg")), filename: 'thinktank.jpeg')
+  user.image.attach(io: File.open(Rails.root.join("db/seeds/thinktank.jpeg")), filename: 'thinktank.jpeg')
 end
 
 #########################################################################################################
@@ -96,7 +96,7 @@ facilitator = User.create_with(
   phone_number: "(47) 3034-5432",
   celular_number: Faker::PhoneNumber.cell_phone,
   address: Faker::Address.full_address,
-  gender: Person.genders.values.sample,
+  gender: User.genders.values.sample,
 ).find_or_create_by!(email: "facilitator@example.com")
 
 cluster_one = Cluster.create!(
@@ -134,9 +134,9 @@ Team.create!(
   axis: Axis.first
 )
 
-Member.create!(team: Team.first, person: Person.first, role: :mm)
-Member.create!(team: Team.first, person: Person.second, role: :sol)
-Member.create!(team: Team.first, person: Person.third, role: :sol)
+Member.create!(team: Team.first, user: User.first, role: :mm)
+Member.create!(team: Team.first, user: User.second, role: :sol)
+Member.create!(team: Team.first, user: User.third, role: :sol)
 
 #########################################################################################################
 
@@ -153,9 +153,9 @@ Team.create!(
   axis: Axis.second
 )
 
-Member.create!(team: Team.second, person: Person.fourth, role: :mm)
-Member.create!(team: Team.second, person: Person.fifth, role: :sol)
-Member.create!(team: Team.second, person: Person.find(5), role: :sol)
+Member.create!(team: Team.second, user: User.fourth, role: :mm)
+Member.create!(team: Team.second, user: User.fifth, role: :sol)
+Member.create!(team: Team.second, user: User.find(5), role: :sol)
 
 # Meeting.create!(
 #   team: Team.second,
@@ -186,9 +186,9 @@ Team.create!(
   axis: Axis.third
 )
 
-Member.create!(team: Team.second, person: Person.find(6), role: :mm)
-Member.create!(team: Team.second, person: Person.find(7), role: :sol)
-Member.create!(team: Team.second, person: Person.find(8), role: :sol)
+Member.create!(team: Team.second, user: User.find(6), role: :mm)
+Member.create!(team: Team.second, user: User.find(7), role: :sol)
+Member.create!(team: Team.second, user: User.find(8), role: :sol)
 
 # Meeting.create!(
 #   team: Team.third,

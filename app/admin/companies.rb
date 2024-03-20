@@ -7,7 +7,7 @@ ActiveAdmin.register Company do
     :cnpj,
     :id,
     :name,
-    person_ids: []
+    user_ids: []
   )
 
   index download_links: [:csv] do
@@ -18,7 +18,7 @@ ActiveAdmin.register Company do
     end
     column :cnpj
     column "# Pessoas" do |company|
-      link_to company.people.count, people_path(q: { company_id_eq: company.id })
+      link_to company.users.count, users_path(q: { company_id_eq: company.id })
     end
 
     actions
@@ -33,13 +33,13 @@ ActiveAdmin.register Company do
       row :cnpj
     end
 
-    panel "Pessoas associadas: #{company.people.count}" do
-      table_for company.people.ordered_by_full_name do
-        column :image do |person|
-          image_tag(person.avatar_path, { width: 50, height: "auto" })
+    panel "Pessoas associadas: #{company.users.count}" do
+      table_for company.users.ordered_by_full_name do
+        column :image do |user|
+          image_tag(user.avatar_path, { width: 50, height: "auto" })
         end
-        column :full_name do |person|
-          link_to person.full_name, person_path(person)
+        column :full_name do |user|
+          link_to user.full_name, user_path(user)
         end
         column :nickname
         column :email
@@ -59,7 +59,7 @@ ActiveAdmin.register Company do
     f.inputs do
       f.input :name
       f.input :cnpj, input_html: { placeholder: "XX.XXX.XXX/XXXX-XX" }
-      f.input :people, as: :select, collection: Person.ordered_by_full_name, label: "Pessoas"
+      f.input :users, as: :select, collection: User.ordered_by_full_name, label: "Pessoas"
     end
 
     f.actions

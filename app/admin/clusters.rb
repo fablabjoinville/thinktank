@@ -10,7 +10,7 @@ ActiveAdmin.register Cluster do
     :end_time,
     :id,
     :link,
-    :person_id,
+    :user_id,
     :start_date,
     :start_time,
     :week_day,
@@ -108,7 +108,6 @@ ActiveAdmin.register Cluster do
       f.input :user, input_html: { class: "slim-select" }, prompt: "Selecione o facilitador"
       f.input :address
       f.input :link, as: :url
-      f.input :teams, as: :select, collection: Team.ordered_by_name, input_html: { class: "sim-select" }, prompt: "Selecione as equipes", multiple: true
       f.input :active, as: :boolean
     end
 

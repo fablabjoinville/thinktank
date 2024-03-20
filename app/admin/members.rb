@@ -3,16 +3,16 @@ require 'active_admin/views/index_as_grouped_table'
 ActiveAdmin.register Member do
   menu priority: 5
   config.create_another = true
-  config.sort_order = 'person.full_name_asc'
+  config.sort_order = 'users.full_name_asc'
 
-  includes :person, :team
+  includes :user, :team
 
   permit_params(
     :_destroy,
     :active,
     :id,
     :modality,
-    :person_id,
+    :user_id,
     :role,
     :team_id,
   )
@@ -22,7 +22,7 @@ ActiveAdmin.register Member do
   end
   scope "Todos", :all
 
-  filter :person_full_name_cont, label: "Nome"
+  filter :user_full_name_cont, label: "Nome"
   filter :team, as: :select, collection: -> { Team.ordered_by_name }, label: "Equipe"
   filter :active, as: :select, collection: [["Ativo", true], ["Inativo", false]], label: "Ativo"
   filter :role, as: :select, label: "Role"
@@ -41,7 +41,7 @@ ActiveAdmin.register Member do
 
   index as: :grouped_table, group_by_attribute: :team, download_links: [:csv] do
     selectable_column
-    column :full_name, sortable: "person.full_name" do |member|
+    column :full_name, sortable: "users.full_name" do |member|
       link_to member.full_name, member_path(member)
     end
     column :team, sortable: "team.name"
@@ -63,8 +63,8 @@ ActiveAdmin.register Member do
           row :active
         end
 
-        panel "Dados cadastrais (#{link_to "editar", member.person })".html_safe do
-          attributes_table_for member.person do
+        panel "Dados cadastrais (#{link_to "editar", member.user })".html_safe do
+          attributes_table_for member.user do
             row :full_name
             row :nickname
             row :email
@@ -76,8 +76,8 @@ ActiveAdmin.register Member do
             row :birthday
             row :company
             tag_row :gender
-            row :image do |person|
-              image_tag(person.avatar_path, { width: 200, height: "auto" })
+            row :image do |user|
+              image_tag(user.avatar_path, { width: 200, height: "auto" })
             end
           end
         end
@@ -117,7 +117,7 @@ ActiveAdmin.register Member do
 
     f.inputs do
       f.input :team, as: :select, collection: Team.ordered_by_name, input_html: { class: "slim-select" }, prompt: "Selecione a equipe"
-      f.input :person, as: :select, collection: Person.ordered_by_full_name, input_html: { class: "slim-select" }, prompt: "Selecione a pessoa"
+      f.input :user, as: :select, collection: User.ordered_by_full_name, input_html: { class: "slim-select" }, prompt: "Selecione a pessoa"
       f.input :role, as: :select, collection: Member.humanized_enum_list(:roles), input_html: { class: "default-select" }, prompt: "Selecione o role"
       f.input :modality, as: :radio, collection: Member.humanized_enum_list(:modalities)
       f.input :active
@@ -136,7 +136,7 @@ ActiveAdmin.register Member do
     end
     column :full_name
     column "Apelido" do |member|
-      member.person.nickname
+      member.user.nickname
     end
     column :role do |member|
       member.humanized_enum(:role)
@@ -151,19 +151,19 @@ ActiveAdmin.register Member do
     column :phone_number
     column :celular_number
     column "Gênero" do |member|
-      member.person.humanized_enum(:gender)
+      member.user.humanized_enum(:gender)
     end
     column "Aniversário" do |member|
-      member.person.birthday
+      member.user.birthday
     end
     column "Endereço" do |member|
-      member.person.address
+      member.user.address
     end
     column "CPF" do |member|
-      member.person.cpf
+      member.user.cpf
     end
     column "RG" do |member|
-      member.person.rg
+      member.user.rg
     end
     column "Empresa" do |member|
       member.company&.name

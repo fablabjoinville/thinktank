@@ -215,7 +215,45 @@ en:
           mp: MP
           sol: SOL
         team: Equipe
-      person:
+      phase:
+        created_at: Criado Em
+        id: ID
+        meetings: Encontros
+        name: Nome
+        tools: Ferramentas
+        tool_ids: Ferramentas
+        updated_at: Atualizado Em
+      team:
+        axis: Eixo
+        axis_id: ID do Eixo
+        cluster_ids: Clusters
+        created_at: Criado Em
+        id: ID
+        link_miro: Link do Miro
+        link_teams: Link do MS Teams
+        user_ids: Membros da equipe
+        name: Nome da equipe
+        updated_at: Atualizado Em
+      tool:
+        created_at: Criado em
+        name: Nome da ferramenta
+        phases: Fases
+        phase_ids: Fases
+        updated_at: Atualizado em
+      tool_event_assessment:
+        comment: Comentário
+        created_at: Criado em
+        score:
+          one: Avaliação
+          other: Avaliações
+        scores:
+          pessimo: Péssimo
+          ruim: Ruim
+          bom: Bom
+          otimo: Ótimo
+        tool: Ferramenta
+        updated_at: Atualizado em
+      user:
         address: Endereço
         authorization_level: Permissão
         authorization_levels:
@@ -243,47 +281,7 @@ en:
         nickname: Apelido
         phone_number: Telefone
         rg: RG
-        type: Tipo de cadastro
         updated_at: Atualizado Em
-      phase:
-        created_at: Criado Em
-        id: ID
-        meetings: Encontros
-        name: Nome
-        tools: Ferramentas
-        tool_ids: Ferramentas
-        updated_at: Atualizado Em
-      team:
-        axis: Eixo
-        axis_id: ID do Eixo
-        cluster_ids: Clusters
-        created_at: Criado Em
-        id: ID
-        link_miro: Link do Miro
-        link_teams: Link do MS Teams
-        person_ids: Membros da equipe
-        name: Nome da equipe
-        updated_at: Atualizado Em
-      tool:
-        created_at: Criado em
-        name: Nome da ferramenta
-        phases: Fases
-        phase_ids: Fases
-        updated_at: Atualizado em
-      tool_event_assessment:
-        comment: Comentário
-        created_at: Criado em
-        score:
-          one: Avaliação
-          other: Avaliações
-        scores:
-          pessimo: Péssimo
-          ruim: Ruim
-          bom: Bom
-          otimo: Ótimo
-        tool: Ferramenta
-        updated_at: Atualizado em
-      user:
         confirmation_sent_at: Confirmação enviada em
         confirmation_token: Token de confirmação
         confirmed_at: Confirmado em
@@ -297,7 +295,6 @@ en:
         locked_at: Bloqueado em
         password_confirmation: Confirme sua senha
         password: Senha
-        phone_number: Telefone
         remember_created_at: Lembrar criado em
         remember_me: Lembre-se de mim
         reset_password_sent_at: Resetar senha enviado em
@@ -305,19 +302,6 @@ en:
         sign_in_count: Contagem de acessos
         unconfirmed_email: E-mail não confirmado
         unlock_token: Token de desbloqueio
-        authorization_level: Permissão
-        authorization_levels:
-          one: Permissão
-          admin: Admin
-          facilitator: Facilitador
-          person: Externo
-          secretary: Secretário
-          super_admin: Super Admin
-        genders:
-          one: Gênero
-          man: Masculino
-          woman: Feminino
-          other: Outro
     models:
       active_admin_comments:
         one: Comentário
@@ -349,9 +333,6 @@ en:
       member:
         one: Membro de Equipe
         other: Membros de Equipe
-      person:
-        one: Pessoa Física
-        other: Pessoas Físicas
       phase:
         one: Fase
         other: Fases
@@ -365,8 +346,8 @@ en:
         one: Avaliação de ferramenta
         other: Avaliações de ferramenta
       user:
-        one: Usuário interno
-        other: Usuários internos
+        one: Pessoa
+        other: Pessoas
   date:
     abbr_day_names:
     - dom

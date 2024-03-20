@@ -6,7 +6,7 @@ FactoryBot.define do
     company
     cpf { CPF.generate(true) }
     full_name { Faker::Name.unique.name }
-    gender { Person.genders.values.sample }
+    gender { User.genders.values.sample }
     image { File.open(Rails.root.join("db/seeds/thinktank.jpeg")) }
     nickname { "nickname" }
     phone_number { "(47) 3034-5432" }

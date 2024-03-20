@@ -96,7 +96,7 @@ ActiveAdmin.register Event do
 
       column min_width: "63%", max_width: "63%" do
         panel "Participantes: #{event.attendances_counts}" do
-          table_for event.attendances.joins(member: :person).order('person.full_name ASC') do
+          table_for event.attendances.joins(member: :user).order('users.full_name ASC') do
             column do |attendance|
               image_tag(attendance.avatar_path, { width: 50, height: "auto" })
             end

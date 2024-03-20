@@ -14,7 +14,7 @@ User.create_with(
   phone_number: "(47) 3034-5432",
   celular_number: Faker::PhoneNumber.cell_phone,
   address: Faker::Address.full_address,
-  gender: Person.genders.values.sample,
+  gender: User.genders.values.sample,
 ).find_or_create_by!(email: "admin@example.com")
 
 puts "Creating Facilitators..."
@@ -31,5 +31,5 @@ User.create_with(
   phone_number: "(47) 3043-1234",
   celular_number: Faker::PhoneNumber.cell_phone,
   address: Faker::Address.full_address,
-  gender: Person.genders.values.sample,
+  gender: User.genders.values.sample,
 ).find_or_create_by!(email: "facilitator@example.com")
