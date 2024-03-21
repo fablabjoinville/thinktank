@@ -42,6 +42,17 @@ ActiveAdmin.register User do
     link_to localizer.t(:new_model), new_resource_path
   end
 
+  scope "Todos", :all
+  scope ("Externos") { |user| user.internal_team.invert_where }
+  scope ("Time interno") { |user| user.internal_team }
+
+  filter :full_name_cont, label: "Nome"
+  filter :nickname_cont, label: "Apelido"
+  filter :authorization_level, as: :select, label: "Nível de autorização"
+  filter :cpf_eq, label: "CPF"
+  filter :rg_eq, label: "RG"
+  filter :company, as: :select, label: "Empresa"
+
   index download_links: [:csv] do
     selectable_column
 
@@ -54,8 +65,8 @@ ActiveAdmin.register User do
     column :nickname
     column :email
     tag_column :authorization_level
-    column :phone_number
     column :celular_number
+    column :phone_number
     column :birthday
     column :company
     tag_column :gender
@@ -63,33 +74,14 @@ ActiveAdmin.register User do
     actions
   end
 
-  scope "Todos" do |user|
-    user.ordered_by_full_name
-  end
-
-  scope "Pessoas" do | user|
-    user.internal_team.invert_where
-  end
-
-  scope "Time interno", if: -> { true } do |user|
-    user.internal_team
-  end
-
-  filter :full_name_cont, label: "Nome"
-  filter :nickname_cont, label: "Apelido"
-  filter :authorization_level, as: :select, label: "Nível de autorização"
-  filter :cpf_eq, label: "CPF"
-  filter :rg_eq, label: "RG"
-  filter :company, as: :select, label: "Empresa"
-
   show do
     attributes_table do
       row :full_name
       row :nickname
       row :email
       tag_row :authorization_level
-      row :phone_number
       row :celular_number
+      row :phone_number
       row :address
       row :cpf
       row :rg
@@ -126,7 +118,7 @@ ActiveAdmin.register User do
         f.input :authorization_level, as: :select, collection: User.humanized_enum_list(:authorization_levels),
               input_html: { class: "default-select" }, prompt: "Selecione o nível de autorização"
       when :admin
-        f.input :authorization_level, as: :select, collection: User.humanized_enum_list(:authorization_levels, :facilitator, :secretary),
+        f.input :authorization_level, as: :select, collection: User.humanized_enum_list(:authorization_levels, :person, :facilitator, :secretary),
         input_html: { class: "default-select" }, prompt: "Selecione o nível de autorização"
       end
     end
