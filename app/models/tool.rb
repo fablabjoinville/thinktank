@@ -1,5 +1,5 @@
 class Tool < ApplicationRecord
-  has_many :tool_event_assessment, dependent: :destroy
+  has_many :tool_event_assessment, dependent: :restrict_with_error
   has_many :events, through: :tool_event_assessment
 
   has_and_belongs_to_many :phases

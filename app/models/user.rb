@@ -6,8 +6,8 @@ class User < ApplicationRecord
 
   belongs_to :company, optional: true
 
-  has_many :clusters
-  has_many :members
+  has_many :clusters, dependent: :restrict_with_error
+  has_many :members, dependent: :restrict_with_error
   has_many :teams, through: :members
 
   has_one_attached :image

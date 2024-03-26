@@ -1,12 +1,13 @@
 class Member < ApplicationRecord
   belongs_to :team
-  belongs_to :user
   has_one :cluster, through: :team
   has_one :chapter, through: :cluster
 
+  belongs_to :user
+  has_one :company, through: :user
+
   has_many :attendances, dependent: :destroy
   has_many :events, through: :attendances
-  has_one :company, through: :user
 
   enum modality: [:presencial, :online, :hibrido]
   enum :role, [:mm, :mp, :sol], prefix: true, default: :sol

@@ -3,8 +3,8 @@ class Team < ApplicationRecord
   belongs_to :cluster
   has_one :chapter, through: :cluster
 
-  has_many :events, dependent: :destroy
-  has_many :members, dependent: :destroy
+  has_many :events, dependent: :restrict_with_error
+  has_many :members, dependent: :restrict_with_error
   has_many :users, through: :members
 
   validates :name, presence: true, uniqueness: true

@@ -1,5 +1,5 @@
 class Chapter < ApplicationRecord
-  has_many :clusters, dependent: :nullify
+  has_many :clusters, dependent: :restrict_with_error
 
   validates :title, presence: true
   validates :edition_year, presence: true, inclusion: { in: 2023..2030 }

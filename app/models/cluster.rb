@@ -1,7 +1,7 @@
 class Cluster < ApplicationRecord
   belongs_to :chapter
   belongs_to :user
-  has_many :teams
+  has_many :teams, dependent: :restrict_with_error
 
   validates :start_time, presence: true
   validates :end_time, presence: true, comparison: { greater_than: :start_time }

@@ -30,7 +30,16 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  activemodel: &activemodel
+  attributes: # Default attributes names common to most models
+    id: ID
+    created_at: "Criado em"
+    updated_at: "Atualizado em"
+  errors: # Default error messages
+    messages:
+      required: "must exist"
+      taken: "has already been taken"
+
+  activerecord:
     errors:
       messages:
         disposable_domain: "não é permitido (e-mail temporário)"
@@ -61,15 +70,11 @@ en:
         restrict_dependent_destroy:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
-  activerecord:
-    <<: *activemodel
     attributes:
       assessment:
         assessmentable: Item
         author: Avaliador
-        created_at: Criado em
         general_comments: Comentários gerais
-        id: ID
         item_a_assessment: Item de controle A
         item_a_comment: Comentário item de controle A
         item_b_assessment: Item de controle B
@@ -78,10 +83,8 @@ en:
         item_c_comment: Comentário item de controle C
         item_d_assessment: Item de controle D
         item_d_comment: Comentário item de controle D
-        updated_at: Atualizado Em
       attendance:
         attendance: Presença
-        created_at: Criado em
         event: Evento
         member: Membro de equipe
         reason: Comentário
@@ -92,35 +95,24 @@ en:
           present: Presente
           absent: Ausente
         team: Equipe
-        updated_at: Atualizado em
       axis:
-        created_at: Criado Em
         description: Descrição
-        id: ID
         title: Título
-        updated_at: Atualizado Em
       chapter:
         clusters: Clusters
-        created_at: Criado Em
         edition_year: Edição
-        id: ID
         title: Título
-        updated_at: Atualizado Em
       cluster:
         active: Ativo
         address: Local base
         chapter: Capítulo
-        created_at: Criado Em
         end_date: Data final
         end_time: Hora Final
-        id: ID
         link: Sala Teams
         start_date: Data início
         start_time: Hora de Início
         team_ids: Equipes
         teams: Equipes
-        updated_at: Atualizado Em
-        user_id: ID do Usuário
         user: Facilitador
         week_day: Dia da semana
         week_days:
@@ -134,18 +126,13 @@ en:
           domingo: Domingo
       company:
         cnpj: CNPJ
-        created_at: Criado em
-        id: ID
         name: Nome
-        updated_at: Atualizado Em
       event:
-        created_at: Criado em
         date: Data
         general_comments: Comentários gerais
-        id: ID
         item_a_comment: Comentário
         item_a_score: Relacionamento entre MPs
-        item_a_scores:
+        item_a_scores: &item_scores
           bom: Bom
           otimo: Ótimo
           pessimo: Péssimo
@@ -153,39 +140,23 @@ en:
         item_b_comment: Comentário
         item_b_score: Relacionamento MPs e SOLs
         item_b_scores:
-          bom: Bom
-          otimo: Ótimo
-          pessimo: Péssimo
-          ruim: Ruim
+          <<: *item_scores
         item_c_comment: Comentário
         item_c_score: Conhecimento dos MPs para o evento
         item_c_scores:
-          bom: Bom
-          otimo: Ótimo
-          pessimo: Péssimo
-          ruim: Ruim
+          <<: *item_scores
         item_d_comment: Comentário
         item_d_score: Atitude dos MPs para o evento
         item_d_scores:
-          bom: Bom
-          otimo: Ótimo
-          pessimo: Péssimo
-          ruim: Ruim
+          <<: *item_scores
         meeting: Encontro
         name: Título
         scores:
-          bom: Bom
-          otimo: Ótimo
-          pessimo: Péssimo
-          ruim: Ruim
+          <<: *item_scores
         team: Equipe
-        updated_at: Atualizado em
       meeting:
-        created_at: Criado em
-        id: ID
         phase: Fase
         name: Título
-        updated_at: Atualizado em
       member:
         active: Ativo
         address: Endereço
@@ -199,7 +170,6 @@ en:
           man: Masculino
           woman: Feminino
           other: Outro
-        id: ID
         modality: Modalidade
         modalities:
           one: Modalidade
@@ -216,33 +186,23 @@ en:
           sol: SOL
         team: Equipe
       phase:
-        created_at: Criado Em
-        id: ID
         meetings: Encontros
         name: Nome
         tools: Ferramentas
         tool_ids: Ferramentas
-        updated_at: Atualizado Em
       team:
         axis: Eixo
-        axis_id: ID do Eixo
         cluster_ids: Clusters
-        created_at: Criado Em
-        id: ID
         link_miro: Link do Miro
         link_teams: Link do MS Teams
         user_ids: Membros da equipe
         name: Nome da equipe
-        updated_at: Atualizado Em
       tool:
-        created_at: Criado em
         name: Nome da ferramenta
         phases: Fases
         phase_ids: Fases
-        updated_at: Atualizado em
       tool_event_assessment:
         comment: Comentário
-        created_at: Criado em
         score:
           one: Avaliação
           other: Avaliações
@@ -252,7 +212,6 @@ en:
           bom: Bom
           otimo: Ótimo
         tool: Ferramenta
-        updated_at: Atualizado em
       user:
         address: Endereço
         authorization_level: Permissão
@@ -267,7 +226,6 @@ en:
         celular_number: Celular
         company: Empresa
         cpf: CPF
-        created_at: Criado Em
         email: E-mail
         full_name: Nome
         gender: Gênero
@@ -276,12 +234,10 @@ en:
           man: Masculino
           woman: Feminino
           other: Outro
-        id: ID
         image: Foto
         nickname: Apelido
         phone_number: Telefone
         rg: RG
-        updated_at: Atualizado Em
         confirmation_sent_at: Confirmação enviada em
         confirmation_token: Token de confirmação
         confirmed_at: Confirmado em

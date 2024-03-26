@@ -29,6 +29,9 @@ class Ability
       can :manage, User, authorization_level: [:person]
       can :read, User, authorization_level: [:facilitator, :secretary, :admin, :super_admin]
       can :update, User, id: user.id
+
+      cannot :manage, ActiveAdmin::Comment
+      can :read, ActiveAdmin::Comment
     when :facilitator
       can :read, Cluster, user_id: user.id
       can :read, Team, cluster: { user_id: user.id }
